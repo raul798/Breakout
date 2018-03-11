@@ -24,8 +24,8 @@ namespace engine
 		float normalize();
 
 		//overload operators
-		vector_2& operator=(const vector_2& pRightSide);
-		vector_2  operator+(const vector_2& pRightSide);
+		vector_2 operator=(vector_2 pRightSide);
+		vector_2& operator+(vector_2 pRightSide);
 		vector_2& operator+=(const vector_2& pRightSide);
 		vector_2  operator-(const vector_2& pRightSide);
 		vector_2& operator-=(const vector_2& pRightSide);
