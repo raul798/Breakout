@@ -13,7 +13,7 @@ namespace engine
 	public:
 		//constructors
 		matrix_4();
-		matrix_4(float pArray[15]);
+		matrix_4(float pArray[16]);
 		matrix_4(float pValue0, float pValue1, float pValue2, float pValue3,
 				 float pValue4, float pValue5, float pValue6, float pValue7,
 				 float pValue8, float pValue9, float pValue10, float pValue11,
@@ -49,7 +49,7 @@ namespace engine
 		matrix_4& operator/=(const matrix_4 pRightSide);
 
 	private:
-		float mMatrix[3][3];
+		float mMatrix[4][4];
 	};
 }
 

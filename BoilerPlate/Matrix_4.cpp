@@ -29,7 +29,8 @@ namespace engine
 		mMatrix[2][3] = 0.0f;
 		mMatrix[3][3] = 1.0f;
 	}
-	matrix_4::matrix_4(float pArray[15])
+
+	matrix_4::matrix_4(float pArray[16])
 	{
 		//matrix[row][column]
 		//first column
@@ -56,6 +57,7 @@ namespace engine
 		mMatrix[2][3] = pArray[14];
 		mMatrix[3][3] = pArray[15];
 	}
+
 	matrix_4::matrix_4(float pValue0, float pValue1, float pValue2, float pValue3,
 					   float pValue4, float pValue5, float pValue6, float pValue7,
 					   float pValue8, float pValue9, float pValue10, float pValue11,
