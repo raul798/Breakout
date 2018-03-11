@@ -24,7 +24,7 @@ namespace engine
 		void identity();
 		matrix_4 get_transpose();
 		float& matrix_4::operator[](const int pRightSide);
-		//std::ostream& operator<<(std::ostream& os, const matrix_4&);
+		friend std::ostream& operator<< (std::ostream& pExit, matrix_4 pTarget);
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		float get_angle();
 		void translate();

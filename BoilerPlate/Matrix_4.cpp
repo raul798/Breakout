@@ -178,6 +178,20 @@ namespace engine
 		return mMatrix[pRowIndex][pColumnIndex];
 	}
 
+	std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				pOstream << pMatrix.mMatrix[i][j] << " ";
+			}
+			pOstream << "\n";
+		}
+
+		return pOstream;
+	}
+
 	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
