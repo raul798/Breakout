@@ -87,6 +87,86 @@ namespace engine
 		mMatrix[3][3] = pValue15;
 	}
 
+	float *matrix_4::get_matrix()
+	{
+		return *mMatrix;
+	}
+
+	float *matrix_4::get_matrix_row(int pRowIndex)
+	{
+		float matrixRow[3];
+
+		for (int i = 0; i < 4; i++)
+		{
+			matrixRow[i] = mMatrix[pRowIndex][i];
+		}
+
+		return matrixRow;
+	}
+
+	float *matrix_4::get_matrix_column(int pColumnIndex)
+	{
+		float matrixColumn[3];
+
+		for (int i = 0; i < 4; i++)
+		{
+			matrixColumn[i] = mMatrix[i][pColumnIndex];
+		}
+
+		return matrixColumn;
+	}
+
+	void matrix_4::identity()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (i == j)
+				{
+					mMatrix[i][j] = 1;
+				}
+				else
+				{
+					mMatrix[i][j] = 0;
+				}
+			}
+		}
+	}
+
+	matrix_4 matrix_4::get_transpose()
+	{
+		matrix_4 transposeMatrix;
+
+		//first column
+		mMatrix[0][0] = transposeMatrix.mMatrix[0][0];
+		mMatrix[1][0] = transposeMatrix.mMatrix[0][1];
+		mMatrix[2][0] = transposeMatrix.mMatrix[0][2];
+		mMatrix[3][0] = transposeMatrix.mMatrix[0][3];
+
+		//second column
+		mMatrix[0][1] = transposeMatrix.mMatrix[0][1];
+		mMatrix[1][1] = transposeMatrix.mMatrix[1][1];
+		mMatrix[2][1] = transposeMatrix.mMatrix[1][2];
+		mMatrix[3][1] = transposeMatrix.mMatrix[3][1];
+
+		//third column
+		mMatrix[0][2] = transposeMatrix.mMatrix[0][2];
+		mMatrix[1][2] = transposeMatrix.mMatrix[2][1];
+		mMatrix[2][2] = transposeMatrix.mMatrix[2][2];
+		mMatrix[3][2] = transposeMatrix.mMatrix[2][3];
+
+		//fourth column
+		mMatrix[0][3] = transposeMatrix.mMatrix[0][3];
+		mMatrix[1][3] = transposeMatrix.mMatrix[3][1];
+		mMatrix[2][3] = transposeMatrix.mMatrix[3][2];
+		mMatrix[3][3] = transposeMatrix.mMatrix[3][3];
+
+		return transposeMatrix;
+	}
+
+
+
 	matrix_4 matrix_4::operator+(matrix_4 pRightSide)
 	{
 		matrix_4 matrix;

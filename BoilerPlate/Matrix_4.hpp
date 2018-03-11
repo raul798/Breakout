@@ -2,7 +2,6 @@
 #ifndef MATRIX_4_HPP
 #define MATRIX_4_HPP
 
-
 namespace engine
 {
 	class matrix_4
@@ -17,12 +16,13 @@ namespace engine
 				 float pValue12, float pValue13, float pValue14, float pValue15);
 
 		//functions
-		float get_matrix_row(int pRowIndex, int *pStorageRow[]);
-		float get_matrix_column(int pRowIndex, int *pStorageColumn[]);
-		matrix_4 get_matrix();
+		float *get_matrix();
+		float *get_matrix_row(int pRowIndex);
+		float *get_matrix_column(int pColumnIndex);
 		void identity();
 		matrix_4 get_transpose();
-		matrix_4  operator[](const matrix_4& pRightSide);
+		matrix_4 operator[](const matrix_4& pRightSide);
+		//operator<<() function;
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		//should return 3 values
 		float get_angle();
