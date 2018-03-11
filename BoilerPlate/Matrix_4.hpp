@@ -11,13 +11,39 @@ namespace engine
 		//constructors
 		matrix_4();
 		matrix_4(float pArray[15]);
-		matrix_4(float pValue11, float pValue21, float pValue31, float pValue41,
-				 float pValue12, float pValue22, float pValue32, float pValue42,
-				 float pValue13, float pValue23, float pValue33, float pValue43,
-				 float pValue14, float pValue24, float pValue34, float pValue44);
+		matrix_4(float pValue0, float pValue1, float pValue2, float pValue3,
+				 float pValue4, float pValue5, float pValue6, float pValue7,
+				 float pValue8, float pValue9, float pValue10, float pValue11,
+				 float pValue12, float pValue13, float pValue14, float pValue15);
+
+		//functions
+		matrix_4 get_matrix();
+		void identity();
+		matrix_4 get_transpose();
+		matrix_4  operator[](const matrix_4& pRightSide);
+		float get_matrix_value(int pRowIndex, int pColumnIndex);
+		//should return 3 values
+		float get_angle();
+		void translate();
+		void rotate();
+		void rotate_x();
+		void rotate_y();
+		void rotate_z();
+		void invert();
+		void transform();
 		
+		//arithmetic functions
+		matrix_4  operator+(const matrix_4& pRightSide);
+		matrix_4& operator+=(const matrix_4& pRightSide);
+		matrix_4  operator-(const matrix_4& pRightSide);
+		matrix_4& operator-=(const matrix_4& pRightSide);
+		matrix_4  operator*(const matrix_4& pRightSide);
+		matrix_4& operator*=(const matrix_4& pRightSide);
+		matrix_4  operator/(const matrix_4& pRightSide);
+		matrix_4& operator/=(const matrix_4& pRightSide);
+
 	private:
-		float mMatrix[4][4];
+		float *mMatrix[4][4];
 	};
 }
 
