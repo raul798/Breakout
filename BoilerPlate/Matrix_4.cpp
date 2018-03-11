@@ -178,7 +178,7 @@ namespace engine
 		return mMatrix[pRowIndex][pColumnIndex];
 	}
 
-	std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix)
+	std::ostream& operator<<(std::ostream& pOstream, matrix_4 pMatrix)
 	{
 		for (int i = 0; i < 4; i++)
 		{
