@@ -18,6 +18,9 @@
     <ClCompile Include="vector_4.cpp">
       <Filter>Engine\Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix_4.cpp">
+      <Filter>Engine\Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -33,6 +36,9 @@
       <Filter>Engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="vector_4.hpp">
+      <Filter>Engine\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix_4.hpp">
       <Filter>Engine\Header files</Filter>
     </ClInclude>
   </ItemGroup>
