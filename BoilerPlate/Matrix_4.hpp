@@ -29,7 +29,8 @@ namespace engine
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		vector_3 get_angle();
 		void translate(vector_4 *pVector);
-		void rotate();
+		void rotate_from_angles(float angles);
+		void rotate_from_radians(float radians);
 		void rotate_x();
 		void rotate_y();
 		void rotate_z();

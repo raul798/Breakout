@@ -325,11 +325,39 @@ namespace engine
 	{
 		matrix_4 matrix;
 
+		//product of the first row
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				matrix.mMatrix[i][j] = mMatrix[i][j] * pRightSide.mMatrix[i][j];
+				matrix.mMatrix[0][i] = matrix.mMatrix[0][j] * pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//product of the second row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				matrix.mMatrix[1][i] = matrix.mMatrix[1][j] * pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//product of the third row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				matrix.mMatrix[2][i] = matrix.mMatrix[2][j] * pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//product of the fourth row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				matrix.mMatrix[3][i] = matrix.mMatrix[3][j] * pRightSide.mMatrix[j][i];
 			}
 		}
 
@@ -338,11 +366,39 @@ namespace engine
 
 	matrix_4& matrix_4::operator*=(const matrix_4 pRightSide)
 	{
+		//product of the first row
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				mMatrix[i][j] *= pRightSide.mMatrix[i][j];
+				mMatrix[0][i] *= pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//product of the second row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[1][i] *= pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//product of the third row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[2][i] *= pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//product of the fourth row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[3][i] *= pRightSide.mMatrix[j][i];
 			}
 		}
 
@@ -353,11 +409,39 @@ namespace engine
 	{
 		matrix_4 matrix;
 
+		//first row
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				matrix.mMatrix[i][j] = mMatrix[i][j] / pRightSide.mMatrix[i][j];
+				matrix.mMatrix[0][i] = matrix.mMatrix[0][j] / pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//second row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				matrix.mMatrix[1][i] = matrix.mMatrix[1][j] / pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//third row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				matrix.mMatrix[2][i] = matrix.mMatrix[2][j] / pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//fourth row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				matrix.mMatrix[3][i] = matrix.mMatrix[3][j] / pRightSide.mMatrix[j][i];
 			}
 		}
 
@@ -366,11 +450,39 @@ namespace engine
 
 	matrix_4& matrix_4::operator/=(const matrix_4 pRightSide)
 	{
+		//first row
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				mMatrix[i][j] /= pRightSide.mMatrix[i][j];
+				mMatrix[0][i] /= pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//second row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[1][i] /= pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//third row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[2][i] /= pRightSide.mMatrix[j][i];
+			}
+		}
+
+		//fourth row
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[3][i] /= pRightSide.mMatrix[j][i];
 			}
 		}
 
