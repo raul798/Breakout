@@ -28,7 +28,7 @@ namespace engine
 		float& matrix_4::operator[](const int pRightSide);
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		vector_3 get_angle();
-		void translate();
+		void translate(vector_4 *pVector);
 		void rotate();
 		void rotate_x();
 		void rotate_y();

@@ -239,9 +239,31 @@ namespace engine
 			roll = (roll - 180.0f) * -1;
 		}
 
-
 		return vector_3(yaw, pitch, roll);
 	}
+
+	void matrix_4::translate(vector_4 *pVector)
+	{
+		pVector->mX = (mMatrix[0][0] * pVector->mX) + 
+					  (mMatrix[0][1] * pVector->mY) + 
+					  (mMatrix[0][2] * pVector->mZ) + 
+					  (mMatrix[0][3] * pVector->mW);
+
+		pVector->mY = (mMatrix[1][0] * pVector->mX) +
+					  (mMatrix[1][1] * pVector->mY) +
+					  (mMatrix[1][2] * pVector->mZ) +
+					  (mMatrix[1][3] * pVector->mW);
+
+		pVector->mZ = (mMatrix[2][0] * pVector->mX) +
+					  (mMatrix[2][1] * pVector->mY) +
+					  (mMatrix[2][2] * pVector->mZ) +
+					  (mMatrix[2][3] * pVector->mW);
+
+		pVector->mW = (mMatrix[3][0] * pVector->mX) +
+					  (mMatrix[3][1] * pVector->mY) +
+					  (mMatrix[3][2] * pVector->mZ) +
+					  (mMatrix[3][3] * pVector->mW);
+	}	
 
 	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
 	{
