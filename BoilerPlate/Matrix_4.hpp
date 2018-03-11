@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include "vector_4.hpp"
+
 namespace engine
 {
 	class matrix_4
@@ -25,7 +27,7 @@ namespace engine
 		matrix_4 get_transpose();
 		float& matrix_4::operator[](const int pRightSide);
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
-		float get_angle();
+		vector_3 get_angle();
 		void translate();
 		void rotate();
 		void rotate_x();

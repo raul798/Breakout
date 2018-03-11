@@ -192,6 +192,57 @@ namespace engine
 		return pOstream;
 	}
 
+	vector_3 matrix_4::get_angle()
+	{
+		float yaw, pitch, roll;
+
+		if(mMatrix[0][0] == 1.0f || mMatrix[0][0] == -1.0f)
+		{
+			yaw = atan2f(mMatrix[0][2], mMatrix[2][3]);
+			pitch = 0.0f;
+			roll = 0.0f;
+		}
+		else
+		{
+			yaw = atan2f(-mMatrix[2][1], mMatrix[0][0]);
+			pitch = asinf(mMatrix[1][0]);
+			roll = atan2f(-mMatrix[1][2], mMatrix[1][1]);
+		}
+
+		//yaw degree range (-180, 180)
+		if(yaw < -180.0f)
+		{
+			yaw = (yaw + 180.0f) * -1;
+		}
+		if (yaw > 180.0f)
+		{
+			yaw = (yaw - 180.0f) * -1;
+		}
+
+		//ypitchaw degree range (-180, 180)
+		if (pitch < -180.0f)
+		{
+			pitch = (pitch + 180.0f) * -1;
+		}
+		if (pitch > 180.0f)
+		{
+			pitch = (pitch - 180.0f) * -1;
+		}
+
+		//roll degree range (-180, 180)
+		if (roll < -180.0f)
+		{
+			roll = (roll + 180.0f) * -1;
+		}
+		if (roll > 180.0f)
+		{
+			roll = (roll - 180.0f) * -1;
+		}
+
+
+		return vector_3(yaw, pitch, roll);
+	}
+
 	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
