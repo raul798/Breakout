@@ -165,9 +165,20 @@ namespace engine
 		return transposeMatrix;
 	}
 
+	float& matrix_4::operator[](const int pRightSide)
+	{
+		int row = pRightSide % 4;
+		int column = pRightSide / 4;
 
+		return mMatrix[row][column];
+	}
 
-	matrix_4 matrix_4::operator+(matrix_4 pRightSide)
+	float matrix_4::get_matrix_value(int pRowIndex, int pColumnIndex)
+	{
+		return mMatrix[pRowIndex][pColumnIndex];
+	}
+
+	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 		
@@ -182,7 +193,7 @@ namespace engine
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator+=(matrix_4 pRightSide)
+	matrix_4& matrix_4::operator+=(const matrix_4 pRightSide)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -191,9 +202,11 @@ namespace engine
 				mMatrix[i][j] += pRightSide.mMatrix[i][j];
 			}
 		}
+
+		return *this;
 	}
 
-	matrix_4 matrix_4::operator-(matrix_4 pRightSide)
+	matrix_4 matrix_4::operator-(const matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 
@@ -208,7 +221,7 @@ namespace engine
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator-=(matrix_4 pRightSide)
+	matrix_4& matrix_4::operator-=(const matrix_4 pRightSide)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -217,9 +230,11 @@ namespace engine
 				mMatrix[i][j] -= pRightSide.mMatrix[i][j];
 			}
 		}
+
+		return *this;
 	}
 
-	matrix_4 matrix_4::operator*(matrix_4 pRightSide)
+	matrix_4 matrix_4::operator*(const matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 
@@ -234,7 +249,7 @@ namespace engine
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator*=(matrix_4 pRightSide)
+	matrix_4& matrix_4::operator*=(const matrix_4 pRightSide)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -243,9 +258,11 @@ namespace engine
 				mMatrix[i][j] *= pRightSide.mMatrix[i][j];
 			}
 		}
+
+		return *this;
 	}
 
-	matrix_4 matrix_4::operator/(matrix_4 pRightSide)
+	matrix_4 matrix_4::operator/(const matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 
@@ -260,7 +277,7 @@ namespace engine
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator/=(matrix_4 pRightSide)
+	matrix_4& matrix_4::operator/=(const matrix_4 pRightSide)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -269,5 +286,7 @@ namespace engine
 				mMatrix[i][j] /= pRightSide.mMatrix[i][j];
 			}
 		}
+
+		return *this;
 	}
 }

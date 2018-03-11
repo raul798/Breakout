@@ -2,6 +2,8 @@
 #ifndef MATRIX_4_HPP
 #define MATRIX_4_HPP
 
+#include <iostream>
+
 namespace engine
 {
 	class matrix_4
@@ -21,10 +23,9 @@ namespace engine
 		float *get_matrix_column(int pColumnIndex);
 		void identity();
 		matrix_4 get_transpose();
-		matrix_4 operator[](const matrix_4& pRightSide);
-		//operator<<() function;
+		float& matrix_4::operator[](const int pRightSide);
+		//std::ostream& operator<<(std::ostream& os, const matrix_4&);
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
-		//should return 3 values
 		float get_angle();
 		void translate();
 		void rotate();
@@ -35,14 +36,14 @@ namespace engine
 		void transform();
 		
 		//arithmetic functions
-		matrix_4  operator+(matrix_4 pRightSide);
-		matrix_4& operator+=(matrix_4 pRightSide);
-		matrix_4  operator-(matrix_4 pRightSide);
-		matrix_4& operator-=(matrix_4 pRightSide);
-		matrix_4  operator*(matrix_4 pRightSide);
-		matrix_4& operator*=(matrix_4 pRightSide);
-		matrix_4  operator/(matrix_4 pRightSide);
-		matrix_4& operator/=(matrix_4 pRightSide);
+		matrix_4  operator+(const matrix_4 pRightSide);
+		matrix_4& operator+=(const matrix_4 pRightSide);
+		matrix_4  operator-(const matrix_4 pRightSide);
+		matrix_4& operator-=(const matrix_4 pRightSide);
+		matrix_4  operator*(const matrix_4 pRightSide);
+		matrix_4& operator*=(const matrix_4 pRightSide);
+		matrix_4  operator/(const matrix_4 pRightSide);
+		matrix_4& operator/=(const matrix_4 pRightSide);
 
 	private:
 		float mMatrix[3][3];

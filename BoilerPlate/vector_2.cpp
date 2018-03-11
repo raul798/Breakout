@@ -59,7 +59,6 @@ namespace engine
 	//operators
 	vector_2& vector_2::operator=(const vector_2& pRightSide)
 	{
-
 		mX = pRightSide.mX;
 		mY = pRightSide.mY;
 
