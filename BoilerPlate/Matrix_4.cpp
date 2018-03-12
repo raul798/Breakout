@@ -141,28 +141,28 @@ namespace engine
 		matrix_4 transposeMatrix;
 
 		//first column
-		mMatrix[0][0] = transposeMatrix.mMatrix[0][0];
-		mMatrix[1][0] = transposeMatrix.mMatrix[0][1];
-		mMatrix[2][0] = transposeMatrix.mMatrix[0][2];
-		mMatrix[3][0] = transposeMatrix.mMatrix[0][3];
+		transposeMatrix.mMatrix[0][0] = mMatrix[0][0];
+		transposeMatrix.mMatrix[0][1] = mMatrix[1][0];
+		transposeMatrix.mMatrix[0][2] = mMatrix[2][0];
+		transposeMatrix.mMatrix[0][3] = mMatrix[3][0];
 
 		//second column
-		mMatrix[0][1] = transposeMatrix.mMatrix[0][1];
-		mMatrix[1][1] = transposeMatrix.mMatrix[1][1];
-		mMatrix[2][1] = transposeMatrix.mMatrix[1][2];
-		mMatrix[3][1] = transposeMatrix.mMatrix[3][1];
+		transposeMatrix.mMatrix[0][1] = mMatrix[0][1];
+		transposeMatrix.mMatrix[1][1] = mMatrix[1][1];
+		transposeMatrix.mMatrix[1][2] = mMatrix[2][1];
+		transposeMatrix.mMatrix[3][1] = mMatrix[3][1];
 
 		//third column
-		mMatrix[0][2] = transposeMatrix.mMatrix[0][2];
-		mMatrix[1][2] = transposeMatrix.mMatrix[2][1];
-		mMatrix[2][2] = transposeMatrix.mMatrix[2][2];
-		mMatrix[3][2] = transposeMatrix.mMatrix[2][3];
+		transposeMatrix.mMatrix[0][2] = mMatrix[0][2];
+		transposeMatrix.mMatrix[2][1] = mMatrix[1][2];
+		transposeMatrix.mMatrix[2][2] = mMatrix[2][2];
+		transposeMatrix.mMatrix[2][3] = mMatrix[3][2];
 
 		//fourth column
-		mMatrix[0][3] = transposeMatrix.mMatrix[0][3];
-		mMatrix[1][3] = transposeMatrix.mMatrix[3][1];
-		mMatrix[2][3] = transposeMatrix.mMatrix[3][2];
-		mMatrix[3][3] = transposeMatrix.mMatrix[3][3];
+		transposeMatrix.mMatrix[0][3] = mMatrix[0][3];
+		transposeMatrix.mMatrix[3][1] = mMatrix[1][3];
+		transposeMatrix.mMatrix[3][2] = mMatrix[2][3];
+		transposeMatrix.mMatrix[3][3] = mMatrix[3][3];
 
 		return transposeMatrix;
 	}
@@ -299,9 +299,9 @@ namespace engine
 		{
 			determinant = 1.0f / determinant;
 
-			for (int i = 0; i < 16; i++)
+			for (int i = 0; i < 4; i++)
 			{
-				for (int j = 0; j < 16; j++)
+				for (int j = 0; j < 4; j++)
 				{
 					inverse[i][j] = inverse[i][j] * determinant;
 				}
@@ -360,7 +360,7 @@ namespace engine
 			yaw = (yaw - 180.0f) * -1;
 		}
 
-		//ypitchaw degree range (-180, 180)
+		//pitch degree range (-180, 180)
 		if (pitch < -180.0f)
 		{
 			pitch = (pitch + 180.0f) * -1;
@@ -469,36 +469,40 @@ namespace engine
 		//product of the first row
 		for (int i = 0; i < 4; i++)
 		{
+			matrix.mMatrix[0][i] = 0;
 			for (int j = 0; j < 4; j++)
 			{
-				matrix.mMatrix[0][i] = matrix.mMatrix[0][j] * pRightSide.mMatrix[j][i];
+				matrix.mMatrix[0][i] += matrix.mMatrix[0][j] * pRightSide.mMatrix[j][i];
 			}
 		}
 
 		//product of the second row
 		for (int i = 0; i < 4; i++)
 		{
+			matrix.mMatrix[1][i] = 0;
 			for (int j = 0; j < 4; j++)
 			{
-				matrix.mMatrix[1][i] = matrix.mMatrix[1][j] * pRightSide.mMatrix[j][i];
+				matrix.mMatrix[1][i] += matrix.mMatrix[1][j] * pRightSide.mMatrix[j][i];
 			}
 		}
 
 		//product of the third row
 		for (int i = 0; i < 4; i++)
 		{
+			matrix.mMatrix[2][i] = 0;
 			for (int j = 0; j < 4; j++)
 			{
-				matrix.mMatrix[2][i] = matrix.mMatrix[2][j] * pRightSide.mMatrix[j][i];
+				matrix.mMatrix[2][i] += matrix.mMatrix[2][j] * pRightSide.mMatrix[j][i];
 			}
 		}
 
 		//product of the fourth row
 		for (int i = 0; i < 4; i++)
 		{
+			matrix.mMatrix[3][i] = 0;
 			for (int j = 0; j < 4; j++)
 			{
-				matrix.mMatrix[3][i] = matrix.mMatrix[3][j] * pRightSide.mMatrix[j][i];
+				matrix.mMatrix[3][i] += matrix.mMatrix[3][j] * pRightSide.mMatrix[j][i];
 			}
 		}
 
@@ -558,6 +562,19 @@ namespace engine
 	matrix_4& matrix_4::operator/=(matrix_4 pRightSide)
 	{
 		*this *= pRightSide.invert();
+
+		return *this;
+	}
+
+	matrix_4& matrix_4::operator=(matrix_4 pRightSide)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				mMatrix[i][j] = pRightSide.mMatrix[i][j];
+			}
+		}
 
 		return *this;
 	}

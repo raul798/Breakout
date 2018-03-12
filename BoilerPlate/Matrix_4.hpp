@@ -47,7 +47,7 @@ namespace engine
 		matrix_4& operator*=(const matrix_4 pRightSide);
 		matrix_4  operator/(matrix_4 pRightSide);
 		matrix_4& operator/=(matrix_4 pRightSide);
-
+		matrix_4& operator=(const matrix_4 pRightSide);
 	private:
 		float mMatrix[4][4];
 	};
