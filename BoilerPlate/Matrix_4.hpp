@@ -37,7 +37,7 @@ namespace engine
 		matrix_4 rotate_y(float pRadians);
 		matrix_4 rotate_z(float pRadians);
 		matrix_4 invert();
-		matrix_4 transform();
+		matrix_4 transform(int pIndexValue, float pDesiredValue);
 	
 		//arithmetic functions
 		matrix_4  operator+(const matrix_4 pRightSide);

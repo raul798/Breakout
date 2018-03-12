@@ -482,9 +482,11 @@ namespace engine
 		return matrix;
 	}
 
-	matrix_4 matrix_4::transform()
+	matrix_4 matrix_4::transform(int pIndexValue, float pDesiredValue)
 	{
 		matrix_4 matrix;
+
+		matrix[pIndexValue] = pDesiredValue;
 
 		return matrix;
 	}
