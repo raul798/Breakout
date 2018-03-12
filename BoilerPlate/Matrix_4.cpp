@@ -418,7 +418,7 @@ namespace engine
 		return pVector;
 	}
 
-	matrix_4 matrix_4::rotate_from_angles(float pDegrees)
+	matrix_4 matrix_4::rotate_from_degrees(float pDegrees)
 	{
 		math_utilities mathUtilities;
 		matrix_4 matrix;
