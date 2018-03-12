@@ -6,6 +6,8 @@
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
+#include "matrix_4.hpp"
+
 namespace Engine
 {
 	const float DESIRED_FRAME_RATE = 60.0f;

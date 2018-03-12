@@ -10,6 +10,8 @@
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 
+#include "matrix_4.hpp"
+
 namespace Engine
 {
 	class App : public SDLEvent

@@ -15,6 +15,8 @@ const int HEIGHT = 640;
 
 int main(int argc, char* argv[])
 {
+	std::cout << "hola" << std::endl;
+
 #if _MSC_VER && _DEBUG
 	// https://msdn.microsoft.com/en-us/library/x98tx3cf.aspx
 	// This will help you detect leaks when using Visual C++

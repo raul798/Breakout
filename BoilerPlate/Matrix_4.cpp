@@ -58,35 +58,35 @@ namespace engine
 		mMatrix[3][3] = pArray[15];
 	}
 
-	matrix_4::matrix_4(float pValue0, float pValue1, float pValue2, float pValue3,
-					   float pValue4, float pValue5, float pValue6, float pValue7,
-					   float pValue8, float pValue9, float pValue10, float pValue11,
-					   float pValue12, float pValue13, float pValue14, float pValue15)
+	matrix_4::matrix_4(float pFristValue, float pSecondValue, float pThirdValue, float pFourthValue,
+					   float pFifthValue, float pSixthValue, float pSeventhValue, float pEighthValue,
+					   float pNinthValue, float pTenthValue, float pEleventhValue, float pTwelfthValue,
+					   float pThirteenthValue, float pFourteenthValue, float pFifteenthValue, float pSixteenthValue)
 	{
 		//matrix[row][column]
 		//first column
-		mMatrix[0][0] = pValue0;
-		mMatrix[1][0] = pValue1;
-		mMatrix[2][0] = pValue2;
-		mMatrix[3][0] = pValue3;
+		mMatrix[0][0] = pFristValue;
+		mMatrix[1][0] = pSecondValue;
+		mMatrix[2][0] = pThirdValue;
+		mMatrix[3][0] = pFourthValue;
 
 		//second column
-		mMatrix[0][1] = pValue4;
-		mMatrix[1][1] = pValue5;
-		mMatrix[2][1] = pValue6;
-		mMatrix[3][1] = pValue7;
+		mMatrix[0][1] = pFifthValue;
+		mMatrix[1][1] = pSixthValue;
+		mMatrix[2][1] = pSeventhValue;
+		mMatrix[3][1] = pEighthValue;
 
 		//third column
-		mMatrix[0][2] = pValue8;
-		mMatrix[1][2] = pValue9;
-		mMatrix[2][2] = pValue10;
-		mMatrix[3][2] = pValue11;
+		mMatrix[0][2] = pNinthValue;
+		mMatrix[1][2] = pTenthValue;
+		mMatrix[2][2] = pEleventhValue;
+		mMatrix[3][2] = pTwelfthValue;
 
 		//fourth column
-		mMatrix[0][3] = pValue12;
-		mMatrix[1][3] = pValue13;
-		mMatrix[2][3] = pValue14;
-		mMatrix[3][3] = pValue15;
+		mMatrix[0][3] = pThirteenthValue;
+		mMatrix[1][3] = pFourteenthValue;
+		mMatrix[2][3] = pFifteenthValue;
+		mMatrix[3][3] = pSixteenthValue;
 	}
 
 	float *matrix_4::get_matrix()
