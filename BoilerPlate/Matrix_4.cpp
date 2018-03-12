@@ -174,7 +174,7 @@ namespace engine
 		return mMatrix[pRowIndex][pColumnIndex];
 	}
 
-	void matrix_4::invert()
+	matrix_4 matrix_4::invert()
 	{
 		float determinant;
 		matrix_4 *inverse, *duplicateMatrix;
@@ -308,6 +308,8 @@ namespace engine
 					inverse[i][j] = inverse[i][j] * determinant;
 				}
 			}
+
+			return *inverse;
 		}
 	}
 
@@ -546,86 +548,18 @@ namespace engine
 		return *this;
 	}
 
-	matrix_4 matrix_4::operator/(const matrix_4 pRightSide)
+	matrix_4 matrix_4::operator/(matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 
-		//first row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[0][i] = matrix.mMatrix[0][j] / pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//second row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[1][i] = matrix.mMatrix[1][j] / pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//third row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[2][i] = matrix.mMatrix[2][j] / pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//fourth row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[3][i] = matrix.mMatrix[3][j] / pRightSide.mMatrix[j][i];
-			}
-		}
-
+		matrix = *this *  pRightSide.invert();
+		
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator/=(const matrix_4 pRightSide)
+	matrix_4& matrix_4::operator/=(matrix_4 pRightSide)
 	{
-		//first row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[0][i] /= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//second row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[1][i] /= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//third row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[2][i] /= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//fourth row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[3][i] /= pRightSide.mMatrix[j][i];
-			}
-		}
+		*this *= pRightSide.invert();
 
 		return *this;
 	}

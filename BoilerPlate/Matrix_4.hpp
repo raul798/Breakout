@@ -34,7 +34,7 @@ namespace engine
 		void rotate_x();
 		void rotate_y();
 		void rotate_z();
-		void invert();
+		matrix_4 invert();
 		void transform();
 		friend std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix);
 		float& matrix_4::operator[](const int pRightSide);
@@ -46,8 +46,8 @@ namespace engine
 		matrix_4& operator-=(const matrix_4 pRightSide);
 		matrix_4  operator*(const matrix_4 pRightSide);
 		matrix_4& operator*=(const matrix_4 pRightSide);
-		matrix_4  operator/(const matrix_4 pRightSide);
-		matrix_4& operator/=(const matrix_4 pRightSide);
+		matrix_4  operator/(matrix_4 pRightSide);
+		matrix_4& operator/=(matrix_4 pRightSide);
 
 	private:
 		float mMatrix[4][4];
