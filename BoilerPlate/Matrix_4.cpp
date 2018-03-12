@@ -167,17 +167,156 @@ namespace engine
 		return transposeMatrix;
 	}
 
+	
+
+	float matrix_4::get_matrix_value(int pRowIndex, int pColumnIndex)
+	{
+		return mMatrix[pRowIndex][pColumnIndex];
+	}
+
+	void matrix_4::invert()
+	{
+		float determinant;
+		matrix_4 *inverse, *duplicateMatrix;
+		duplicateMatrix = this;
+
+		inverse->mMatrix[0][0] = duplicateMatrix->mMatrix[1][1]	* duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] -
+								 duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[2][3] -
+								 duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] +
+								 duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][3] +
+								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] -
+								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][2];
+
+		inverse->mMatrix[0][1] = -duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] +
+								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[2][3] +
+						       	  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] -
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][3] -
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] +
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][2];
+
+		inverse->mMatrix[0][2] = duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][3] -
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[1][3] -
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][3] +
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][3] +
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][2] -
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][2];
+
+		inverse->mMatrix[0][3] = -duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][3] +
+								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[1][3] +
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][3] -
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][3] -
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][2] +
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][2];
+
+		inverse->mMatrix[1][0] = -duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] +
+								  duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][2]* duplicateMatrix->mMatrix[2][3] +
+								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] -
+								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] -
+								  duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2]+
+								  duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2];
+
+		inverse->mMatrix[1][1] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] -
+								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[2][3] -
+								 duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] +
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] +
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2] -
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2];
+
+		inverse->mMatrix[1][2] = -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][3] +
+								  duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[1][3] +
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][3] -
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][3] -
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][2] +
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][2];
+
+		inverse->mMatrix[1][3] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][3] -
+								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[1][3] -
+								 duplicateMatrix->mMatrix[0][8] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][3] +
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][3] +
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][2] -
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][2];
+
+		inverse->mMatrix[2][0] = duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] -
+								 duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][3] -
+								 duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] +
+								 duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] +
+								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] -
+								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+
+		inverse->mMatrix[2][1] = -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] +
+								  duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][3] +
+								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] -
+								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] -
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] +
+								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+
+		inverse->mMatrix[2][2] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][3] -
+								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][3] -
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][3] +
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][3] +
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][1] -
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][1];
+
+		inverse->mMatrix[2][3]= -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][3] +
+								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][3] +
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][3] -
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][3] -
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] +
+								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][1];
+
+		inverse->mMatrix[3][0] = -duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] +
+								  duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][2] +
+								  duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2] -
+								  duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2] -
+								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] +
+								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+
+		inverse->mMatrix[3][1] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] -
+							     duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][2] -
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2] +
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2] +
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] -
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+
+		inverse->mMatrix[3][2] = -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][2] +
+								  duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][2] +
+								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][2] -
+								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][2] -
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][1] +
+								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][1];
+
+		inverse->mMatrix[3][3] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][2] -
+								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][2] -
+								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][2] +
+							     duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][2] +
+								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] -
+							     duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][1];
+
+		determinant = duplicateMatrix->mMatrix[0][0] * inverse->mMatrix[0][0] + 
+					  duplicateMatrix->mMatrix[1][0] * inverse->mMatrix[0][1] + 
+				      duplicateMatrix->mMatrix[2][0] * inverse->mMatrix[0][2] + 
+					  duplicateMatrix->mMatrix[3][0] * inverse->mMatrix[0][3];
+	
+		if (determinant != 0)
+		{
+			determinant = 1.0f / determinant;
+
+			for (int i = 0; i < 16; i++)
+			{
+				for (int j = 0; j < 16; j++)
+				{
+					inverse[i][j] = inverse[i][j] * determinant;
+				}
+			}
+		}
+	}
+
 	float& matrix_4::operator[](const int pRightSide)
 	{
 		int row = pRightSide % 4;
 		int column = pRightSide / 4;
 
 		return mMatrix[row][column];
-	}
-
-	float matrix_4::get_matrix_value(int pRowIndex, int pColumnIndex)
-	{
-		return mMatrix[pRowIndex][pColumnIndex];
 	}
 
 	std::ostream& operator<<(std::ostream& pOstream, matrix_4 pMatrix)
