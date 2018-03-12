@@ -389,31 +389,42 @@ namespace engine
 		return vector_3(yaw, pitch, roll);
 	}
 
-	vector_4& matrix_4::translate(vector_4 pVector)
+	matrix_4 matrix_4::translate_matrix(vector_4 pVector)
 	{
-		mMatrix[0][3] = pVector.mX;
-		mMatrix[1][3] = pVector.mY;
-		mMatrix[2][3] = pVector.mZ;
+		matrix_4 matrix;
 
-		pVector.mX = (mMatrix[0][0] * pVector.mX) +
-					 (mMatrix[0][1] * pVector.mY) +
-					 (mMatrix[0][2] * pVector.mZ) +
-					 (mMatrix[0][3] * pVector.mW);
+		matrix.mMatrix[0][3] = pVector.mX;
+		matrix.mMatrix[1][3] = pVector.mY;
+		matrix.mMatrix[2][3] = pVector.mZ;
 
-		pVector.mY = (mMatrix[1][0] * pVector.mX) +
-					 (mMatrix[1][1] * pVector.mY) +
-					 (mMatrix[1][2] * pVector.mZ) +
-					 (mMatrix[1][3] * pVector.mW);
+		return matrix;
+	}
 
-		pVector.mZ = (mMatrix[2][0] * pVector.mX) +
-					 (mMatrix[2][1] * pVector.mY) +
-					 (mMatrix[2][2] * pVector.mZ) +
-					 (mMatrix[2][3] * pVector.mW);
+	vector_4& matrix_4::translate_vector(vector_4 pVector)
+	{
+		matrix_4 matrix;
 
-		pVector.mW = (mMatrix[3][0] * 1) +
-					 (mMatrix[3][1] * 1) +
-					 (mMatrix[3][2] * 1) +
-					 (mMatrix[3][3] * 1);
+		matrix = translate_matrix(pVector);
+
+		pVector.mX = (matrix.mMatrix[0][0] * pVector.mX) +
+					 (matrix.mMatrix[0][1] * pVector.mY) +
+					 (matrix.mMatrix[0][2] * pVector.mZ) +
+					 (matrix.mMatrix[0][3] * pVector.mW);
+
+		pVector.mY = (matrix.mMatrix[1][0] * pVector.mX) +
+					 (matrix.mMatrix[1][1] * pVector.mY) +
+					 (matrix.mMatrix[1][2] * pVector.mZ) +
+					 (matrix.mMatrix[1][3] * pVector.mW);
+
+		pVector.mZ = (matrix.mMatrix[2][0] * pVector.mX) +
+					 (matrix.mMatrix[2][1] * pVector.mY) +
+					 (matrix.mMatrix[2][2] * pVector.mZ) +
+					 (matrix.mMatrix[2][3] * pVector.mW);
+
+		pVector.mW = (matrix.mMatrix[3][0] * 1) +
+					 (matrix.mMatrix[3][1] * 1) +
+					 (matrix.mMatrix[3][2] * 1) +
+					 (matrix.mMatrix[3][3] * 1);
 
 		return pVector;
 	}
@@ -471,9 +482,11 @@ namespace engine
 		return matrix;
 	}
 
-	void matrix_4::transform()
+	matrix_4 matrix_4::transform()
 	{
-		
+		matrix_4 matrix;
+
+		return matrix;
 	}
 
 	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
