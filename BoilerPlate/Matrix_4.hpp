@@ -29,7 +29,7 @@ namespace engine
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		vector_3 get_angle();
 		friend std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix);
-		matrix_4 translate(vector_4 pVector);
+		vector_4& translate(vector_4 pVector);
 		matrix_4 rotate_from_angles(float pDegrees);
 		matrix_4 rotate_from_radians(float pRadians);
 		matrix_4 rotate_x(float pRadians);

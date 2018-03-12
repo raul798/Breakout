@@ -389,15 +389,33 @@ namespace engine
 		return vector_3(yaw, pitch, roll);
 	}
 
-	matrix_4 matrix_4::translate(vector_4 pVector)
+	vector_4& matrix_4::translate(vector_4 pVector)
 	{
-		matrix_4 matrix;
+		mMatrix[0][3] = pVector.mX;
+		mMatrix[1][3] = pVector.mY;
+		mMatrix[2][3] = pVector.mZ;
 
-		matrix[3] = pVector.mX;
-		matrix[7] = pVector.mY;
-		matrix[11] = pVector.mZ;
+		pVector.mX = (mMatrix[0][0] * pVector.mX) +
+					 (mMatrix[0][1] * pVector.mY) +
+					 (mMatrix[0][2] * pVector.mZ) +
+					 (mMatrix[0][3] * pVector.mW);
 
-		return matrix;
+		pVector.mY = (mMatrix[1][0] * pVector.mX) +
+					 (mMatrix[1][1] * pVector.mY) +
+					 (mMatrix[1][2] * pVector.mZ) +
+					 (mMatrix[1][3] * pVector.mW);
+
+		pVector.mZ = (mMatrix[2][0] * pVector.mX) +
+					 (mMatrix[2][1] * pVector.mY) +
+					 (mMatrix[2][2] * pVector.mZ) +
+					 (mMatrix[2][3] * pVector.mW);
+
+		pVector.mW = (mMatrix[3][0] * 1) +
+					 (mMatrix[3][1] * 1) +
+					 (mMatrix[3][2] * 1) +
+					 (mMatrix[3][3] * 1);
+
+		return pVector;
 	}
 
 	matrix_4 matrix_4::rotate_from_angles(float pDegrees)
