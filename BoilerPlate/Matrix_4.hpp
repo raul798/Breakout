@@ -25,9 +25,10 @@ namespace engine
 		float *get_matrix_column(int pColumnIndex);
 		void identity();
 		matrix_4 get_transpose();
-		
+		float& matrix_4::operator[](const int pRightSide);
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		vector_3 get_angle();
+		friend std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix);
 		void translate(vector_4 *pVector);
 		void rotate_from_angles(float angles);
 		void rotate_from_radians(float radians);
@@ -36,9 +37,7 @@ namespace engine
 		void rotate_z();
 		matrix_4 invert();
 		void transform();
-		friend std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix);
-		float& matrix_4::operator[](const int pRightSide);
-		
+	
 		//arithmetic functions
 		matrix_4  operator+(const matrix_4 pRightSide);
 		matrix_4& operator+=(const matrix_4 pRightSide);

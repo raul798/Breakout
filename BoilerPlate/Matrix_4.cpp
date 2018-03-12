@@ -167,8 +167,6 @@ namespace engine
 		return transposeMatrix;
 	}
 
-	
-
 	float matrix_4::get_matrix_value(int pRowIndex, int pColumnIndex)
 	{
 		return mMatrix[pRowIndex][pColumnIndex];
