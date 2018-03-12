@@ -4,30 +4,20 @@ namespace engine
 {
 	matrix_4::matrix_4()
 	{
-		//matrix[row][column]
-		//first column
-		mMatrix[0][0] = 1.0f;
-		mMatrix[1][0] = 0.0f;
-		mMatrix[2][0] = 0.0f;
-		mMatrix[3][0] = 0.0f;
-
-		//second column
-		mMatrix[0][1] = 0.0f;
-		mMatrix[1][1] = 1.0f;
-		mMatrix[2][1] = 0.0f;
-		mMatrix[3][1] = 0.0f;
-
-		//third column
-		mMatrix[0][2] = 0.0f;
-		mMatrix[1][2] = 0.0f;
-		mMatrix[2][2] = 1.0f;
-		mMatrix[3][2] = 0.0f;
-
-		//fourth column
-		mMatrix[0][3] = 0.0f;
-		mMatrix[1][3] = 0.0f;
-		mMatrix[2][3] = 0.0f;
-		mMatrix[3][3] = 1.0f;
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (i == j)
+				{
+					mMatrix[i][j] = 1;
+				}
+				else
+				{
+					mMatrix[i][j] = 0;
+				}
+			}
+		}
 	}
 
 	matrix_4::matrix_4(float pArray[16])
@@ -321,6 +311,10 @@ namespace engine
 
 			return *inverse;
 		}
+		else
+		{
+			return NULL;
+		}
 	}
 
 	float& matrix_4::operator[](const int pRightSide)
@@ -395,28 +389,74 @@ namespace engine
 		return vector_3(yaw, pitch, roll);
 	}
 
-	void matrix_4::translate(vector_4 *pVector)
+	matrix_4 matrix_4::translate(vector_4 pVector)
 	{
-		pVector->mX = (mMatrix[0][0] * pVector->mX) + 
-					  (mMatrix[0][1] * pVector->mY) + 
-					  (mMatrix[0][2] * pVector->mZ) + 
-					  (mMatrix[0][3] * pVector->mW);
+		matrix_4 matrix;
 
-		pVector->mY = (mMatrix[1][0] * pVector->mX) +
-					  (mMatrix[1][1] * pVector->mY) +
-					  (mMatrix[1][2] * pVector->mZ) +
-					  (mMatrix[1][3] * pVector->mW);
+		matrix[3] = pVector.mX;
+		matrix[7] = pVector.mY;
+		matrix[11] = pVector.mZ;
 
-		pVector->mZ = (mMatrix[2][0] * pVector->mX) +
-					  (mMatrix[2][1] * pVector->mY) +
-					  (mMatrix[2][2] * pVector->mZ) +
-					  (mMatrix[2][3] * pVector->mW);
+		return matrix;
+	}
 
-		pVector->mW = (mMatrix[3][0] * pVector->mX) +
-					  (mMatrix[3][1] * pVector->mY) +
-					  (mMatrix[3][2] * pVector->mZ) +
-					  (mMatrix[3][3] * pVector->mW);
-	}	
+	matrix_4 matrix_4::rotate_from_angles(float pDegrees)
+	{
+		math_utilities mathUtilities;
+		matrix_4 matrix;
+
+		float angleInDegrees = mathUtilities.degrees_to_radians(pDegrees);
+
+		return matrix.rotate_z(angleInDegrees);
+	}
+
+	matrix_4 matrix_4::rotate_from_radians(float pRadians)
+	{
+		matrix_4 matrix;
+
+		return matrix.rotate_z(pRadians);
+	}
+
+	matrix_4 matrix_4::rotate_x(float pRadians)
+	{
+		matrix_4 matrix;
+
+		matrix[5] = cos(-pRadians);
+		matrix[6] = -sin(-pRadians);
+		matrix[9] = sin(-pRadians);
+		matrix[10] = cos(-pRadians);
+
+		return matrix;
+	}
+
+	matrix_4 matrix_4::rotate_y(float pRadians)
+	{
+		matrix_4 matrix;
+
+		matrix[0] =cos(-pRadians);
+		matrix[2] = sin(-pRadians);
+		matrix[8] = -sin(-pRadians);
+		matrix[10] = cos(-pRadians);
+		
+		return matrix;
+	}
+
+	matrix_4 matrix_4::rotate_z(float pRadians)
+	{
+		matrix_4 matrix;
+
+		matrix[0] = cos(-pRadians);
+		matrix[1] = -sin(-pRadians);
+		matrix[4] = sin(-pRadians);
+		matrix[5] = cos(-pRadians);
+		
+		return matrix;
+	}
+
+	void matrix_4::transform()
+	{
+		
+	}
 
 	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
 	{
@@ -474,92 +514,22 @@ namespace engine
 		return *this;
 	}
 
-	matrix_4 matrix_4::operator*(const matrix_4 pRightSide)
+	matrix_4 matrix_4::operator*(matrix_4& pRightSide)
 	{
-		matrix_4 matrix;
+		matrix_4 matrix(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
-		//product of the first row
-		for (int i = 0; i < 4; i++)
+		for (int rowToChange = 0; rowToChange < 4; rowToChange++)
 		{
-			matrix.mMatrix[0][i] = 0;
-			for (int j = 0; j < 4; j++)
+			for (int i = 0; i < 4; i++)
 			{
-				matrix.mMatrix[0][i] += matrix.mMatrix[0][j] * pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//product of the second row
-		for (int i = 0; i < 4; i++)
-		{
-			matrix.mMatrix[1][i] = 0;
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[1][i] += matrix.mMatrix[1][j] * pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//product of the third row
-		for (int i = 0; i < 4; i++)
-		{
-			matrix.mMatrix[2][i] = 0;
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[2][i] += matrix.mMatrix[2][j] * pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//product of the fourth row
-		for (int i = 0; i < 4; i++)
-		{
-			matrix.mMatrix[3][i] = 0;
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[3][i] += matrix.mMatrix[3][j] * pRightSide.mMatrix[j][i];
+				for (int j = 0; j < 4; j++)
+				{
+					matrix.mMatrix[rowToChange][i] += matrix.mMatrix[rowToChange][j] * pRightSide.mMatrix[j][i];
+				}
 			}
 		}
 
 		return matrix;
-	}
-
-	matrix_4& matrix_4::operator*=(const matrix_4 pRightSide)
-	{
-		//product of the first row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[0][i] *= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//product of the second row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[1][i] *= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//product of the third row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[2][i] *= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		//product of the fourth row
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[3][i] *= pRightSide.mMatrix[j][i];
-			}
-		}
-
-		return *this;
 	}
 
 	matrix_4 matrix_4::operator/(matrix_4 pRightSide)
@@ -569,13 +539,6 @@ namespace engine
 		matrix = *this *  pRightSide.invert();
 		
 		return matrix;
-	}
-
-	matrix_4& matrix_4::operator/=(matrix_4 pRightSide)
-	{
-		*this *= pRightSide.invert();
-
-		return *this;
 	}
 
 	matrix_4& matrix_4::operator=(matrix_4 pRightSide)

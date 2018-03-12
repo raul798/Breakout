@@ -29,12 +29,12 @@ namespace engine
 		float get_matrix_value(int pRowIndex, int pColumnIndex);
 		vector_3 get_angle();
 		friend std::ostream& operator<< (std::ostream& pOstream, matrix_4 pMatrix);
-		void translate(vector_4 *pVector);
-		void rotate_from_angles(float angles);
-		void rotate_from_radians(float radians);
-		void rotate_x();
-		void rotate_y();
-		void rotate_z();
+		matrix_4 translate(vector_4 pVector);
+		matrix_4 rotate_from_angles(float pDegrees);
+		matrix_4 rotate_from_radians(float pRadians);
+		matrix_4 rotate_x(float pRadians);
+		matrix_4 rotate_y(float pRadians);
+		matrix_4 rotate_z(float pRadians);
 		matrix_4 invert();
 		void transform();
 	
@@ -43,10 +43,8 @@ namespace engine
 		matrix_4& operator+=(const matrix_4 pRightSide);
 		matrix_4  operator-(const matrix_4 pRightSide);
 		matrix_4& operator-=(const matrix_4 pRightSide);
-		matrix_4  operator*(const matrix_4 pRightSide);
-		matrix_4& operator*=(const matrix_4 pRightSide);
+		matrix_4  operator*(matrix_4& pRightSide);
 		matrix_4  operator/(matrix_4 pRightSide);
-		matrix_4& operator/=(matrix_4 pRightSide);
 		matrix_4& operator=(const matrix_4 pRightSide);
 	private:
 		float mMatrix[4][4];
