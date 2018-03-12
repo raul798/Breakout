@@ -484,7 +484,7 @@ namespace engine
 
 	matrix_4 matrix_4::transform(int pIndexValue, float pDesiredValue)
 	{
-		matrix_4 matrix;
+		matrix_4 matrix = *this;
 
 		matrix[pIndexValue] = pDesiredValue;
 
