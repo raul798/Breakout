@@ -20,7 +20,7 @@ namespace engine
 				 float pValue12, float pValue13, float pValue14, float pValue15);
 
 		//functions
-		float *get_matrix();
+		float **get_matrix();
 		float *get_matrix_row(int pRowIndex);
 		float *get_matrix_column(int pColumnIndex);
 		void identity();

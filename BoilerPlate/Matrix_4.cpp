@@ -89,9 +89,21 @@ namespace engine
 		mMatrix[3][3] = pSixteenthValue;
 	}
 
-	float *matrix_4::get_matrix()
+	float **matrix_4::get_matrix()
 	{
-		return *mMatrix;
+		float** matrix = new float*[4];
+
+		for (int i = 0; i < 4; i++)
+		{
+			matrix[i] = new float[4];
+
+			for (int j = 0; j < 4; j++)
+			{
+				matrix[i][j] = mMatrix[i][j];
+			}
+		}
+
+		return matrix;
 	}
 
 	float *matrix_4::get_matrix_row(int pRowIndex)
