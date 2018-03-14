@@ -53,4 +53,8 @@
       <UniqueIdentifier>{da8cc683-e66e-46b9-be58-7d0e16e23f76}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="vertex.glsl" />
+    <None Include="frag.glsl" />
+  </ItemGroup>
 </Project>
