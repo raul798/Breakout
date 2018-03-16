@@ -15,6 +15,9 @@
 
 #include "matrix_4.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.hpp"
+
 namespace Engine
 {
 	const float DESIRED_FRAME_RATE = 60.0f;
@@ -24,7 +27,40 @@ namespace Engine
 	GLuint VertexArrayObject; //VAO
 	GLuint VertexBufferObject; //VBO
 	GLuint ProgramID;
+	GLuint texture1;
+	GLuint texture2;
 
+	GLuint LoadTexture(const char * texture_path)
+	{
+		unsigned int texture;
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		// set the texture wrapping/filtering options (on the currently bound texture object)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int width, height, nrChannels;
+		//flip y 
+		stbi_set_flip_vertically_on_load(true);
+
+		// Load the texture
+		unsigned char *data = stbi_load(texture_path, &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			std::cout << "Failed to load texture" << std::endl;
+			return -1;
+		}
+		stbi_image_free(data);
+
+		return texture;
+	}
 
 	//TODO: move this to helper class
 	GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path) {
@@ -156,6 +192,9 @@ namespace Engine
 		
 		//TODO: move out
 		ProgramID = LoadShaders("vertex.glsl", "frag.glsl");
+		texture1 = LoadTexture("face.png");
+		//texture2 = LoadTexture("test.png");
+
 		//GLuint uniColor = glGetUniformLocation(ProgramID, "triangleColor");
 
 		// set up vertex data (and buffer(s)) and configure vertex attributes
@@ -187,12 +226,12 @@ namespace Engine
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 		//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glVertexAttribPointer(
+		glVertexAttribPointer( 
 			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 			3,                  // size
 			GL_FLOAT,           // type
 			GL_FALSE,           // normalized?
-			3 * sizeof(float),  // stride
+			6 * sizeof(float),  // stride
 			(void*)0            // array buffer offset
 		);
 		glEnableVertexAttribArray(0);
@@ -204,8 +243,8 @@ namespace Engine
 		// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 		glBindVertexArray(0);
 
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			
 		SDL_Event event;
 		while (m_state == GameState::RUNNING)

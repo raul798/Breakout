@@ -5,7 +5,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="stb_image.c" />
     <ClCompile Include="math_utilities.cpp">
       <Filter>Engine\Source files</Filter>
     </ClCompile>
@@ -41,6 +40,7 @@
     <ClInclude Include="matrix_4.hpp">
       <Filter>Engine\Header files</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
