@@ -4,48 +4,50 @@ namespace engine
 {
 	matrix_4::matrix_4()
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				if (i == j)
-				{
-					mMatrix[i][j] = 1;
-				}
-				else
-				{
-					mMatrix[i][j] = 0;
-				}
-			}
-		}
+		mMatrix[0] = 1;
+		mMatrix[1] = 0;
+		mMatrix[2] = 0;
+		mMatrix[3] = 0;
+		mMatrix[4] = 0;
+		mMatrix[5] = 1;
+		mMatrix[6] = 0;
+		mMatrix[7] = 0;
+		mMatrix[8] = 0;
+		mMatrix[9] = 0;
+		mMatrix[10] = 1;
+		mMatrix[11] = 0;
+		mMatrix[12] = 0;
+		mMatrix[13] = 0;
+		mMatrix[14] = 0;
+		mMatrix[15] = 1;
 	}
 
 	matrix_4::matrix_4(float pArray[16])
 	{
 		//matrix[row][column]
 		//first column
-		mMatrix[0][0] = pArray[0];
-		mMatrix[1][0] = pArray[1];
-		mMatrix[2][0] = pArray[2];
-		mMatrix[3][0] = pArray[3];
+		mMatrix[0] = pArray[0];
+		mMatrix[1] = pArray[1];
+		mMatrix[2] = pArray[2];
+		mMatrix[3] = pArray[3];
 
 		//second column
-		mMatrix[0][1] = pArray[4];
-		mMatrix[1][1] = pArray[5];
-		mMatrix[2][1] = pArray[6];
-		mMatrix[3][1] = pArray[7];
+		mMatrix[4] = pArray[4];
+		mMatrix[5] = pArray[5];
+		mMatrix[6] = pArray[6];
+		mMatrix[7] = pArray[7];
 
 		//third column
-		mMatrix[0][2] = pArray[8];
-		mMatrix[1][2] = pArray[9];
-		mMatrix[2][2] = pArray[10];
-		mMatrix[3][2] = pArray[11];
+		mMatrix[8] = pArray[8];
+		mMatrix[9] = pArray[9];
+		mMatrix[10] = pArray[10];
+		mMatrix[11] = pArray[11];
 
 		//fourth column
-		mMatrix[0][3] = pArray[12];
-		mMatrix[1][3] = pArray[13];
-		mMatrix[2][3] = pArray[14];
-		mMatrix[3][3] = pArray[15];
+		mMatrix[12] = pArray[12];
+		mMatrix[13] = pArray[13];
+		mMatrix[14] = pArray[14];
+		mMatrix[15] = pArray[15];
 	}
 
 	matrix_4::matrix_4(float pFristValue, float pSecondValue, float pThirdValue, float pFourthValue,
@@ -55,28 +57,28 @@ namespace engine
 	{
 		//matrix[row][column]
 		//first column
-		mMatrix[0][0] = pFristValue;
-		mMatrix[1][0] = pSecondValue;
-		mMatrix[2][0] = pThirdValue;
-		mMatrix[3][0] = pFourthValue;
+		mMatrix[0] = pFristValue;
+		mMatrix[1] = pSecondValue;
+		mMatrix[2] = pThirdValue;
+		mMatrix[3] = pFourthValue;
 
 		//second column
-		mMatrix[0][1] = pFifthValue;
-		mMatrix[1][1] = pSixthValue;
-		mMatrix[2][1] = pSeventhValue;
-		mMatrix[3][1] = pEighthValue;
+		mMatrix[4] = pFifthValue;
+		mMatrix[5] = pSixthValue;
+		mMatrix[6] = pSeventhValue;
+		mMatrix[7] = pEighthValue;
 
 		//third column
-		mMatrix[0][2] = pNinthValue;
-		mMatrix[1][2] = pTenthValue;
-		mMatrix[2][2] = pEleventhValue;
-		mMatrix[3][2] = pTwelfthValue;
+		mMatrix[8] = pNinthValue;
+		mMatrix[9] = pTenthValue;
+		mMatrix[10] = pEleventhValue;
+		mMatrix[11] = pTwelfthValue;
 
 		//fourth column
-		mMatrix[0][3] = pThirteenthValue;
-		mMatrix[1][3] = pFourteenthValue;
-		mMatrix[2][3] = pFifteenthValue;
-		mMatrix[3][3] = pSixteenthValue;
+		mMatrix[12] = pThirteenthValue;
+		mMatrix[13] = pFourteenthValue;
+		mMatrix[14] = pFifteenthValue;
+		mMatrix[15] = pSixteenthValue;
 	}
 
 	float **matrix_4::get_matrix()
@@ -89,7 +91,7 @@ namespace engine
 
 			for (int j = 0; j < 4; j++)
 			{
-				matrix[i][j] = mMatrix[i][j];
+				matrix[i][j] = mMatrix[i*4 + j];
 			}
 		}
 
@@ -98,44 +100,42 @@ namespace engine
 
 	float *matrix_4::get_matrix_row(int pRowIndex)
 	{
-		float matrixRow[3];
-
-		for (int i = 0; i < 4; i++)
-		{
-			matrixRow[i] = mMatrix[pRowIndex][i];
-		}
-
+		float matrixRow[4];
+		matrixRow[0] = mMatrix[pRowIndex];
+		matrixRow[1] = mMatrix[pRowIndex + 1];
+		matrixRow[2] = mMatrix[pRowIndex + 2];
+		matrixRow[3] = mMatrix[pRowIndex + 3];
 		return matrixRow;
 	}
 
 	float *matrix_4::get_matrix_column(int pColumnIndex)
 	{
-		float matrixColumn[3];
-
-		for (int i = 0; i < 4; i++)
-		{
-			matrixColumn[i] = mMatrix[i][pColumnIndex];
-		}
-
+		float matrixColumn[4];
+		matrixColumn[0] = mMatrix[pColumnIndex];
+		matrixColumn[1] = mMatrix[pColumnIndex + 1];
+		matrixColumn[2] = mMatrix[pColumnIndex + 2];
+		matrixColumn[3] = mMatrix[pColumnIndex + 3];
 		return matrixColumn;
 	}
 
 	void matrix_4::identity()
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				if (i == j)
-				{
-					mMatrix[i][j] = 1;
-				}
-				else
-				{
-					mMatrix[i][j] = 0;
-				}
-			}
-		}
+		mMatrix[0] = 1;
+		mMatrix[1] = 0;
+		mMatrix[2] = 0;
+		mMatrix[3] = 0;
+		mMatrix[4] = 0;
+		mMatrix[5] = 1;
+		mMatrix[6] = 0;
+		mMatrix[7] = 0;
+		mMatrix[8] = 0;
+		mMatrix[9] = 0;
+		mMatrix[10] = 1;
+		mMatrix[11] = 0;
+		mMatrix[12] = 0;
+		mMatrix[13] = 0;
+		mMatrix[14] = 0;
+		mMatrix[15] = 1;
 	}
 
 	matrix_4 matrix_4::get_transpose()
@@ -143,171 +143,181 @@ namespace engine
 		matrix_4 transposeMatrix;
 
 		//first column
-		transposeMatrix.mMatrix[0][0] = mMatrix[0][0];
-		transposeMatrix.mMatrix[0][1] = mMatrix[1][0];
-		transposeMatrix.mMatrix[0][2] = mMatrix[2][0];
-		transposeMatrix.mMatrix[0][3] = mMatrix[3][0];
+		transposeMatrix[0] = mMatrix[0];
+		transposeMatrix[1] = mMatrix[1];
+		transposeMatrix[2] = mMatrix[2];
+		transposeMatrix[3] = mMatrix[3];
 
 		//second column
-		transposeMatrix.mMatrix[0][1] = mMatrix[0][1];
-		transposeMatrix.mMatrix[1][1] = mMatrix[1][1];
-		transposeMatrix.mMatrix[1][2] = mMatrix[2][1];
-		transposeMatrix.mMatrix[3][1] = mMatrix[3][1];
+		transposeMatrix[4] = mMatrix[4];
+		transposeMatrix[5] = mMatrix[5];
+		transposeMatrix[6] = mMatrix[6];
+		transposeMatrix[7] = mMatrix[7];
 
 		//third column
-		transposeMatrix.mMatrix[0][2] = mMatrix[0][2];
-		transposeMatrix.mMatrix[2][1] = mMatrix[1][2];
-		transposeMatrix.mMatrix[2][2] = mMatrix[2][2];
-		transposeMatrix.mMatrix[2][3] = mMatrix[3][2];
+		transposeMatrix[8] = mMatrix[8];
+		transposeMatrix[9] = mMatrix[9];
+		transposeMatrix[10] = mMatrix[10];
+		transposeMatrix[11] = mMatrix[11];
 
 		//fourth column
-		transposeMatrix.mMatrix[0][3] = mMatrix[0][3];
-		transposeMatrix.mMatrix[3][1] = mMatrix[1][3];
-		transposeMatrix.mMatrix[3][2] = mMatrix[2][3];
-		transposeMatrix.mMatrix[3][3] = mMatrix[3][3];
+		transposeMatrix[12] = mMatrix[12];
+		transposeMatrix[13] = mMatrix[13];
+		transposeMatrix[14] = mMatrix[14];
+		transposeMatrix[15] = mMatrix[15];
 
 		return transposeMatrix;
 	}
 
 	float matrix_4::get_matrix_value(int pRowIndex, int pColumnIndex)
 	{
-		return mMatrix[pRowIndex][pColumnIndex];
+		return mMatrix[pColumnIndex * 4 + pRowIndex];
 	}
 
 	matrix_4 matrix_4::invert()
 	{
 		float determinant;
-		matrix_4 *inverse, *duplicateMatrix;
+		matrix_4 *duplicateMatrix;
+		matrix_4 *inverse = new matrix_4();
 		duplicateMatrix = this;
 
-		inverse->mMatrix[0][0] = duplicateMatrix->mMatrix[1][1]	* duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] -
-								 duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[2][3] -
-								 duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] +
-								 duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][3] +
-								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] -
-								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][2];
+		inverse->mMatrix[0] = duplicateMatrix->mMatrix[5]	* duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] -
+								 duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] -
+								 duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] +
+								 duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] +
+								 duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] -
+								 duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10];
 
-		inverse->mMatrix[0][1] = -duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] +
-								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[2][3] +
-						       	  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] -
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][3] -
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] +
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][2];
+		inverse->mMatrix[4] = -duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] +
+								  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] +
+						       	  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] -
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[14] -
+								  duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] +
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[10];
 
-		inverse->mMatrix[0][2] = duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][3] -
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[1][3] -
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][3] +
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][3] +
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][2] -
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][2];
+		inverse->mMatrix[8] = duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[15] -
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[13] -
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[15] +
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[13] +
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[1] -
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[9];
 
-		inverse->mMatrix[0][3] = -duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][3] +
-								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[1][3] +
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][3] -
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][3] -
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][2] +
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][2];
+		inverse->mMatrix[12] = -duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[14] +
+								  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[13] +
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[14] -
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[13] -
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[10] +
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[9];
 
-		inverse->mMatrix[1][0] = -duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] +
-								  duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][2]* duplicateMatrix->mMatrix[2][3] +
-								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] -
-								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] -
-								  duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2]+
-								  duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2];
+		inverse->mMatrix[1] = -duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] +
+								  duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11]* duplicateMatrix->mMatrix[14] +
+								  duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] -
+								  duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] -
+								  duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] +
+								  duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10];
 
-		inverse->mMatrix[1][1] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[3][3] -
-								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[2][3] -
-								 duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] +
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] +
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2] -
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2];
+		inverse->mMatrix[5] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] -
+								 duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] -
+								 duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] +
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] +
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] -
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10];
 
-		inverse->mMatrix[1][2] = -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][3] +
-								  duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][2] * duplicateMatrix->mMatrix[1][3] +
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][3] -
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][3] -
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][2] +
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][2];
+		inverse->mMatrix[9] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[15] +
+								  duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[13] +
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[15] -
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[13] -
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] +
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[9];
 
-		inverse->mMatrix[1][3] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][3] -
-								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][2] * duplicateMatrix->mMatrix[1][3] -
-								 duplicateMatrix->mMatrix[0][8] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][3] +
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][3] +
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][2] -
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][2];
+		inverse->mMatrix[13] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[14] -
+								 duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[13] -
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[14] +
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[13] +
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] -
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[9];
 
-		inverse->mMatrix[2][0] = duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] -
-								 duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][3] -
-								 duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] +
-								 duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] +
-								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] -
-								 duplicateMatrix->mMatrix[1][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+		inverse->mMatrix[2] = duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] -
+								 duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[14] -
+								 duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] +
+								 duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] +
+								 duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] -
+								 duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
-		inverse->mMatrix[2][1] = -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][3] +
-								  duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][3] +
-								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][3] -
-								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][3] -
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] +
-								  duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+		inverse->mMatrix[6] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] +
+								  duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] +
+								  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] -
+								  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] -
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] +
+								  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
-		inverse->mMatrix[2][2] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][3] -
-								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][3] -
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][3] +
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][3] +
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][1] -
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][1];
+		inverse->mMatrix[10] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[15] -
+								 duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[13] -
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[15] +
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[13] +
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] -
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[5];
 
-		inverse->mMatrix[2][3]= -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][3] +
-								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][3] +
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][3] -
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][3] -
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] +
-								 duplicateMatrix->mMatrix[0][3] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][1];
+		inverse->mMatrix[14]= -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[14] +
+								 duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[13] +
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[14] -
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[13] -
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] +
+								 duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[5];
 
-		inverse->mMatrix[3][0] = -duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] +
-								  duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][2] +
-								  duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2] -
-								  duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2] -
-								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] +
-								  duplicateMatrix->mMatrix[1][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+		inverse->mMatrix[3] = -duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] +
+								  duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10] +
+								  duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] -
+								  duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10] -
+								  duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] +
+								  duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
-		inverse->mMatrix[3][1] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[3][2] -
-							     duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[2][2] -
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][2] +
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][2] +
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[3][1] -
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[2][1];
+		inverse->mMatrix[7] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] -
+							     duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10] -
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] +
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10] +
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] -
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
-		inverse->mMatrix[3][2] = -duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[3][2] +
-								  duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[3][1] * duplicateMatrix->mMatrix[1][2] +
-								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][2] -
-								  duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][2] -
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[3][1] +
-								  duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[3][0] * duplicateMatrix->mMatrix[1][1];
+		inverse->mMatrix[11] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[11] +
+								  duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[9] +
+								  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] -
+								  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[9] -
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] +
+								  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[5];
 
-		inverse->mMatrix[3][3] = duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[1][1] * duplicateMatrix->mMatrix[2][2] -
-								 duplicateMatrix->mMatrix[0][0] * duplicateMatrix->mMatrix[2][1] * duplicateMatrix->mMatrix[1][2] -
-								 duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][2] +
-							     duplicateMatrix->mMatrix[0][1] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][2] +
-								 duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[1][0] * duplicateMatrix->mMatrix[2][1] -
-							     duplicateMatrix->mMatrix[0][2] * duplicateMatrix->mMatrix[2][0] * duplicateMatrix->mMatrix[1][1];
+		inverse->mMatrix[15] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[10] -
+								 duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[9] -
+								 duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] +
+							     duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[9] +
+								 duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] -
+							     duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[5];
 
-		determinant = duplicateMatrix->mMatrix[0][0] * inverse->mMatrix[0][0] + 
-					  duplicateMatrix->mMatrix[1][0] * inverse->mMatrix[0][1] + 
-				      duplicateMatrix->mMatrix[2][0] * inverse->mMatrix[0][2] + 
-					  duplicateMatrix->mMatrix[3][0] * inverse->mMatrix[0][3];
+		determinant = duplicateMatrix->mMatrix[0] * inverse->mMatrix[0] + 
+					  duplicateMatrix->mMatrix[1] * inverse->mMatrix[4] + 
+				      duplicateMatrix->mMatrix[2] * inverse->mMatrix[8] + 
+					  duplicateMatrix->mMatrix[3] * inverse->mMatrix[12];
 	
 		if (determinant != 0)
 		{
 			determinant = 1.0f / determinant;
 
-			for (int i = 0; i < 4; i++)
-			{
-				for (int j = 0; j < 4; j++)
-				{
-					inverse[i][j] = inverse[i][j] * determinant;
-				}
-			}
+			inverse->mMatrix[0] = inverse->mMatrix[0] * determinant;
+			inverse->mMatrix[1] = inverse->mMatrix[1] * determinant;
+			inverse->mMatrix[2] = inverse->mMatrix[2] * determinant;
+			inverse->mMatrix[3] = inverse->mMatrix[3] * determinant;
+			inverse->mMatrix[4] = inverse->mMatrix[4] * determinant;
+			inverse->mMatrix[5] = inverse->mMatrix[5] * determinant;
+			inverse->mMatrix[6] = inverse->mMatrix[6] * determinant;
+			inverse->mMatrix[7] = inverse->mMatrix[7] * determinant;
+			inverse->mMatrix[8] = inverse->mMatrix[8] * determinant;
+			inverse->mMatrix[9] = inverse->mMatrix[9] * determinant;
+			inverse->mMatrix[10] = inverse->mMatrix[10] * determinant;
+			inverse->mMatrix[11] = inverse->mMatrix[11] * determinant;
+			inverse->mMatrix[12] = inverse->mMatrix[12] * determinant;
+			inverse->mMatrix[13] = inverse->mMatrix[13] * determinant;
+			inverse->mMatrix[14] = inverse->mMatrix[14] * determinant;
+			inverse->mMatrix[15] = inverse->mMatrix[15] * determinant;
 
 			return *inverse;
 		}
@@ -319,23 +329,31 @@ namespace engine
 
 	float& matrix_4::operator[](const int pRightSide)
 	{
-		int row = pRightSide % 4;
-		int column = pRightSide / 4;
-
-		return mMatrix[row][column];
+		return mMatrix[pRightSide];
 	}
 
 	std::ostream& operator<<(std::ostream& pOstream, matrix_4 pMatrix)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				pOstream << pMatrix.mMatrix[i][j] << " ";
-			}
-			pOstream << "\n";
-		}
-
+		pOstream << pMatrix[0] << " ";
+		pOstream << pMatrix[1] << " ";
+		pOstream << pMatrix[2] << " ";
+		pOstream << pMatrix[3] << " ";
+		pOstream << "\n";
+		pOstream << pMatrix[4] << " ";
+		pOstream << pMatrix[5] << " ";
+		pOstream << pMatrix[6] << " ";
+		pOstream << pMatrix[7] << " ";
+		pOstream << "\n";
+		pOstream << pMatrix[8] << " ";
+		pOstream << pMatrix[9] << " ";
+		pOstream << pMatrix[10] << " ";
+		pOstream << pMatrix[11] << " ";
+		pOstream << "\n";
+		pOstream << pMatrix[12] << " ";
+		pOstream << pMatrix[13] << " ";
+		pOstream << pMatrix[14] << " ";
+		pOstream << pMatrix[15] << " ";
+		pOstream << "\n";
 		return pOstream;
 	}
 
@@ -343,17 +361,17 @@ namespace engine
 	{
 		float yaw, pitch, roll;
 
-		if(mMatrix[0][0] == 1.0f || mMatrix[0][0] == -1.0f)
+		if(mMatrix[0] == 1.0f || mMatrix[0] == -1.0f)
 		{
-			yaw = atan2f(mMatrix[0][2], mMatrix[2][3]);
+			yaw = atan2f(mMatrix[8], mMatrix[14]);
 			pitch = 0.0f;
 			roll = 0.0f;
 		}
 		else
 		{
-			yaw = atan2f(-mMatrix[2][1], mMatrix[0][0]);
-			pitch = asinf(mMatrix[1][0]);
-			roll = atan2f(-mMatrix[1][2], mMatrix[1][1]);
+			yaw = atan2f(-mMatrix[6], mMatrix[0]);
+			pitch = asinf(mMatrix[1]);
+			roll = atan2f(-mMatrix[9], mMatrix[5]);
 		}
 
 		//yaw degree range (-180, 180)
@@ -393,9 +411,9 @@ namespace engine
 	{
 		matrix_4 matrix;
 
-		matrix.mMatrix[0][3] = pVector.mX;
-		matrix.mMatrix[1][3] = pVector.mY;
-		matrix.mMatrix[2][3] = pVector.mZ;
+		matrix.mMatrix[12] = pVector.mX;
+		matrix.mMatrix[13] = pVector.mY;
+		matrix.mMatrix[14] = pVector.mZ;
 
 		return matrix;
 	}
@@ -406,25 +424,25 @@ namespace engine
 
 		matrix = translate_matrix(pVector);
 
-		pVector.mX = (matrix.mMatrix[0][0] * pVector.mX) +
-					 (matrix.mMatrix[0][1] * pVector.mY) +
-					 (matrix.mMatrix[0][2] * pVector.mZ) +
-					 (matrix.mMatrix[0][3] * pVector.mW);
+		pVector.mX = (matrix[0] * pVector.mX) +
+					 (matrix[4] * pVector.mY) +
+					 (matrix[8] * pVector.mZ) +
+					 (matrix[12] * pVector.mW);
 
-		pVector.mY = (matrix.mMatrix[1][0] * pVector.mX) +
-					 (matrix.mMatrix[1][1] * pVector.mY) +
-					 (matrix.mMatrix[1][2] * pVector.mZ) +
-					 (matrix.mMatrix[1][3] * pVector.mW);
+		pVector.mY = (matrix[1] * pVector.mX) +
+					 (matrix[5] * pVector.mY) +
+					 (matrix[9] * pVector.mZ) +
+					 (matrix[13] * pVector.mW);
 
-		pVector.mZ = (matrix.mMatrix[2][0] * pVector.mX) +
-					 (matrix.mMatrix[2][1] * pVector.mY) +
-					 (matrix.mMatrix[2][2] * pVector.mZ) +
-					 (matrix.mMatrix[2][3] * pVector.mW);
+		pVector.mZ = (matrix[2] * pVector.mX) +
+					 (matrix[6] * pVector.mY) +
+					 (matrix[10] * pVector.mZ) +
+					 (matrix[14] * pVector.mW);
 
-		pVector.mW = (matrix.mMatrix[3][0] * 1) +
-					 (matrix.mMatrix[3][1] * 1) +
-					 (matrix.mMatrix[3][2] * 1) +
-					 (matrix.mMatrix[3][3] * 1);
+		pVector.mW = (matrix[3] * 1) +
+					 (matrix[7] * 1) +
+					 (matrix[11] * 1) +
+					 (matrix[15] * 1);
 
 		return pVector;
 	}
@@ -491,77 +509,139 @@ namespace engine
 		return matrix;
 	}
 
-	matrix_4 matrix_4::operator+(const matrix_4 pRightSide)
+	matrix_4 matrix_4::operator+(matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 		
-		for (int i = 0; i < 4; i++) 
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[i][j] = mMatrix[i][j] + pRightSide.mMatrix[i][j];
-			}
-		}
+		matrix[0] = mMatrix[0] + pRightSide[0];
+		matrix[1] = mMatrix[1] + pRightSide[1];
+		matrix[2] = mMatrix[2] + pRightSide[2];
+		matrix[3] = mMatrix[3] + pRightSide[3];
+		matrix[4] = mMatrix[4] + pRightSide[4];
+		matrix[5] = mMatrix[5] + pRightSide[5];
+		matrix[6] = mMatrix[6] + pRightSide[6];
+		matrix[7] = mMatrix[7] + pRightSide[7];
+		matrix[8] = mMatrix[8] + pRightSide[8];
+		matrix[9] = mMatrix[9] + pRightSide[9];
+		matrix[10] = mMatrix[10] + pRightSide[10];
+		matrix[11] = mMatrix[11] + pRightSide[11];
+		matrix[12] = mMatrix[12] + pRightSide[12];
+		matrix[13] = mMatrix[13] + pRightSide[13];
+		matrix[14] = mMatrix[14] + pRightSide[14];
+		matrix[15] = mMatrix[15] + pRightSide[15];
 
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator+=(const matrix_4 pRightSide)
+	matrix_4& matrix_4::operator+=(matrix_4 pRightSide)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[i][j] += pRightSide.mMatrix[i][j];
-			}
-		}
+		mMatrix[0] += pRightSide[0];
+		mMatrix[1] += pRightSide[1];
+		mMatrix[2] += pRightSide[2];
+		mMatrix[3] += pRightSide[3];
+		mMatrix[4] += pRightSide[4];
+		mMatrix[5] += pRightSide[5];
+		mMatrix[6] += pRightSide[6];
+		mMatrix[7] += pRightSide[7];
+		mMatrix[8] += pRightSide[8];
+		mMatrix[9] += pRightSide[9];
+		mMatrix[10] += pRightSide[10];
+		mMatrix[11] += pRightSide[11];
+		mMatrix[12] += pRightSide[12];
+		mMatrix[13] += pRightSide[13];
+		mMatrix[14] += pRightSide[14];
+		mMatrix[15] += pRightSide[15];
+
 
 		return *this;
 	}
 
-	matrix_4 matrix_4::operator-(const matrix_4 pRightSide)
+	matrix_4 matrix_4::operator-(matrix_4 pRightSide)
 	{
 		matrix_4 matrix;
 
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				matrix.mMatrix[i][j] = mMatrix[i][j] - pRightSide.mMatrix[i][j];
-			}
-		}
+		matrix[0] = mMatrix[0] - pRightSide[0];
+		matrix[1] = mMatrix[1] - pRightSide[1];
+		matrix[2] = mMatrix[2] - pRightSide[2];
+		matrix[3] = mMatrix[3] - pRightSide[3];
+		matrix[4] = mMatrix[4] - pRightSide[4];
+		matrix[5] = mMatrix[5] - pRightSide[5];
+		matrix[6] = mMatrix[6] - pRightSide[6];
+		matrix[7] = mMatrix[7] - pRightSide[7];
+		matrix[8] = mMatrix[8] - pRightSide[8];
+		matrix[9] = mMatrix[9] - pRightSide[9];
+		matrix[10] = mMatrix[10] - pRightSide[10];
+		matrix[11] = mMatrix[11] - pRightSide[11];
+		matrix[12] = mMatrix[12] - pRightSide[12];
+		matrix[13] = mMatrix[13] - pRightSide[13];
+		matrix[14] = mMatrix[14] - pRightSide[14];
+		matrix[15] = mMatrix[15] - pRightSide[15];
+
 
 		return matrix;
 	}
 
-	matrix_4& matrix_4::operator-=(const matrix_4 pRightSide)
+	matrix_4& matrix_4::operator-=(matrix_4 pRightSide)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[i][j] -= pRightSide.mMatrix[i][j];
-			}
-		}
-
+		mMatrix[0] -= pRightSide[0];
+		mMatrix[1] -= pRightSide[1];
+		mMatrix[2] -= pRightSide[2];
+		mMatrix[3] -= pRightSide[3];
+		mMatrix[4] -= pRightSide[4];
+		mMatrix[5] -= pRightSide[5];
+		mMatrix[6] -= pRightSide[6];
+		mMatrix[7] -= pRightSide[7];
+		mMatrix[8] -= pRightSide[8];
+		mMatrix[9] -= pRightSide[9];
+		mMatrix[10] -= pRightSide[10];
+		mMatrix[11] -= pRightSide[11];
+		mMatrix[12] -= pRightSide[12];
+		mMatrix[13] -= pRightSide[13];
+		mMatrix[14] -= pRightSide[14];
+		mMatrix[15] -= pRightSide[15];
 		return *this;
 	}
 
 	matrix_4 matrix_4::operator*(matrix_4& pRightSide)
 	{
 		matrix_4 matrix(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-
-		for (int rowToChange = 0; rowToChange < 4; rowToChange++)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				for (int j = 0; j < 4; j++)
-				{
-					matrix.mMatrix[rowToChange][i] += matrix.mMatrix[rowToChange][j] * pRightSide.mMatrix[j][i];
-				}
-			}
-		}
-
+		//first column
+		matrix[0] = mMatrix[0] * pRightSide[0] + mMatrix[4] * pRightSide[1] + 
+			mMatrix[8] * pRightSide[2] + mMatrix[12] * pRightSide[3];
+		matrix[1] = mMatrix[0] * pRightSide[4] + mMatrix[4] * pRightSide[5] +
+			mMatrix[8] * pRightSide[6] + mMatrix[12] * pRightSide[7];
+		matrix[2] = mMatrix[0] * pRightSide[8] + mMatrix[4] * pRightSide[9] +
+			mMatrix[8] * pRightSide[10] + mMatrix[12] * pRightSide[11];
+		matrix[3] = mMatrix[0] * pRightSide[12] + mMatrix[4] * pRightSide[13] +
+			mMatrix[8] * pRightSide[14] + mMatrix[12] * pRightSide[15];
+		//second column
+		matrix[4] = mMatrix[1] * pRightSide[0] + mMatrix[5] * pRightSide[1] +
+			mMatrix[9] * pRightSide[2] + mMatrix[13] * pRightSide[3];
+		matrix[5] = mMatrix[1] * pRightSide[4] + mMatrix[5] * pRightSide[5] +
+			mMatrix[9] * pRightSide[6] + mMatrix[13] * pRightSide[7];
+		matrix[6] = mMatrix[1] * pRightSide[8] + mMatrix[5] * pRightSide[9] +
+			mMatrix[9] * pRightSide[10] + mMatrix[13] * pRightSide[11];
+		matrix[7] = mMatrix[1] * pRightSide[12] + mMatrix[5] * pRightSide[13] +
+			mMatrix[9] * pRightSide[14] + mMatrix[13] * pRightSide[15];
+		//third column
+		matrix[8] = mMatrix[2] * pRightSide[0] + mMatrix[6] * pRightSide[1] +
+			mMatrix[10] * pRightSide[2] + mMatrix[14] * pRightSide[3];
+		matrix[9] = mMatrix[2] * pRightSide[4] + mMatrix[6] * pRightSide[5] +
+			mMatrix[10] * pRightSide[6] + mMatrix[14] * pRightSide[7];
+		matrix[10] = mMatrix[2] * pRightSide[8] + mMatrix[6] * pRightSide[9] +
+			mMatrix[10] * pRightSide[10] + mMatrix[14] * pRightSide[11];
+		matrix[11] = mMatrix[2] * pRightSide[12] + mMatrix[6] * pRightSide[13] +
+			mMatrix[10] * pRightSide[14] + mMatrix[14] * pRightSide[15];
+		//fourth column
+		matrix[12] = mMatrix[3] * pRightSide[0] + mMatrix[7] * pRightSide[1] +
+			mMatrix[11] * pRightSide[2] + mMatrix[15] * pRightSide[3];
+		matrix[13] = mMatrix[3] * pRightSide[4] + mMatrix[7] * pRightSide[5] +
+			mMatrix[11] * pRightSide[6] + mMatrix[15] * pRightSide[7];
+		matrix[14] = mMatrix[3] * pRightSide[8] + mMatrix[7] * pRightSide[9] +
+			mMatrix[11] * pRightSide[10] + mMatrix[15] * pRightSide[11];
+		matrix[15] = mMatrix[3] * pRightSide[12] + mMatrix[7] * pRightSide[13] +
+			mMatrix[11] * pRightSide[14] + mMatrix[15] * pRightSide[15];
+		
 		return matrix;
 	}
 
@@ -576,14 +656,22 @@ namespace engine
 
 	matrix_4& matrix_4::operator=(matrix_4 pRightSide)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				mMatrix[i][j] = pRightSide.mMatrix[i][j];
-			}
-		}
-
+		mMatrix[0] = pRightSide[0];
+		mMatrix[1] = pRightSide[1];
+		mMatrix[2] = pRightSide[2];
+		mMatrix[3] = pRightSide[3];
+		mMatrix[4] = pRightSide[4];
+		mMatrix[5] = pRightSide[5];
+		mMatrix[6] = pRightSide[6];
+		mMatrix[7] = pRightSide[7];
+		mMatrix[8] = pRightSide[8];
+		mMatrix[9] = pRightSide[9];
+		mMatrix[10] = pRightSide[10];
+		mMatrix[11] = pRightSide[11];
+		mMatrix[12] = pRightSide[12];
+		mMatrix[13] = pRightSide[13];
+		mMatrix[14] = pRightSide[14];
+		mMatrix[15] = pRightSide[15];
 		return *this;
 	}
 }
