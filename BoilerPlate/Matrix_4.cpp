@@ -81,44 +81,54 @@ namespace engine
 		mMatrix[15] = pSixteenthValue;
 	}
 
-	float **matrix_4::get_matrix()
+	float *matrix_4::get_matrix()
 	{
-		float** matrix = new float*[4];
+		float matrix[16];
 
-		for (int i = 0; i < 4; i++)
-		{
-			matrix[i] = new float[4];
-
-			for (int j = 0; j < 4; j++)
-			{
-				matrix[i][j] = mMatrix[i*4 + j];
-			}
-		}
-
+		matrix[0]  = mMatrix[0];
+		matrix[2]  = mMatrix[2];
+		matrix[3]  = mMatrix[3];
+		matrix[4]  = mMatrix[4];
+		matrix[5]  = mMatrix[5];
+		matrix[6]  = mMatrix[6];
+		matrix[7]  = mMatrix[7];
+		matrix[8]  = mMatrix[8];
+		matrix[9]  = mMatrix[9];
+		matrix[10] = mMatrix[10];
+		matrix[11] = mMatrix[11];
+		matrix[12] = mMatrix[12];
+		matrix[13] = mMatrix[13];
+		matrix[14] = mMatrix[14];
+		matrix[15] = mMatrix[15];
+		
 		return matrix;
 	}
 
 	float *matrix_4::get_matrix_row(int pRowIndex)
 	{
 		float matrixRow[4];
+
 		matrixRow[0] = mMatrix[pRowIndex];
 		matrixRow[1] = mMatrix[pRowIndex + 1];
 		matrixRow[2] = mMatrix[pRowIndex + 2];
 		matrixRow[3] = mMatrix[pRowIndex + 3];
+
 		return matrixRow;
 	}
 
 	float *matrix_4::get_matrix_column(int pColumnIndex)
 	{
 		float matrixColumn[4];
+
 		matrixColumn[0] = mMatrix[pColumnIndex];
 		matrixColumn[1] = mMatrix[pColumnIndex + 1];
 		matrixColumn[2] = mMatrix[pColumnIndex + 2];
 		matrixColumn[3] = mMatrix[pColumnIndex + 3];
+
 		return matrixColumn;
 	}
 
-	void matrix_4::identity()
+	void matrix_4::set_identity()
 	{
 		mMatrix[0] = 1;
 		mMatrix[1] = 0;
@@ -354,6 +364,7 @@ namespace engine
 		pOstream << pMatrix[14] << " ";
 		pOstream << pMatrix[15] << " ";
 		pOstream << "\n";
+
 		return pOstream;
 	}
 
@@ -407,97 +418,65 @@ namespace engine
 		return vector_3(yaw, pitch, roll);
 	}
 
-	matrix_4 matrix_4::translate_matrix(vector_4 pVector)
+	void matrix_4::translate_vector(vector_4 pVector)
 	{
-		matrix_4 matrix;
+		matrix_4 translationMatrix;
 
-		matrix.mMatrix[12] = pVector.mX;
-		matrix.mMatrix[13] = pVector.mY;
-		matrix.mMatrix[14] = pVector.mZ;
+		translationMatrix.mMatrix[12] = pVector.mX;
+		translationMatrix.mMatrix[13] = pVector.mY;
+		translationMatrix.mMatrix[14] = pVector.mZ;
 
-		return matrix;
+		*this = *this * translationMatrix;
 	}
 
-	vector_4& matrix_4::translate_vector(vector_4 pVector)
-	{
-		matrix_4 matrix;
-
-		matrix = translate_matrix(pVector);
-
-		pVector.mX = (matrix[0] * pVector.mX) +
-					 (matrix[4] * pVector.mY) +
-					 (matrix[8] * pVector.mZ) +
-					 (matrix[12] * pVector.mW);
-
-		pVector.mY = (matrix[1] * pVector.mX) +
-					 (matrix[5] * pVector.mY) +
-					 (matrix[9] * pVector.mZ) +
-					 (matrix[13] * pVector.mW);
-
-		pVector.mZ = (matrix[2] * pVector.mX) +
-					 (matrix[6] * pVector.mY) +
-					 (matrix[10] * pVector.mZ) +
-					 (matrix[14] * pVector.mW);
-
-		pVector.mW = (matrix[3] * 1) +
-					 (matrix[7] * 1) +
-					 (matrix[11] * 1) +
-					 (matrix[15] * 1);
-
-		return pVector;
-	}
-
-	matrix_4 matrix_4::rotate_from_degrees(float pDegrees)
+	void matrix_4::rotate_from_degrees(float pDegrees)
 	{
 		math_utilities mathUtilities;
-		matrix_4 matrix;
 
-		float angleInDegrees = mathUtilities.degrees_to_radians(pDegrees);
+		float angleInRadians = mathUtilities.degrees_to_radians(pDegrees);
 
-		return matrix.rotate_z(angleInDegrees);
+		this->rotate_z(angleInRadians);
 	}
 
-	matrix_4 matrix_4::rotate_from_radians(float pRadians)
+	void matrix_4::rotate_from_radians(float pRadians)
 	{
-		matrix_4 matrix;
-
-		return matrix.rotate_z(pRadians);
+		this->rotate_z(pRadians);
 	}
 
-	matrix_4 matrix_4::rotate_x(float pRadians)
+	void matrix_4::rotate_x(float pRadians)
 	{
-		matrix_4 matrix;
+		matrix_4 rotationMatrix;
 
-		matrix[5] = cos(-pRadians);
-		matrix[6] = -sin(-pRadians);
-		matrix[9] = sin(-pRadians);
-		matrix[10] = cos(-pRadians);
+		rotationMatrix[5] = cos(-pRadians);
+		rotationMatrix[6] = -sin(-pRadians);
+		rotationMatrix[9] = sin(-pRadians);
+		rotationMatrix[10] = cos(-pRadians);
 
-		return matrix;
+		*this = *this * rotationMatrix;
 	}
 
-	matrix_4 matrix_4::rotate_y(float pRadians)
+	void matrix_4::rotate_y(float pRadians)
 	{
-		matrix_4 matrix;
+		matrix_4 rotationMatrix;
 
-		matrix[0] =cos(-pRadians);
-		matrix[2] = sin(-pRadians);
-		matrix[8] = -sin(-pRadians);
-		matrix[10] = cos(-pRadians);
+		rotationMatrix[0] =cos(-pRadians);
+		rotationMatrix[2] = sin(-pRadians);
+		rotationMatrix[8] = -sin(-pRadians);
+		rotationMatrix[10] = cos(-pRadians);
+
+		*this = *this * rotationMatrix;
+	}
+
+	void matrix_4::rotate_z(float pRadians)
+	{
+		matrix_4 rotationMatrix;
+
+		rotationMatrix[0] = cos(-pRadians);
+		rotationMatrix[1] = -sin(-pRadians);
+		rotationMatrix[4] = sin(-pRadians);
+		rotationMatrix[5] = cos(-pRadians);
 		
-		return matrix;
-	}
-
-	matrix_4 matrix_4::rotate_z(float pRadians)
-	{
-		matrix_4 matrix;
-
-		matrix[0] = cos(-pRadians);
-		matrix[1] = -sin(-pRadians);
-		matrix[4] = sin(-pRadians);
-		matrix[5] = cos(-pRadians);
-		
-		return matrix;
+		*this = *this * rotationMatrix;
 	}
 
 	matrix_4 matrix_4::transform(int pIndexValue, float pDesiredValue)
