@@ -21,6 +21,7 @@ namespace engine
 
 		//functions
 		float *get_matrix();
+		float *get_matrix_pointer();
 		float *get_matrix_row(int pRowIndex);
 		float *get_matrix_column(int pColumnIndex);
 		void set_identity();

@@ -5,7 +5,7 @@
 //
 #include <cstdlib>
 
-namespace Engine
+namespace engine
 {
 	TimeManager::TimeManager()
 	{

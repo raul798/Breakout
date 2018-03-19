@@ -9,7 +9,7 @@
 #include <sys/time.h>
 #endif
 
-namespace Engine
+namespace engine
 {
 	class TimeManager
 	{

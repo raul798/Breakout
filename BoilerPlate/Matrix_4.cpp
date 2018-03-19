@@ -104,6 +104,11 @@ namespace engine
 		return matrix;
 	}
 
+	float *matrix_4::get_matrix_pointer()
+	{
+		return &mMatrix[0];
+	}
+
 	float *matrix_4::get_matrix_row(int pRowIndex)
 	{
 		float matrixRow[4];
