@@ -2,17 +2,13 @@
 
 namespace engine
 {
-	renderer::renderer(const char *pTextures[])
-	{
-		ProgramID = mShaderManager.LoadShaders("vertex.glsl", "frag.glsl");
-		assign_textures(pTextures);
-	}
+	renderer::renderer(){}
 
 	renderer::~renderer()
 	{
-		glDeleteBuffers(1, &VertexBufferObject);
-		glDeleteVertexArrays(1, &VertexArrayObject);
-		glDeleteProgram(ProgramID);
+		glDeleteBuffers(1, &mVertexBufferObject);
+		glDeleteVertexArrays(1, &mVertexArrayObject);
+		glDeleteProgram(mProgramID);
 	}
 
 	void renderer::assign_textures(const char *pTextures[])
@@ -25,30 +21,18 @@ namespace engine
 
 	void renderer::render()
 	{
-		glUseProgram(ProgramID);
-		glBindVertexArray(VertexArrayObject);
+		glUseProgram(mProgramID);
+		glBindVertexArray(mVertexArrayObject);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
 
-	void renderer::vertices_manager()
+	void renderer::assign_program_id()
 	{
-		//TODO: move out
-		//ProgramID = mShaderManager.LoadShaders("vertex.glsl", "frag.glsl");
-		//texture1 = render_manager.LoadTexture("face.png");
-		//texture2 = LoadTexture("test.png");
+		mProgramID = mShaderManager.load_shaders("vertex.glsl", "frag.glsl");
+	}
 
-		//GLuint uniColor = glGetUniformLocation(ProgramID, "triangleColor");
-
-		// set up vertex data (and buffer(s)) and configure vertex attributes
-		//// ------------------------------------------------------------------
-		//float vertices[] = {
-		//	-0.5f, -0.5f, 0.0f, // left  
-		//	0.5f, -0.5f, 0.0f, // right 
-		//	0.0f,  0.5f, 0.0f  // top   
-		//};
-
-		//assign_textures(const char *pTextures[]);
-
+	void renderer::vertices_manager()
+	{	
 		float vertices[] = {
 			// first triangle
 			0.5f,  0.5f, 0.0f,  // top right
@@ -61,12 +45,12 @@ namespace engine
 			-0.5f,  0.5f, 0.0f  // top left
 		};
 
-		glGenVertexArrays(1, &VertexArrayObject);
-		glGenBuffers(1, &VertexBufferObject);
+		glGenVertexArrays(1, &mVertexArrayObject);
+		glGenBuffers(1, &mVertexBufferObject);
 
-		glBindVertexArray(VertexArrayObject);
+		glBindVertexArray(mVertexArrayObject);
 
-		glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
+		glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferObject);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 		//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -75,7 +59,7 @@ namespace engine
 			3,                  // size
 			GL_FLOAT,           // type
 			GL_FALSE,           // normalized?
-			6 * sizeof(float),  // stride
+			3 * sizeof(float),  // stride
 			(void*)0            // array buffer offset
 		);
 		glEnableVertexAttribArray(0);
@@ -86,11 +70,30 @@ namespace engine
 		// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
 		// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 		glBindVertexArray(0);
+	}
 
-		//glActiveTexture(texture1);
+	void renderer::determine_polygon_mode()
+	{
+		if (mIsPolygonModeFill == true)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+		else if (mIsPolygonModeFill == false)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+	}
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	void renderer::switch_polygon_mode()
+	{
+		if (mIsPolygonModeFill == true)
+		{
+			mIsPolygonModeFill = false;
+		}
+		else
+		{
+			mIsPolygonModeFill = true;
+		}
 	}
 
 	

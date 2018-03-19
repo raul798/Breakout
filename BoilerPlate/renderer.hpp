@@ -16,17 +16,21 @@ namespace engine
 	class renderer
 	{
 	public:
-		renderer(const char *pTextures[]);
+		renderer();
 		~renderer();
 		void assign_textures(const char *pTextures[]);
 		void vertices_manager();
 		void render();
+		void assign_program_id();
+		void switch_polygon_mode();
+		void determine_polygon_mode();
 
 	private:
-		GLuint VertexArrayObject; //VAO
-		GLuint VertexBufferObject; //VBO
-		GLuint ProgramID;
+		GLuint mVertexArrayObject; //VAO
+		GLuint mVertexBufferObject; //VBO
+		GLuint mProgramID;
 		shader_utilities mShaderManager;
 		texture mTexturesContainer[TEXTURE_NUMBER];
+		bool mIsPolygonModeFill;
 	};
 }

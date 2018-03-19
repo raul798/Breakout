@@ -14,7 +14,7 @@ namespace engine
 	public:
 		texture();
 		texture(const char *pTexture);
-		GLuint LoadTexture(const char * texture_path);
+		GLuint load_texture(const char *pTexturePath);
 		GLuint get_texture();
 
 	private:

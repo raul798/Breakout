@@ -6,20 +6,12 @@
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "matrix_4.hpp"
-
 namespace engine
 {
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
-
-	//renderer render_manager;
-	//vao/vcaca
-	//GLuint texture1;
-	//GLuint texture2;
 	
-	const char *files[] = { "test.png" };
-	renderer renderManager = renderer(files);
+	renderer renderManager;
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -49,7 +41,7 @@ namespace engine
 
 		m_state = GameState::RUNNING;
 		
-	// cosa
+		renderManager.assign_program_id();
 		renderManager.vertices_manager();
 			
 		SDL_Event event;
@@ -94,6 +86,10 @@ namespace engine
 	{		
 		switch (keyBoardEvent.keysym.scancode)
 		{
+		case SDL_SCANCODE_F:
+			renderManager.switch_polygon_mode();
+			break;
+
 		default:			
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
 			break;
@@ -107,6 +103,7 @@ namespace engine
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();
 			break;
+
 		default:
 			//DO NOTHING
 			break;
@@ -117,8 +114,7 @@ namespace engine
 	{
 		double startTime = m_timer->GetElapsedTimeInSeconds();
 
-		// Update code goes here
-		//
+		renderManager.determine_polygon_mode();
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;

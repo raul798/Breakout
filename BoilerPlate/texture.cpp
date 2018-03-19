@@ -4,12 +4,11 @@
 
 namespace engine
 {
-	texture::texture()
-	{
-	}
+	texture::texture(){}
+
 	texture::texture(const char *pTexture)
 	{
-		mTexture = LoadTexture(pTexture);
+		mTexture = load_texture(pTexture);
 	}
 
 	GLuint texture::get_texture()
@@ -17,7 +16,7 @@ namespace engine
 		return mTexture;
 	}
 
-	GLuint texture::LoadTexture(const char * texture_path)
+	GLuint texture::load_texture(const char * pTexturePath)
 	{
 		unsigned int texture;
 		glGenTextures(1, &texture);
@@ -33,7 +32,7 @@ namespace engine
 		stbi_set_flip_vertically_on_load(true);
 
 		// Load the texture
-		unsigned char *data = stbi_load(texture_path, &width, &height, &nrChannels, 0);
+		unsigned char *data = stbi_load(pTexturePath, &width, &height, &nrChannels, 0);
 		if (data)
 		{
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);

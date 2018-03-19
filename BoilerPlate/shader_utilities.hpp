@@ -11,6 +11,6 @@ namespace engine
 {
 	struct shader_utilities
 	{
-		GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
+		GLuint load_shaders(const char *pVertexFilePath, const char *pFragmentFilePath);
 	};
 }
