@@ -20,9 +20,18 @@
     <ClCompile Include="matrix_4.cpp">
       <Filter>Engine\Source files</Filter>
     </ClCompile>
-    <ClCompile Include="renderer.cpp" />
-    <ClCompile Include="shader_utilities.cpp" />
-    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="error_manager.cpp">
+      <Filter>Engine\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>Engine\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_utilities.cpp">
+      <Filter>Engine\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Engine\Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -43,11 +52,17 @@
     <ClInclude Include="matrix_4.hpp">
       <Filter>Engine\Header files</Filter>
     </ClInclude>
-    <ClInclude Include="renderer.hpp" />
-    <ClInclude Include="shader_utilities.hpp" />
-    <ClInclude Include="texture.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="renderer.hpp">
+      <Filter>Engine\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_utilities.hpp">
+      <Filter>Engine\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.hpp">
+      <Filter>Engine\Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -63,6 +78,9 @@
   <ItemGroup>
     <None Include="vertex.glsl" />
     <None Include="frag.glsl" />
+    <None Include="error_manager.hpp">
+      <Filter>Engine\Header files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BoilerPlate.rc" />

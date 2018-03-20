@@ -1,11 +1,14 @@
 #pragma once
+#ifndef TEXTURE_HPP
+#define TEXTURE_HPP
+
 #include <iostream>
-#include <algorithm>
 
 // OpenGL includes
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
+#include "stb_image.h"
 
 namespace engine
 {
@@ -21,3 +24,5 @@ namespace engine
 		GLuint mTexture;
 	};
 }
+
+#endif

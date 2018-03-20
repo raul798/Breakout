@@ -1,10 +1,6 @@
 #pragma once
-#include <iostream>
-#include <algorithm>
-
-// OpenGL includes
-#include <GL/glew.h>
-#include <SDL2/SDL_opengl.h>
+#ifndef RENDERER_HPP
+#define RENDERER_HPP
 
 #include "shader_utilities.hpp"
 #include "texture.hpp"
@@ -34,3 +30,5 @@ namespace engine
 		bool mIsPolygonModeFill;
 	};
 }
+
+#endif

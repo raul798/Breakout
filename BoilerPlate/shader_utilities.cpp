@@ -1,14 +1,10 @@
 #include "shader_utilities.hpp"
-#include <string>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <algorithm>
-#include <sstream>
 
 namespace engine
 {
 	GLuint shader_utilities::load_shaders(const char *pVertexFilePath, const char *pFragmentFilePath) {
+
+		error_manager errorManager;
 
 		// Create the shaders
 		GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -17,6 +13,7 @@ namespace engine
 		// Read the Vertex Shader code from the file
 		std::string VertexShaderCode;
 		std::ifstream VertexShaderStream(pVertexFilePath, std::ios::in);
+
 		if (VertexShaderStream.is_open()) {
 			std::stringstream sstr;
 			sstr << VertexShaderStream.rdbuf();
@@ -24,8 +21,7 @@ namespace engine
 			VertexShaderStream.close();
 		}
 		else {
-			printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", pVertexFilePath);
-			getchar();
+			errorManager.display_error_message_box(pVertexFilePath, "20", "Impossible to open file. Are you in the right directory ?", "");
 			return 0;
 		}
 
@@ -55,7 +51,8 @@ namespace engine
 		if (InfoLogLength > 0) {
 			std::vector<char> VertexShaderErrorMessage(InfoLogLength + 1);
 			glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-			printf("%s\n", &VertexShaderErrorMessage[0]);
+			//printf("%s\n", &VertexShaderErrorMessage[0]);
+			errorManager.display_error_message_box(pVertexFilePath, "49", "Impossible to open file. Are you in the right directory ?", "");
 		}
 
 
@@ -72,7 +69,8 @@ namespace engine
 		if (InfoLogLength > 0) {
 			std::vector<char> FragmentShaderErrorMessage(InfoLogLength + 1);
 			glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-			printf("%s\n", &FragmentShaderErrorMessage[0]);
+			//printf("%s\n", &FragmentShaderErrorMessage[0]);
+			errorManager.display_error_message_box(pFragmentFilePath, "67", "Impossible to open file. Are you in the right directory ?", "");
 		}
 
 
@@ -90,7 +88,8 @@ namespace engine
 		if (InfoLogLength > 0) {
 			std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
 			glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-			printf("%s\n", &ProgramErrorMessage[0]);
+			//printf("%s\n", &ProgramErrorMessage[0]);
+			errorManager.display_error_message_box("", "85", "Impossible to open file. Are you in the right directory ?", "");
 		}
 
 

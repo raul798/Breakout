@@ -1,11 +1,19 @@
 #pragma once
+#ifndef SHADER_UTILITIES_HPP
+#define SHADER_UTILITIES_HPP
+
 #include <iostream>
-#include <algorithm>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 // OpenGL includes
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
+#include "error_manager.hpp"
+#include "stb_image.h"
 
 namespace engine
 {
@@ -14,3 +22,5 @@ namespace engine
 		GLuint load_shaders(const char *pVertexFilePath, const char *pFragmentFilePath);
 	};
 }
+
+#endif
