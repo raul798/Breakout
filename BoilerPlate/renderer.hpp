@@ -4,6 +4,7 @@
 
 #include "shader_utilities.hpp"
 #include "texture.hpp"
+#include "vertex.hpp"
 
 const int TEXTURE_NUMBER = 16;
 
@@ -22,8 +23,9 @@ namespace engine
 		void determine_polygon_mode();
 
 	private:
-		GLuint mVertexArrayObject; //VAO
-		GLuint mVertexBufferObject; //VBO
+		GLuint mVertexArrayObject;    //VAO
+		GLuint mVertexBufferObject;   //VBO
+		GLuint mElementsBufferObject; //EBO
 		GLuint mProgramID;
 		shader_utilities mShaderManager;
 		texture mTexturesContainer[TEXTURE_NUMBER];
