@@ -51,8 +51,7 @@ namespace engine
 		if (InfoLogLength > 0) {
 			std::vector<char> VertexShaderErrorMessage(InfoLogLength + 1);
 			glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-			//printf("%s\n", &VertexShaderErrorMessage[0]);
-			errorManager.display_error_message_box(pVertexFilePath, "49", "Impossible to open file. Are you in the right directory ?", "");
+			errorManager.display_error_message_box(pVertexFilePath, "49", &VertexShaderErrorMessage[0], "");
 		}
 
 
@@ -69,8 +68,7 @@ namespace engine
 		if (InfoLogLength > 0) {
 			std::vector<char> FragmentShaderErrorMessage(InfoLogLength + 1);
 			glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-			//printf("%s\n", &FragmentShaderErrorMessage[0]);
-			errorManager.display_error_message_box(pFragmentFilePath, "67", "Impossible to open file. Are you in the right directory ?", "");
+			errorManager.display_error_message_box(pFragmentFilePath, "67", &FragmentShaderErrorMessage[0], "");
 		}
 
 
@@ -88,10 +86,8 @@ namespace engine
 		if (InfoLogLength > 0) {
 			std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
 			glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-			//printf("%s\n", &ProgramErrorMessage[0]);
 			errorManager.display_error_message_box("", "85", "Impossible to open file. Are you in the right directory ?", "");
 		}
-
 
 		glDetachShader(ProgramID, VertexShaderID);
 		glDetachShader(ProgramID, FragmentShaderID);
