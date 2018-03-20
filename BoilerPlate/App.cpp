@@ -1,6 +1,4 @@
 #include "App.hpp"
-#include <iostream>
-#include <algorithm>
 
 // OpenGL includes
 #include <GL/glew.h>
