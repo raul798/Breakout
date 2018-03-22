@@ -658,4 +658,21 @@ namespace engine
 		mMatrix[15] = pRightSide[15];
 		return *this;
 	}
+	void matrix_4::make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
+		const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis)
+	{
+		//Em^3::setting identity matrix, saves 10 lines of codes...
+		set_identity();
+		//Em^3::setting inverse of the difference, save 3 divisions...
+		float inverseXAxesDifference = 1 / (pMaximumXAxis - pMinimumXAxis);
+		float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
+		float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
+		//Em^3::more info: https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/orthographic-projection-matrix
+		mMatrix[0] = 2.0f * inverseXAxesDifference;
+		mMatrix[5] = 2.0f * inverseYAxesDifference;
+		mMatrix[10] = -2.0f * inverseZAxesDifference;
+		mMatrix[12] = -(pMaximumXAxis + pMinimumXAxis) * inverseXAxesDifference;
+		mMatrix[13] = -(pMaximumYAxis + pMinimumYAxis) * inverseYAxesDifference;
+		mMatrix[14] = -(pMaximumZAxis + pMinimumZAxis) * inverseZAxesDifference;
+	}
 }

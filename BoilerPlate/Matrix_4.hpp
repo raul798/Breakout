@@ -36,6 +36,8 @@ namespace engine
 		void rotate_x(float pRadians);
 		void rotate_y(float pRadians);
 		void rotate_z(float pRadians);
+		void make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
+			const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis);
 		matrix_4 invert();
 		matrix_4 transform(int pIndexValue, float pDesiredValue);
 	
