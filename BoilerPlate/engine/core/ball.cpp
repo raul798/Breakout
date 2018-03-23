@@ -24,8 +24,6 @@ namespace engine
 				mBallIndices[i + 8] = 0.0f;
 				*/
 			//}
-			
-
 			mTextureIndex = 1;
 		}
 
