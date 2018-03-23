@@ -30,7 +30,7 @@ namespace game
 	private:
 		engine::core::renderer mRenderManager;
 		engine::core::ball mBall;
-		engine::core::block mBlocks;
+		engine::core::block mBlock;
 		int mInputCounter;
 	};
 }
