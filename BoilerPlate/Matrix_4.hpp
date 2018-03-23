@@ -38,6 +38,7 @@ namespace engine
 		void rotate_z(float pRadians);
 		void make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 			const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis);
+		void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane);
 		matrix_4 invert();
 		matrix_4 transform(int pIndexValue, float pDesiredValue);
 	

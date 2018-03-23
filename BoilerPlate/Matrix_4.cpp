@@ -675,4 +675,21 @@ namespace engine
 		mMatrix[13] = -(pMaximumYAxis + pMinimumYAxis) * inverseYAxesDifference;
 		mMatrix[14] = -(pMaximumZAxis + pMinimumZAxis) * inverseZAxesDifference;
 	}
+
+	void matrix_4::make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane)
+	{
+		//Em^3::use of pi and all of these angles things...
+		math_utilities mathMaster;
+		//Em^3::scale based on field of view, used mathmaster for angles managing
+		//Em^3::operation pi/180 can be used with degrees_to_radians with 1 as angle
+		float scale = 1 / (tan(pFieldOfView * 0.5) * mathMaster.degrees_to_radians(1));
+		//Em^3::saving 1 division
+		float inverseClippingPlaneDifference = 1 / (pFarClippingPlane - pNearClippingPlane);
+		mMatrix[0] = scale;
+		mMatrix[5] = scale;
+		mMatrix[10] = -pFarClippingPlane * inverseClippingPlaneDifference;
+		mMatrix[11] = -pFarClippingPlane * pNearClippingPlane * inverseClippingPlaneDifference;
+		mMatrix[14] = -1;
+		mMatrix[15] = 0;
+	}
 }
