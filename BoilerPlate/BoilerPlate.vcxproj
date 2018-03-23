@@ -183,11 +183,9 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\math\vector_2.cpp" />
     <ClCompile Include="engine\math\vector_3.cpp" />
     <ClCompile Include="engine\math\vector_4.cpp" />
-    <ClCompile Include="engine\texture\sprite.cpp" />
     <ClCompile Include="engine\texture\texture.cpp" />
     <ClCompile Include="engine\utilities\error_manager.cpp" />
     <ClCompile Include="engine\utilities\input_manager.cpp" />
-    <ClCompile Include="engine\utilities\resource_manager.cpp" />
     <ClCompile Include="engine\utilities\shader_utilities.cpp" />
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -210,7 +208,6 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="engine\math\vector_2.hpp" />
     <ClInclude Include="engine\math\vector_3.hpp" />
     <ClInclude Include="engine\math\vector_4.hpp" />
-    <ClInclude Include="engine\texture\sprite.hpp" />
     <ClInclude Include="engine\texture\texture.hpp" />
     <ClInclude Include="engine\utilities\error_manager.hpp" />
     <ClInclude Include="engine\utilities\input_manager.hpp" />

@@ -41,14 +41,8 @@
     <ClCompile Include="engine\utilities\error_manager.cpp">
       <Filter>engine\utilities</Filter>
     </ClCompile>
-    <ClCompile Include="engine\utilities\resource_manager.cpp">
-      <Filter>engine\utilities</Filter>
-    </ClCompile>
     <ClCompile Include="game\game.cpp">
       <Filter>game</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\texture\sprite.cpp">
-      <Filter>engine\texture</Filter>
     </ClCompile>
     <ClCompile Include="engine\utilities\input_manager.cpp">
       <Filter>engine\utilities</Filter>
@@ -113,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="game\game.hpp">
       <Filter>game</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\texture\sprite.hpp">
-      <Filter>engine\texture</Filter>
     </ClInclude>
     <ClInclude Include="engine\utilities\input_manager.hpp">
       <Filter>engine\utilities</Filter>
