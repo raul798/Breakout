@@ -8,7 +8,7 @@
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/stb_image.h"
+#include "../utilities/stb_image.h"
 
 namespace engine
 {

@@ -22,7 +22,7 @@ namespace game
 
 	void game::render()
 	{
-		//mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index());
+		mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index());
 		mRenderManager.render(mBlock.get_block_vertices(), mBlock.get_block_indices(), mBlock.get_texture_index());
 	}
 

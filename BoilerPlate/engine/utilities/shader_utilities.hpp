@@ -13,7 +13,7 @@
 #include <SDL2/SDL_opengl.h>
 
 #include "error_manager.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/stb_image.h"
+#include "../utilities/stb_image.h"
 
 namespace engine
 {

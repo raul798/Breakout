@@ -21,17 +21,7 @@ namespace engine
 		{
 
 			mTexturesContainer[mLoadedTextures] = texture::texture(pTextures);
-			/*switch (mLoadedTextures)
-			{
-			case 0:
-				glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
-				break;
-			case 1:
-				glUniform1i(glGetUniformLocation(mProgramID, "texture2"), 1);
-				break;
-			default:
-				break;
-			}*/
+			
 			mLoadedTextures++;
 		}
 

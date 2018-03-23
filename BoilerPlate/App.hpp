@@ -10,9 +10,6 @@
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/math/Matrix_4.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/renderer.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/vertex.hpp"
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/game/game.hpp"
 
 namespace engine

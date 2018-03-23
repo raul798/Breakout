@@ -5,7 +5,7 @@ namespace engine
 	namespace core
 	{
 		block::block() {
-			mTextureIndex = 1;
+			mTextureIndex = 0;
 		}
 
 		vertex *block::get_block_vertices()

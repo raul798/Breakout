@@ -2,8 +2,8 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/utilities/shader_utilities.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/texture/texture.hpp"
+#include "../utilities/shader_utilities.hpp"
+#include "../texture/texture.hpp"
 #include "vertex.hpp"
 
 const int TEXTURE_NUMBER = 16;

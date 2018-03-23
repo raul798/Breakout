@@ -59,7 +59,6 @@
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="stb_image.h" />
     <ClInclude Include="engine\core\component.hpp">
       <Filter>engine\core</Filter>
     </ClInclude>
@@ -119,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="engine\core\block.hpp">
       <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utilities\stb_image.h">
+      <Filter>engine\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

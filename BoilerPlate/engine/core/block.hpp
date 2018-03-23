@@ -2,8 +2,8 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/vertex.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/game_object.hpp"
+#include "../core/vertex.hpp"
+#include "../core/game_object.hpp"
 
 namespace engine
 {
