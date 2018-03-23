@@ -5,13 +5,11 @@ namespace engine
 	namespace core
 	{
 		vertex vertices[] = {
-			// first triangle
-			{ 0.5f,  0.5f, 0.0f },  // top right
-			{ 0.5f, -0.5f, 0.0f },  // bottom right
-			{ -0.5f,  0.5f, 0.0f }, // top left 
-
-			// second triangle
-			{ -0.5f, -0.5f, 0.0f },  // bottom left
+			// positions          // colors           // texture coords
+			0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+			0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+			-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 		};
 
 		int indices[] = { 0, 1, 2, 1, 3, 2 };
@@ -19,6 +17,7 @@ namespace engine
 		renderer::renderer()
 		{
 			mIsPolygonModeFill = true;
+			mLoadedTextures = 0;
 		}
 
 		renderer::~renderer()
@@ -28,19 +27,29 @@ namespace engine
 			glDeleteProgram(mProgramID);
 		}
 
-		void renderer::assign_textures(const char *pTextures[])
+		void renderer::assign_textures(const char pTextures[])
 		{
-			for (int i = 0; i < sizeof(pTextures); i++)
-			{
-				mTexturesContainer[i] = engine::texture::texture(*pTextures);
-			}
+
+			mTexturesContainer[mLoadedTextures] = texture::texture(pTextures);
+			glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
+
+			mLoadedTextures++;
 		}
 
 		void renderer::render()
 		{
 			glUseProgram(mProgramID);
+
+			// Remember this needs to be set after the program is activated
+			glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
+			//glUniform1i(glGetUniformLocation(mProgramID, "texture2"), 1);
+
 			glBindVertexArray(mVertexArrayObject);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementsBufferObject);
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[0].get_texture());
+
 			glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, (void*)0);
 		}
 
@@ -66,16 +75,24 @@ namespace engine
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementsBufferObject);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-			glVertexAttribPointer(
-				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-				3,                  // size
-				GL_FLOAT,           // type
-				GL_FALSE,           // normalized?
-				4 * sizeof(float),  // stride
-				(void*)0            // array buffer offset
+			/*glVertexAttribPointer(
+			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			4 * sizeof(float),  // stride
+			(void*)0            // array buffer offset
 			);
-
+			glEnableVertexAttribArray(0);*/
+			//vertex position
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 			glEnableVertexAttribArray(0);
+			//color
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+			glEnableVertexAttribArray(1);
+			//texture coordinate
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+			glEnableVertexAttribArray(2);
 
 			// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
