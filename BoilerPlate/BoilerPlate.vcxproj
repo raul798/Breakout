@@ -225,6 +225,14 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <None Include="frag.glsl" />
     <None Include="vertex.glsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="game\assets\background.jpg" />
+    <Image Include="game\assets\ball.png" />
+    <Image Include="game\assets\block.png" />
+    <Image Include="game\assets\block_solid.png" />
+    <Image Include="game\assets\face.png" />
+    <Image Include="game\assets\test.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

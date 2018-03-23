@@ -155,4 +155,24 @@
       <Filter>engine\shaders</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="game\assets\block_solid.png">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\background.jpg">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\ball.png">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\block.png">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\face.png">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\test.png">
+      <Filter>game\assets</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
