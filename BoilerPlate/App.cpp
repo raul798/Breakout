@@ -10,8 +10,6 @@ namespace engine
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 	
 	core::renderer renderManager;
-	core::ball ball;
-	core::block block;
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -27,7 +25,8 @@ namespace engine
 
 	App::~App()
 	{
-		renderManager.~renderer();
+		mGame.~game();
+
 		CleanupSDL();
 	}
 
@@ -41,11 +40,7 @@ namespace engine
 
 		m_state = GameState::RUNNING;
 
-		renderManager.assign_program_id();
-		renderManager.assign_textures("game/assets/block.png");
-		renderManager.assign_textures("game/assets/ball.png");
-		renderManager.generate_buffers();
-
+		mGame.execute();
 
 		SDL_Event event;
 		while (m_state == GameState::RUNNING)
@@ -90,7 +85,7 @@ namespace engine
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_F:
-			renderManager.switch_polygon_mode();
+			mGame.mInputManager.set_f(true);
 			break;
 
 		default:			
@@ -106,6 +101,9 @@ namespace engine
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();
 			break;
+		case SDL_SCANCODE_F:
+			mGame.mInputManager.set_f(false);
+			break;
 
 		default:
 			//DO NOTHING
@@ -117,7 +115,8 @@ namespace engine
 	{
 		double startTime = m_timer->GetElapsedTimeInSeconds();
 
-		renderManager.determine_polygon_mode();
+	//	renderManager.determine_polygon_mode();
+		mGame.update();
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;
@@ -140,7 +139,7 @@ namespace engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		renderManager.render(ball.get_ball_vertices(), ball.get_ball_indices(), ball.get_texture_index());
+		mGame.render();
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}

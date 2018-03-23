@@ -13,9 +13,7 @@
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/math/Matrix_4.hpp"
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/renderer.hpp"
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/vertex.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/ball.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/game_object.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/block.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/game/game.hpp"
 
 namespace engine
 {
@@ -73,7 +71,8 @@ namespace engine
 		SDL_GLContext						m_context;
 		GameState::State					m_state;
 		engine::TimeManager*				m_timer;
-
+		game::game							mGame;
+		engine::utilities::input_manager    mInputManager;
 	};
 }
 #endif /* GAME_HPP */

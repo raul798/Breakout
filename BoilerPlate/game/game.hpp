@@ -4,6 +4,9 @@
 
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/math/Matrix_4.hpp"
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/renderer.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/block.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/ball.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/utilities/input_manager.hpp"
 
 namespace game
 {
@@ -16,10 +19,19 @@ namespace game
 
 		//functions
 		void execute();
-
+		void render();
+		void update();
+		void input_controller();
+		void reset_input_controller();
+		void update_input_controller();
 		
+		engine::utilities::input_manager mInputManager;
+
 	private:
 		engine::core::renderer renderManager;
+		engine::core::ball ball;
+		engine::core::block blocks;
+		int mInputCounter;
 	};
 }
 
