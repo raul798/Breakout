@@ -9,7 +9,7 @@ namespace engine
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 	
-	renderer renderManager;
+	core::renderer renderManager;
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)

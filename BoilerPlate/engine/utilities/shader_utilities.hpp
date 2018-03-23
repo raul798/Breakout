@@ -13,14 +13,17 @@
 #include <SDL2/SDL_opengl.h>
 
 #include "error_manager.hpp"
-#include "stb_image.h"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/stb_image.h"
 
 namespace engine
 {
-	struct shader_utilities
+	namespace utilities
 	{
-		GLuint load_shaders(const char *pVertexFilePath, const char *pFragmentFilePath);
-	};
+		struct shader_utilities
+		{
+			GLuint load_shaders(const char *pVertexFilePath, const char *pFragmentFilePath);
+		};
+	}
 }
 
 #endif

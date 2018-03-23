@@ -172,50 +172,58 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="component.cpp" />
-    <ClCompile Include="error_manager.cpp" />
-    <ClCompile Include="game_object.cpp" />
+    <ClCompile Include="engine\core\component.cpp" />
+    <ClCompile Include="engine\core\game_object.cpp" />
+    <ClCompile Include="engine\core\renderer.cpp" />
+    <ClCompile Include="engine\core\unique_id.cpp" />
+    <ClCompile Include="engine\math\math_utilities.cpp" />
+    <ClCompile Include="engine\math\Matrix_4.cpp" />
+    <ClCompile Include="engine\math\vector_2.cpp" />
+    <ClCompile Include="engine\math\vector_3.cpp" />
+    <ClCompile Include="engine\math\vector_4.cpp" />
+    <ClCompile Include="engine\texture\sprite.cpp" />
+    <ClCompile Include="engine\texture\texture.cpp" />
+    <ClCompile Include="engine\utilities\error_manager.cpp" />
+    <ClCompile Include="engine\utilities\input_manager.cpp" />
+    <ClCompile Include="engine\utilities\resource_manager.cpp" />
+    <ClCompile Include="engine\utilities\shader_utilities.cpp" />
+    <ClCompile Include="game\game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="math_utilities.cpp" />
-    <ClCompile Include="matrix_4.cpp" />
-    <ClCompile Include="IRender.hpp" />
-    <ClCompile Include="renderer.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
-    <ClCompile Include="shader_utilities.cpp" />
-    <ClCompile Include="texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="unique_id.cpp" />
-    <ClCompile Include="vector_2.cpp" />
-    <ClCompile Include="vector_3.cpp" />
-    <ClCompile Include="vector_4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="component.hpp" />
-    <ClInclude Include="game_object.hpp" />
-    <ClInclude Include="math_utilities.hpp" />
-    <ClInclude Include="matrix_4.hpp" />
-    <ClInclude Include="renderer.hpp" />
+    <ClInclude Include="engine\core\component.hpp" />
+    <ClInclude Include="engine\core\game_object.hpp" />
+    <ClInclude Include="engine\core\IRender.hpp" />
+    <ClInclude Include="engine\core\IUpdate.hpp" />
+    <ClInclude Include="engine\core\renderer.hpp" />
+    <ClInclude Include="engine\core\unique_id.hpp" />
+    <ClInclude Include="engine\core\vertex.hpp" />
+    <ClInclude Include="engine\math\math_utilities.hpp" />
+    <ClInclude Include="engine\math\Matrix_4.hpp" />
+    <ClInclude Include="engine\math\vector_2.hpp" />
+    <ClInclude Include="engine\math\vector_3.hpp" />
+    <ClInclude Include="engine\math\vector_4.hpp" />
+    <ClInclude Include="engine\texture\sprite.hpp" />
+    <ClInclude Include="engine\texture\texture.hpp" />
+    <ClInclude Include="engine\utilities\error_manager.hpp" />
+    <ClInclude Include="engine\utilities\input_manager.hpp" />
+    <ClInclude Include="engine\utilities\resource_manager.hpp" />
+    <ClInclude Include="engine\utilities\shader_utilities.hpp" />
+    <ClInclude Include="game\game.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDLEvent.hpp" />
-    <ClInclude Include="shader_utilities.hpp" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="texture.hpp" />
     <ClInclude Include="TimeManager.hpp" />
-    <ClInclude Include="unique_id.hpp" />
-    <ClInclude Include="IUpdate.hpp" />
-    <ClInclude Include="vector_2.hpp" />
-    <ClInclude Include="vector_3.hpp" />
-    <ClInclude Include="vector_4.hpp" />
-    <ClInclude Include="vertex.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="error_manager.hpp" />
-    <None Include="frag.glsl" />
-    <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BoilerPlate.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="frag.glsl" />
+    <None Include="vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
