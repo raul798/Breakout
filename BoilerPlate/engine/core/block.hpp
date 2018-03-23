@@ -18,6 +18,7 @@ namespace engine
 			//getter
 			vertex *get_block_vertices();
 			int *get_block_indices();
+			int get_texture_index();
 
 		private:
 			vertex mBlockVertices[32] = {
@@ -29,6 +30,7 @@ namespace engine
 			};
 
 			int mBlockIndices[6] = { 0, 1, 2, 1, 3, 2 };
+			int mTextureIndex;
 		};
 	}
 }

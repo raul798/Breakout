@@ -4,7 +4,9 @@ namespace engine
 {
 	namespace core
 	{
-		block::block() {}
+		block::block() {
+			mTextureIndex = 1;
+		}
 
 		vertex *block::get_block_vertices()
 		{
@@ -14,6 +16,11 @@ namespace engine
 		int *block::get_block_indices()
 		{
 			return mBlockIndices;
+		}
+
+		int block::get_texture_index()
+		{
+			return mTextureIndex;
 		}
 	}
 }

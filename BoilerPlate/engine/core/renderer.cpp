@@ -21,12 +21,21 @@ namespace engine
 		{
 
 			mTexturesContainer[mLoadedTextures] = texture::texture(pTextures);
-			glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
-
+			/*switch (mLoadedTextures)
+			{
+			case 0:
+				glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
+				break;
+			case 1:
+				glUniform1i(glGetUniformLocation(mProgramID, "texture2"), 1);
+				break;
+			default:
+				break;
+			}*/
 			mLoadedTextures++;
 		}
 
-		void renderer::render(vertex pVertices[], int pIndices[])
+		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex)
 		{
 			int localIndices[sizeof(pIndices)];
 
@@ -42,12 +51,16 @@ namespace engine
 			// Remember this needs to be set after the program is activated
 			glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
 			//glUniform1i(glGetUniformLocation(mProgramID, "texture2"), 1);
+			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
+			glUniform2fv(glGetUniformLocation(mProgramID, "resolution"), 1, resolution);
 
 			glBindVertexArray(mVertexArrayObject);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementsBufferObject);
 
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[0].get_texture());
+			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[pTextureIndex].get_texture());
+			/*glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[1].get_texture());*/
 
 			glDrawElements(GL_TRIANGLES, sizeof(localIndices), GL_UNSIGNED_INT, (void*)0);
 		}

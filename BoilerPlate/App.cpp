@@ -42,8 +42,8 @@ namespace engine
 		m_state = GameState::RUNNING;
 
 		renderManager.assign_program_id();
-		renderManager.assign_textures("game/assets/face.png");
-		//renderManager.assign_textures("test.png");
+		renderManager.assign_textures("game/assets/block.png");
+		renderManager.assign_textures("game/assets/ball.png");
 		renderManager.generate_buffers();
 
 
@@ -140,7 +140,7 @@ namespace engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		renderManager.render(ball.get_ball_vertices(), ball.get_ball_indices());
+		renderManager.render(ball.get_ball_vertices(), ball.get_ball_indices(), ball.get_texture_index());
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}

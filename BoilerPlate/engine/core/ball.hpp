@@ -18,6 +18,7 @@ namespace engine
 			//getter
 			vertex *get_ball_vertices();
 			int *get_ball_indices();
+			int get_texture_index();
 
 		private:
 			vertex mBallVertices[32] = {
@@ -28,7 +29,8 @@ namespace engine
 				-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 			};
 
-			int mBallIndices[6] = { 0, 1, 2, 1, 3, 2 };
+			int mBallIndices[6] = { 0, 1, 2, 0, 3, 2 };
+			int mTextureIndex;
 		};
 	}
 }
