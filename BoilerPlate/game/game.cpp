@@ -9,33 +9,34 @@ namespace game
 
 	game::~game() 
 	{
-		renderManager.~renderer();
+		mRenderManager.~renderer();
 	}
 
 	void game::execute()
 	{
-		renderManager.assign_program_id();
-		renderManager.assign_textures("game/assets/block.png");
-		renderManager.assign_textures("game/assets/ball.png");
-		renderManager.generate_buffers();
+		mRenderManager.assign_program_id();
+		mRenderManager.assign_textures("game/assets/block.png");
+		mRenderManager.assign_textures("game/assets/ball.png");
+		mRenderManager.generate_buffers();
 	}
 
 	void game::render()
 	{
-		renderManager.render(ball.get_ball_vertices(), ball.get_ball_indices(), ball.get_texture_index());
+		mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index());
+		//add the render for the block
 	}
 
 	void game::update()
 	{
 		update_input_controller();
-		renderManager.determine_polygon_mode();
+		mRenderManager.determine_polygon_mode();
 	}
 
 	void game::input_controller() 
 	{
 		if (mInputManager.get_f() && mInputCounter == 0) {
 
-			renderManager.switch_polygon_mode();
+			mRenderManager.switch_polygon_mode();
 
 			reset_input_controller();
 		}

@@ -115,7 +115,6 @@ namespace engine
 	{
 		double startTime = m_timer->GetElapsedTimeInSeconds();
 
-	//	renderManager.determine_polygon_mode();
 		mGame.update();
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();

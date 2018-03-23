@@ -28,9 +28,9 @@ namespace game
 		engine::utilities::input_manager mInputManager;
 
 	private:
-		engine::core::renderer renderManager;
-		engine::core::ball ball;
-		engine::core::block blocks;
+		engine::core::renderer mRenderManager;
+		engine::core::ball mBall;
+		engine::core::block mBlocks;
 		int mInputCounter;
 	};
 }
