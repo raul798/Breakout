@@ -40,7 +40,10 @@ namespace engine
 		m_state = GameState::RUNNING;
 		
 		renderManager.assign_program_id();
+		renderManager.assign_textures("face.png");
+		//renderManager.assign_textures("test.png");
 		renderManager.vertices_manager();
+		
 			
 		SDL_Event event;
 		while (m_state == GameState::RUNNING)

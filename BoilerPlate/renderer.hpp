@@ -15,7 +15,7 @@ namespace engine
 	public:
 		renderer();
 		~renderer();
-		void assign_textures(const char *pTextures[]);
+		void assign_textures(const char pTextures[]);
 		void vertices_manager();
 		void render();
 		void assign_program_id();
@@ -29,6 +29,7 @@ namespace engine
 		GLuint mProgramID;
 		shader_utilities mShaderManager;
 		texture mTexturesContainer[TEXTURE_NUMBER];
+		int mLoadedTextures;
 		bool mIsPolygonModeFill;
 	};
 }
