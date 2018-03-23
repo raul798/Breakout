@@ -688,8 +688,33 @@ namespace engine
 		mMatrix[0] = scale;
 		mMatrix[5] = scale;
 		mMatrix[10] = -pFarClippingPlane * inverseClippingPlaneDifference;
-		mMatrix[11] = -pFarClippingPlane * pNearClippingPlane * inverseClippingPlaneDifference;
-		mMatrix[14] = -1;
+		mMatrix[11] = -1;
+		mMatrix[14] = -pFarClippingPlane * pNearClippingPlane * inverseClippingPlaneDifference;
 		mMatrix[15] = 0;
+	}
+
+	void matrix_4::make_look_at(vector_3 pLookingPosition, vector_3 pTargetPosition)
+	{
+		vector_3 forward(pLookingPosition - pTargetPosition);
+		forward.normalize();
+		vector_3 tmp(0.0f, 1.0f, 0.0f);
+		tmp.normalize();
+		vector_3 right;//Em^3::needs to implement cross-product here // "fixed"
+		right = tmp.cross_product(tmp, forward);
+		vector_3 up;//Em^3::same here // "fixed"
+		up = tmp.cross_product(forward, right);
+
+		mMatrix[0] = right.mX;
+		mMatrix[1] = up.mX;
+		mMatrix[2] = forward.mX;
+		mMatrix[3] = pLookingPosition.mX;
+		mMatrix[4] = right.mY;
+		mMatrix[5] = up.mY;
+		mMatrix[6] = forward.mY;
+		mMatrix[7] = pLookingPosition.mY;
+		mMatrix[8] = right.mZ;
+		mMatrix[9] = up.mZ;
+		mMatrix[10] = forward.mZ;
+		mMatrix[11] = pLookingPosition.mZ;
 	}
 }

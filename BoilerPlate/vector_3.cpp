@@ -69,6 +69,17 @@ namespace engine
 	}
 
 	//operators
+
+	vector_3 vector_3::cross_product(const vector_3& pLeftSide, const vector_3& pRightSide)
+	{
+		vector_3 result;
+		result.mX = pLeftSide.mY * pRightSide.mZ - pLeftSide.mZ * pRightSide.mY;
+		result.mY = pLeftSide.mZ * pRightSide.mX - pLeftSide.mX * pRightSide.mZ;
+		result.mZ = pLeftSide.mX * pRightSide.mY - pLeftSide.mY * pRightSide.mX;
+
+		return result;
+	}
+
 	vector_3& vector_3::operator=(const vector_3& pRightSide)
 	{
 
