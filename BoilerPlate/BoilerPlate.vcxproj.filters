@@ -6,31 +6,43 @@
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="math_utilities.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="vector_2.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="vector_3.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="vector_4.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="matrix_4.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="error_manager.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="renderer.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="shader_utilities.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
     </ClCompile>
     <ClCompile Include="texture.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>engine\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="IRender.hpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="component.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="game_object.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="unique_id.cpp">
+      <Filter>engine\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,51 +50,79 @@
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="vector_2.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="math_utilities.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="vector_3.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="vector_4.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="matrix_4.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="renderer.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="shader_utilities.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="texture.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
     </ClInclude>
     <ClInclude Include="vertex.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="unique_id.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="component.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="game_object.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="IUpdate.hpp">
+      <Filter>engine\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Engine">
+    <Filter Include="Game">
+      <UniqueIdentifier>{5b361e1f-c95c-4856-a6b2-02708c35b3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine">
       <UniqueIdentifier>{6f9fb37f-e47b-46c3-8209-dbf486018555}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Source files">
+    <Filter Include="engine\Source files">
       <UniqueIdentifier>{0a3ec513-922c-4b14-83e3-98e1934fea74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Header files">
+    <Filter Include="engine\Header files">
       <UniqueIdentifier>{da8cc683-e66e-46b9-be58-7d0e16e23f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\components">
+      <UniqueIdentifier>{7de3207b-1094-400e-b78a-d17b59796945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\shaders">
+      <UniqueIdentifier>{a17e019d-f4a8-4b67-85ef-14b1552cd58f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\core">
+      <UniqueIdentifier>{0a2a633a-f75a-4498-a0e8-0a1c435ac45a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex.glsl" />
-    <None Include="frag.glsl" />
     <None Include="error_manager.hpp">
-      <Filter>Engine\Header files</Filter>
+      <Filter>engine\Header files</Filter>
+    </None>
+    <None Include="vertex.glsl">
+      <Filter>engine\shaders</Filter>
+    </None>
+    <None Include="frag.glsl">
+      <Filter>engine\shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -172,21 +172,27 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="component.cpp" />
     <ClCompile Include="error_manager.cpp" />
+    <ClCompile Include="game_object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_utilities.cpp" />
     <ClCompile Include="matrix_4.cpp" />
+    <ClCompile Include="IRender.hpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="shader_utilities.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="unique_id.cpp" />
     <ClCompile Include="vector_2.cpp" />
     <ClCompile Include="vector_3.cpp" />
     <ClCompile Include="vector_4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="component.hpp" />
+    <ClInclude Include="game_object.hpp" />
     <ClInclude Include="math_utilities.hpp" />
     <ClInclude Include="matrix_4.hpp" />
     <ClInclude Include="renderer.hpp" />
@@ -196,6 +202,8 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="TimeManager.hpp" />
+    <ClInclude Include="unique_id.hpp" />
+    <ClInclude Include="IUpdate.hpp" />
     <ClInclude Include="vector_2.hpp" />
     <ClInclude Include="vector_3.hpp" />
     <ClInclude Include="vector_4.hpp" />
