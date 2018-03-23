@@ -12,6 +12,10 @@
 
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/math/Matrix_4.hpp"
 #include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/renderer.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/vertex.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/ball.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/game_object.hpp"
+#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/block.hpp"
 
 namespace engine
 {

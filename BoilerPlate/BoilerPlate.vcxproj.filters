@@ -53,6 +53,12 @@
     <ClCompile Include="engine\utilities\input_manager.cpp">
       <Filter>engine\utilities</Filter>
     </ClCompile>
+    <ClCompile Include="engine\core\ball.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\core\block.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -116,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="engine\utilities\resource_manager.hpp">
       <Filter>engine\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\core\ball.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\core\block.hpp">
+      <Filter>engine\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

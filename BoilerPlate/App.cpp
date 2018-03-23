@@ -10,6 +10,8 @@ namespace engine
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 	
 	core::renderer renderManager;
+	core::ball ball;
+	core::block block;
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -42,7 +44,7 @@ namespace engine
 		renderManager.assign_program_id();
 		renderManager.assign_textures("game/assets/face.png");
 		//renderManager.assign_textures("test.png");
-		renderManager.vertices_manager();
+		renderManager.generate_buffers();
 
 
 		SDL_Event event;
@@ -138,7 +140,7 @@ namespace engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		renderManager.render();
+		renderManager.render(ball.get_ball_vertices(), ball.get_ball_indices());
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}

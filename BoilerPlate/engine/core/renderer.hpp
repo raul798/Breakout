@@ -18,11 +18,12 @@ namespace engine
 			renderer();
 			~renderer();
 			void assign_textures(const char pTextures[]);
-			void vertices_manager();
-			void render();
+			void vertices_manager(vertex pVertices[], int pIndices[]);
+			void render(vertex pVertices[], int pIndices[]);
 			void assign_program_id();
 			void switch_polygon_mode();
 			void determine_polygon_mode();
+			void generate_buffers();
 
 		private:
 			GLuint mVertexArrayObject;    //VAO
