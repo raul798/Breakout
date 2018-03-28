@@ -2,11 +2,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/math/Matrix_4.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/renderer.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/block.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/core/ball.hpp"
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/engine/utilities/input_manager.hpp"
+#include "../engine/math/Matrix_4.hpp"
+#include "../engine/core/renderer.hpp"
+#include "../engine/core/block.hpp"
+#include "../engine/core/ball.hpp"
+#include "../engine/utilities/input_manager.hpp"
 
 namespace game
 {

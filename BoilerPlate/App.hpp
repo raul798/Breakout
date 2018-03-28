@@ -10,7 +10,7 @@
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 
-#include "/Users/raula/source/repos/Breakout/BoilerPlate/game/game.hpp"
+#include "../BoilerPlate/game/game.hpp"
 
 namespace engine
 {

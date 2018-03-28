@@ -719,5 +719,19 @@ namespace engine
 			mMatrix[10] = forward.mZ;
 			mMatrix[11] = pLookingPosition.mZ;
 		}
+
+		vector_4 operator*(matrix_4 pLeftSide, vector_4 pRightSide)
+		{
+			vector_4 result;
+			result.mX = pLeftSide[0] * pRightSide.mX + pLeftSide[4] * pRightSide.mY + pLeftSide[8] * pRightSide.mZ + 
+				pLeftSide[12] * pRightSide.mW;
+			result.mY = pLeftSide[1] * pRightSide.mX + pLeftSide[5] * pRightSide.mY + pLeftSide[9] * pRightSide.mZ +
+				pLeftSide[13] * pRightSide.mW;
+			result.mZ = pLeftSide[2] * pRightSide.mX + pLeftSide[6] * pRightSide.mY + pLeftSide[10] * pRightSide.mZ +
+				pLeftSide[14] * pRightSide.mW;
+			result.mX = pLeftSide[3] * pRightSide.mX + pLeftSide[7] * pRightSide.mY + pLeftSide[11] * pRightSide.mZ +
+				pLeftSide[15] * pRightSide.mW;
+			return result;
+		}
 	}
 }
