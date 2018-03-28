@@ -20,7 +20,7 @@ namespace engine
 		void renderer::assign_textures(const char pTextures[])
 		{
 
-			mTexturesContainer[mLoadedTextures] = texture::texture(pTextures);
+			mTexturesContainer[mLoadedTextures] = texture::texture_manager(pTextures);
 			
 			mLoadedTextures++;
 		}
@@ -39,18 +39,20 @@ namespace engine
 			glUseProgram(mProgramID);
 
 			// Remember this needs to be set after the program is activated
-			glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
+			//check this
+			//glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
 			//glUniform1i(glGetUniformLocation(mProgramID, "texture2"), 1);
+
 			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
-			glUniform2fv(glGetUniformLocation(mProgramID, "resolution"), 1, resolution);
+
+			//check this
+			//glUniform2fv(glGetUniformLocation(mProgramID, "resolution"), 1, resolution);
 
 			glBindVertexArray(mVertexArrayObject);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementsBufferObject);
 
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[pTextureIndex].get_texture());
-			/*glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[1].get_texture());*/
 
 			glDrawElements(GL_TRIANGLES, sizeof(localIndices), GL_UNSIGNED_INT, (void*)0);
 		}
@@ -104,7 +106,7 @@ namespace engine
 
 			// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 			// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
 			// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.

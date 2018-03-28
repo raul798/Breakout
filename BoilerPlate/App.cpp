@@ -190,7 +190,7 @@ namespace engine
 		return true;
 	}
 
-	void App::SetupViewport()
+	void App::SetupViewport() 
 	{
 		// Defining ortho values
 		//

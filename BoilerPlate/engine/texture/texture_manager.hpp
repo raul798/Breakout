@@ -14,16 +14,16 @@ namespace engine
 {
 	namespace texture
 	{
-		class texture
+		class texture_manager
 		{
 		public:
-			texture();
-			texture(const char *pTexture);
+			texture_manager();
+			texture_manager(const char *pTexture);
 			GLuint load_texture(const char *pTexturePath);
 			GLuint get_texture();
 
 		private:
-			GLuint mTexture;
+			GLuint mTexture; 
 		};
 	}
 }

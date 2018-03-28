@@ -21,15 +21,15 @@ namespace engine
 			int get_texture_index();
 
 		private:
-			vertex mBlockVertices[32] = {
-				// positions          // colors           // texture coords
-				0.2f,  0.2f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-				0.2f, -0.2f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-				-0.2f, -0.2f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-				-0.2f,  0.2f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+			vertex mBlockVertices[4] = {
+				// positions         // colors           // texture coords
+				{ 0.2f, 0.2f, 0.0f,    1.0f, 0.0f, 0.0f,   1.0f, 1.0f },   // top right
+				{ 0.2f, -0.2f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f },   // bottom right
+				{ -0.2f, 0.2f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f },   // top left
+				{ -0.2f, -0.2f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 0.0f }    // bottom left    
 			};
 
-			int mBlockIndices[6] = { 0, 1, 3, 1, 2, 3 };
+			int mBlockIndices[7] = { 0, 1, 2, 1, 3, 2, 0 };
 			int mTextureIndex;
 		};
 	}

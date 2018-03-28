@@ -3,7 +3,7 @@
 #define RENDERER_HPP
 
 #include "../utilities/shader_utilities.hpp"
-#include "../texture/texture.hpp"
+#include "../texture/texture_manager.hpp"
 #include "vertex.hpp"
 
 const int TEXTURE_NUMBER = 16;
@@ -31,7 +31,7 @@ namespace engine
 			GLuint mElementsBufferObject; //EBO
 			GLuint mProgramID;
 			utilities::shader_utilities mShaderManager;
-			texture::texture mTexturesContainer[TEXTURE_NUMBER];
+			texture::texture_manager mTexturesContainer[TEXTURE_NUMBER];
 			int mLoadedTextures;
 			bool mIsPolygonModeFill;
 		};
