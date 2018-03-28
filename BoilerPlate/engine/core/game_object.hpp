@@ -7,6 +7,7 @@
 //
 #include "IUpdate.hpp"
 #include "IRender.hpp"
+#include "../BoilerPlate/engine/math/Matrix_4.hpp"
 #include "unique_id.hpp"
 
 namespace engine
@@ -60,6 +61,7 @@ namespace engine
 			std::vector<component*>	mComponents;
 			std::vector<game_object*> mChildren;
 			game_object *mParent;
+			math::matrix_4 mModel;
 		};
 	}
 }

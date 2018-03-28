@@ -11,6 +11,7 @@ namespace engine
 		game_object::game_object()
 		{
 			mParent = nullptr;
+			mModel = math::matrix_4();
 		}
 
 		game_object::~game_object()
