@@ -38,15 +38,7 @@ namespace engine
 
 			glUseProgram(mProgramID);
 
-			// Remember this needs to be set after the program is activated
-			//check this
-			//glUniform1i(glGetUniformLocation(mProgramID, "texture1"), 0);
-			//glUniform1i(glGetUniformLocation(mProgramID, "texture2"), 1);
-
 			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
-
-			//check this
-			//glUniform2fv(glGetUniformLocation(mProgramID, "resolution"), 1, resolution);
 
 			glBindVertexArray(mVertexArrayObject);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementsBufferObject);
