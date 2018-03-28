@@ -41,28 +41,33 @@ namespace engine
 			
 			glUseProgram(mProgramID);
 			//glm::mat4 model;
-			glm::mat4 view;
+			//glm::mat4 view;
 			glm::mat4 projection;
 
 			//model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 			//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-			view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+			//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 			projection = glm::perspective(glm::radians(45.0f), static_cast<float>(1136) / static_cast<float>(640), 0.1f, 100.0f);
 			math::matrix_4 model = math::matrix_4();
+			math::matrix_4 view = math::matrix_4();
+			model.translate_vector(math::vector_4(0.0f, 0.0f, 0.30f, 1.0f));
 			model.rotate_z(0.0f);
-			model.translate_vector(math::vector_4(0.0f, 0.0f, 0.0f, 1.0f));
+			view.translate_vector(math::vector_4(0.0f, 0.0f, -3.0f, 1.0f));
 			// retrieve the matrix uniform locations
 			GLuint modelLoc = glGetUniformLocation(mProgramID, "model");
 			GLuint viewLoc = glGetUniformLocation(mProgramID, "view");
 			GLuint projectionLoc = glGetUniformLocation(mProgramID, "projection");
 
-			std::cout << model;
-			float a[16];
-			GLfloat* modelMatrix = model.get_matrix(a);
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, a);
-			
+			//std::cout << model;
+			float modelMatrix[16];
+			float viewMatrix[16];
+			model.get_matrix(modelMatrix);
+			view.get_matrix(viewMatrix);
+			glUniformMatrix4fv(modelLoc, 1, GL_TRUE, modelMatrix);
+			glUniformMatrix4fv(viewLoc, 1, GL_TRUE, viewMatrix);
+
 			//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+			//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 				
 			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
@@ -74,10 +79,14 @@ namespace engine
 			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[pTextureIndex].get_texture());
 
 			glDrawElements(GL_TRIANGLES, sizeof(localIndices), GL_UNSIGNED_INT, (void*)0);
-			std::cout << a[0] << a[1] << a[2] << a[3] << std::endl
+			/*std::cout << view[0][0] << view[0][1] << view[0][2] << view[0][3] << std::endl
+				<< view[1][0] << view[1][1] << view[1][2] << view[1][3] << std::endl
+				<< view[2][0] << view[2][1] << view[2][2] << view[2][3] << std::endl
+				<< view[3][0] << view[3][1] << view[3][2] << view[3][3] << std::endl;*/
+			/*std::cout << a[0] << a[1] << a[2] << a[3] << std::endl
 				<< a[4] << a[5] << a[6] << a[7] << std::endl
 				<< a[8] << a[9] << a[10] << a[11] << std::endl
-				<< a[12] << a[13] << a[14] << a[15] << std::endl;
+				<< a[12] << a[13] << a[14] << a[15] << std::endl;*/
 		}
 
 		void renderer::assign_program_id()
