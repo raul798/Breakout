@@ -9,7 +9,7 @@ namespace engine
 {
 	namespace core
 	{
-		class block:game_object
+		class block :game_object
 		{
 		public:
 			//constructor
@@ -23,10 +23,10 @@ namespace engine
 		private:
 			vertex mBlockVertices[4] = {
 				// positions         // colors           // texture coords
-				{ 0.2f, 0.2f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 1.0f },   // top right
-				{ 0.2f, -0.2f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 0.0f },   // bottom right
-				{ -0.2f, 0.2f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 1.0f },   // top left
-				{ -0.2f, -0.2f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 0.0f }    // bottom left    
+				{ 0.06f, 0.06f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 1.0f },   // top right
+			{ 0.06f, -0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 0.0f },   // bottom right
+			{ -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 1.0f },   // top left
+			{ -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 0.0f }    // bottom left    
 			};
 
 			int mBlockIndices[7] = { 0, 1, 2, 1, 3, 2, 0 };

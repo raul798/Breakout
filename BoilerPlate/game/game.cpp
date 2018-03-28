@@ -7,7 +7,7 @@ namespace game
 		mInputCounter = 0;
 	}
 
-	game::~game() 
+	game::~game()
 	{
 		mRenderManager.~renderer();
 	}
@@ -22,8 +22,8 @@ namespace game
 
 	void game::render()
 	{
-		mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index());
 		mRenderManager.render(mBlock.get_block_vertices(), mBlock.get_block_indices(), mBlock.get_texture_index());
+		mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index());
 	}
 
 	void game::update()
@@ -32,7 +32,7 @@ namespace game
 		mRenderManager.determine_polygon_mode();
 	}
 
-	void game::input_controller() 
+	void game::input_controller()
 	{
 		if (mInputManager.get_f() && mInputCounter == 0) {
 

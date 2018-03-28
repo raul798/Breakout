@@ -1,5 +1,7 @@
 #include "renderer.hpp"
-
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 namespace engine
 {
 	namespace core
@@ -36,8 +38,33 @@ namespace engine
 
 			vertices_manager(pVertices, pIndices);
 
+			
 			glUseProgram(mProgramID);
+			//glm::mat4 model;
+			glm::mat4 view;
+			glm::mat4 projection;
 
+			//model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+			//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+			view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+			projection = glm::perspective(glm::radians(45.0f), static_cast<float>(1136) / static_cast<float>(640), 0.1f, 100.0f);
+			math::matrix_4 model = math::matrix_4();
+			model.rotate_z(0.0f);
+			model.translate_vector(math::vector_4(0.0f, 0.0f, 0.0f, 1.0f));
+			// retrieve the matrix uniform locations
+			GLuint modelLoc = glGetUniformLocation(mProgramID, "model");
+			GLuint viewLoc = glGetUniformLocation(mProgramID, "view");
+			GLuint projectionLoc = glGetUniformLocation(mProgramID, "projection");
+
+			std::cout << model;
+			float a[16];
+			GLfloat* modelMatrix = model.get_matrix(a);
+			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, a);
+			
+			//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+				
 			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
 
 			glBindVertexArray(mVertexArrayObject);
@@ -47,6 +74,10 @@ namespace engine
 			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[pTextureIndex].get_texture());
 
 			glDrawElements(GL_TRIANGLES, sizeof(localIndices), GL_UNSIGNED_INT, (void*)0);
+			std::cout << a[0] << a[1] << a[2] << a[3] << std::endl
+				<< a[4] << a[5] << a[6] << a[7] << std::endl
+				<< a[8] << a[9] << a[10] << a[11] << std::endl
+				<< a[12] << a[13] << a[14] << a[15] << std::endl;
 		}
 
 		void renderer::assign_program_id()

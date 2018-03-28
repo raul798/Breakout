@@ -8,7 +8,7 @@ namespace engine
 {
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
-	
+
 	core::renderer renderManager;
 
 	App::App(const std::string& title, const int width, const int height)
@@ -71,7 +71,7 @@ namespace engine
 
 		// Setup the viewport
 		//
-		//SetupViewport();
+		SetupViewport();
 
 		// Change game state
 		//
@@ -81,14 +81,14 @@ namespace engine
 	}
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
-	{		
+	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_F:
 			mGame.mInputManager.set_f(true);
 			break;
 
-		default:			
+		default:
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
 			break;
 		}
@@ -161,9 +161,9 @@ namespace engine
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-		Uint32 flags =  SDL_WINDOW_OPENGL     | 
-						SDL_WINDOW_SHOWN      | 
-						SDL_WINDOW_RESIZABLE;
+		Uint32 flags = SDL_WINDOW_OPENGL |
+			SDL_WINDOW_SHOWN |
+			SDL_WINDOW_RESIZABLE;
 
 		m_mainWindow = SDL_CreateWindow(
 			m_title.c_str(),
@@ -190,7 +190,7 @@ namespace engine
 		return true;
 	}
 
-	void App::SetupViewport() 
+	void App::SetupViewport()
 	{
 		// Defining ortho values
 		//

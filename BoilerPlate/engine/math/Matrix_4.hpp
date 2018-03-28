@@ -22,7 +22,7 @@ namespace engine
 				float pThirteenthValue, float pFourteenthValue, float pFifteenthValue, float pSixteenthValue);
 
 			//functions
-			float *get_matrix();
+			float *get_matrix(float a[]);
 			float *get_matrix_pointer();
 			float *get_matrix_row(int pRowIndex);
 			float *get_matrix_column(int pColumnIndex);
@@ -43,7 +43,7 @@ namespace engine
 			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane);
 			void make_look_at(vector_3 pLookingPosition, vector_3 pTargetPosition);
 			matrix_4 invert();
-			matrix_4 transform(int pIndexValue, float pDesiredValue);
+			void transform(matrix_4 pTranslation, matrix_4 pRotation, matrix_4 pScale);
 
 			//arithmetic functions
 			matrix_4  operator+(matrix_4 pRightSide);

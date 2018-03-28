@@ -83,25 +83,26 @@ namespace engine
 			mMatrix[15] = pSixteenthValue;
 		}
 
-		float *matrix_4::get_matrix()
+		float *matrix_4::get_matrix(float a[])
 		{
 			float matrix[16];
 
-			matrix[0] = mMatrix[0];
-			matrix[2] = mMatrix[2];
-			matrix[3] = mMatrix[3];
-			matrix[4] = mMatrix[4];
-			matrix[5] = mMatrix[5];
-			matrix[6] = mMatrix[6];
-			matrix[7] = mMatrix[7];
-			matrix[8] = mMatrix[8];
-			matrix[9] = mMatrix[9];
-			matrix[10] = mMatrix[10];
-			matrix[11] = mMatrix[11];
-			matrix[12] = mMatrix[12];
-			matrix[13] = mMatrix[13];
-			matrix[14] = mMatrix[14];
-			matrix[15] = mMatrix[15];
+			a[0] = mMatrix[0];
+			a[1] = mMatrix[1];
+			a[2] = mMatrix[2];
+			a[3] = mMatrix[3];
+			a[4] = mMatrix[4];
+			a[5] = mMatrix[5];
+			a[6] = mMatrix[6];
+			a[7] = mMatrix[7];
+			a[8] = mMatrix[8];
+			a[9] = mMatrix[9];
+			a[10] = mMatrix[10];
+			a[11] = mMatrix[11];
+			a[12] = mMatrix[12];
+			a[13] = mMatrix[13];
+			a[14] = mMatrix[14];
+			a[15] = mMatrix[15];
 
 			return matrix;
 		}
@@ -486,13 +487,9 @@ namespace engine
 			*this = *this * rotationMatrix;
 		}
 
-		matrix_4 matrix_4::transform(int pIndexValue, float pDesiredValue)
+		void matrix_4::transform(matrix_4 pTranslation, matrix_4 pRotation, matrix_4 pScale)
 		{
-			matrix_4 matrix = *this;
-
-			matrix[pIndexValue] = pDesiredValue;
-
-			return matrix;
+			*this = pTranslation * pRotation * pScale;
 		}
 
 		matrix_4 matrix_4::operator+(matrix_4 pRightSide)
@@ -660,16 +657,44 @@ namespace engine
 			mMatrix[15] = pRightSide[15];
 			return *this;
 		}
+
+		vector_4 operator*(matrix_4 pLeftSide, vector_4 pRightSide)
+		{
+			vector_4 result;
+
+			result.mX = pLeftSide[0] * pRightSide.mX +
+				pLeftSide[4] * pRightSide.mY +
+				pLeftSide[8] * pRightSide.mZ +
+				pLeftSide[12] * pRightSide.mW;
+
+			result.mY = pLeftSide[1] * pRightSide.mX +
+				pLeftSide[5] * pRightSide.mY +
+				pLeftSide[9] * pRightSide.mZ +
+				pLeftSide[13] * pRightSide.mW;
+
+			result.mZ = pLeftSide[2] * pRightSide.mX +
+				pLeftSide[6] * pRightSide.mY +
+				pLeftSide[10] * pRightSide.mZ +
+				pLeftSide[14] * pRightSide.mW;
+
+			result.mX = pLeftSide[3] * pRightSide.mX +
+				pLeftSide[7] * pRightSide.mY +
+				pLeftSide[11] * pRightSide.mZ +
+				pLeftSide[15] * pRightSide.mW;
+
+			return result;
+		}
+
 		void matrix_4::make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 			const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis)
 		{
-			//Em^3::setting identity matrix, saves 10 lines of codes...
+			//setting identity matrix, saves 10 lines of codes...
 			set_identity();
-			//Em^3::setting inverse of the difference, save 3 divisions...
+			//setting inverse of the difference, save 3 divisions...
 			float inverseXAxesDifference = 1 / (pMaximumXAxis - pMinimumXAxis);
 			float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
 			float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
-			//Em^3::more info: https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/orthographic-projection-matrix
+
 			mMatrix[0] = 2.0f * inverseXAxesDifference;
 			mMatrix[5] = 2.0f * inverseYAxesDifference;
 			mMatrix[10] = -2.0f * inverseZAxesDifference;
@@ -680,13 +705,13 @@ namespace engine
 
 		void matrix_4::make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane)
 		{
-			//Em^3::use of pi and all of these angles things...
 			math_utilities mathMaster;
-			//Em^3::scale based on field of view, used mathmaster for angles managing
-			//Em^3::operation pi/180 can be used with degrees_to_radians with 1 as angle
+			//scale based on field of view, used mathmaster for angles managing
+			//operation pi/180 can be used with degrees_to_radians with 1 as angle
 			float scale = 1 / (tan(pFieldOfView * 0.5) * mathMaster.degrees_to_radians(1));
-			//Em^3::saving 1 division
+
 			float inverseClippingPlaneDifference = 1 / (pFarClippingPlane - pNearClippingPlane);
+
 			mMatrix[0] = scale;
 			mMatrix[5] = scale;
 			mMatrix[10] = -pFarClippingPlane * inverseClippingPlaneDifference;
@@ -701,9 +726,9 @@ namespace engine
 			forward.normalize();
 			vector_3 tmp(0.0f, 1.0f, 0.0f);
 			tmp.normalize();
-			vector_3 right;//Em^3::needs to implement cross-product here // "fixed"
+			vector_3 right;
 			right = tmp.cross_product(tmp, forward);
-			vector_3 up;//Em^3::same here // "fixed"
+			vector_3 up;
 			up = tmp.cross_product(forward, right);
 
 			mMatrix[0] = right.mX;
@@ -718,20 +743,6 @@ namespace engine
 			mMatrix[9] = up.mZ;
 			mMatrix[10] = forward.mZ;
 			mMatrix[11] = pLookingPosition.mZ;
-		}
-
-		vector_4 operator*(matrix_4 pLeftSide, vector_4 pRightSide)
-		{
-			vector_4 result;
-			result.mX = pLeftSide[0] * pRightSide.mX + pLeftSide[4] * pRightSide.mY + pLeftSide[8] * pRightSide.mZ + 
-				pLeftSide[12] * pRightSide.mW;
-			result.mY = pLeftSide[1] * pRightSide.mX + pLeftSide[5] * pRightSide.mY + pLeftSide[9] * pRightSide.mZ +
-				pLeftSide[13] * pRightSide.mW;
-			result.mZ = pLeftSide[2] * pRightSide.mX + pLeftSide[6] * pRightSide.mY + pLeftSide[10] * pRightSide.mZ +
-				pLeftSide[14] * pRightSide.mW;
-			result.mX = pLeftSide[3] * pRightSide.mX + pLeftSide[7] * pRightSide.mY + pLeftSide[11] * pRightSide.mZ +
-				pLeftSide[15] * pRightSide.mW;
-			return result;
 		}
 	}
 }
