@@ -8,7 +8,7 @@ namespace engine
 	{
 		struct vertex
 		{
-			float coordinates[8];
+			float coordinates[9];
 		};
 	}
 }
