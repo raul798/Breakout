@@ -179,7 +179,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\core\renderer.cpp" />
     <ClCompile Include="engine\core\unique_id.cpp" />
     <ClCompile Include="engine\math\math_utilities.cpp" />
-    <ClCompile Include="engine\math\Matrix_4.cpp" />
+    <ClCompile Include="engine\math\matrix_4.cpp" />
     <ClCompile Include="engine\math\vector_2.cpp" />
     <ClCompile Include="engine\math\vector_3.cpp" />
     <ClCompile Include="engine\math\vector_4.cpp" />
@@ -204,7 +204,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="engine\core\unique_id.hpp" />
     <ClInclude Include="engine\core\vertex.hpp" />
     <ClInclude Include="engine\math\math_utilities.hpp" />
-    <ClInclude Include="engine\math\Matrix_4.hpp" />
+    <ClInclude Include="engine\math\matrix_4.hpp" />
     <ClInclude Include="engine\math\vector_2.hpp" />
     <ClInclude Include="engine\math\vector_3.hpp" />
     <ClInclude Include="engine\math\vector_4.hpp" />
