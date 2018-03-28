@@ -9,7 +9,7 @@ namespace engine
 {
 	namespace core
 	{
-		class block :game_object
+		class block :public game_object
 		{
 		public:
 			//constructor

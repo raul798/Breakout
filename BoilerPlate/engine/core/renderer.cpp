@@ -27,7 +27,7 @@ namespace engine
 			mLoadedTextures++;
 		}
 
-		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex)
+		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex, math::matrix_4 pModelMatrix)
 		{
 			int localIndices[sizeof(pIndices)];
 
@@ -59,7 +59,7 @@ namespace engine
 			float modelMatrix[16];
 			float viewMatrix[16];
 			float a[16];
-			model.get_matrix(modelMatrix);
+			pModelMatrix.get_matrix(modelMatrix);
 			view.get_matrix(viewMatrix);
 			projection.get_matrix(a);
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix);

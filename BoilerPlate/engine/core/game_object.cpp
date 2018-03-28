@@ -78,7 +78,10 @@ namespace engine
 			//base class function call
 			IUpdate::update(pDeltaTime);
 		}
-
+		math::matrix_4 game_object::get_model_matrix()
+		{
+			return mModel;
+		}
 		void game_object::render()
 		{
 			//if ((m_nUpdates % 60) == 0)

@@ -29,11 +29,11 @@ namespace engine
 			void remove_child(game_object *pGame_object);
 			void update(double pDeltaTime) override;
 			void render() override;
-
 			//getters
 			std::vector<component*>GetComponents() const { return mComponents; }
 			std::vector<game_object*> GetChildren() const { return mChildren; }
 			game_object* GetParent() const { return mParent; }
+			math::matrix_4 get_model_matrix();
 
 			template<typename T>
 			T* GetComponent()

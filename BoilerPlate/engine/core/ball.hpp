@@ -9,7 +9,7 @@ namespace engine
 {
 	namespace core
 	{
-		class ball:game_object
+		class ball:public game_object
 		{
 		public:
 			//constructor
