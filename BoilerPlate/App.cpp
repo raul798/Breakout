@@ -41,7 +41,7 @@ namespace engine
 		m_state = GameState::RUNNING;
 
 		mGame.execute();
-
+		mGame.update_screen_paremeter(m_width, m_height);
 		SDL_Event event;
 		while (m_state == GameState::RUNNING)
 		{
@@ -244,7 +244,7 @@ namespace engine
 		//
 		m_width = width;
 		m_height = height;
-
+		mGame.update_screen_paremeter(m_width, m_height);
 		SetupViewport();
 	}
 

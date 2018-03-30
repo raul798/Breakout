@@ -703,16 +703,17 @@ namespace engine
 			mMatrix[14] = -(pMaximumZAxis + pMinimumZAxis) * inverseZAxesDifference;
 		}
 
-		void matrix_4::make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane)
+		void matrix_4::make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane
+			, const float& pScreenAspect)
 		{
 			math_utilities mathMaster;
 			//scale based on field of view, used mathmaster for angles managing
 			//operation pi/180 can be used with degrees_to_radians with 1 as angle
-			float scale = 1.0f / (tan(pFieldOfView * 0.5 * mathMaster.degrees_to_radians(1)));
+			float scale = 1.0f / (tan(mathMaster.degrees_to_radians(pFieldOfView * 0.5)));
 
 			float inverseClippingPlaneDifference = 1.0f / (pFarClippingPlane - pNearClippingPlane);
 
-			mMatrix[0] = scale;
+			mMatrix[0] = scale * pScreenAspect;
 			mMatrix[5] = scale;
 			mMatrix[10] = -pFarClippingPlane * inverseClippingPlaneDifference;
 			mMatrix[11] = -1;

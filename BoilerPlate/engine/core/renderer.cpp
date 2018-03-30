@@ -48,8 +48,8 @@ namespace engine
 			model.rotate_z(0.0f);
 
 			view.translate_vector(math::vector_4(0.0f, 0.0f, -3.0f, 1.0f));
-
-			projection.make_perspective(45.0f, 0.1f, 100.0f);
+			view.rotate_z(0.0f);
+			projection.make_perspective(30.0f, 0.1f, 100.0f, (float)mHeight/mWidth);
 			// retrieve the matrix uniform locations
 			GLuint modelLoc = glGetUniformLocation(mProgramID, "model");
 			GLuint viewLoc = glGetUniformLocation(mProgramID, "view");
@@ -63,7 +63,7 @@ namespace engine
 			view.get_matrix(viewMatrix);
 			projection.get_matrix(a);
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix);
-			glUniformMatrix4fv(viewLoc, 1, GL_TRUE, viewMatrix);
+			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, viewMatrix);
 			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, a);
 	
 			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
@@ -158,6 +158,12 @@ namespace engine
 			{
 				mIsPolygonModeFill = true;
 			}
+		}
+
+		void renderer::update_screen_parameters(int pWidth, int pHeight)
+		{
+			mWidth = pWidth;
+			mHeight = pHeight;
 		}
 	}
 }

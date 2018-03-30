@@ -56,4 +56,9 @@ namespace game
 			mInputCounter--;
 		}
 	}
+
+	void game::update_screen_paremeter(int pWidth, int pHeight)
+	{
+		mRenderManager.update_screen_parameters(pWidth, pHeight);
+	}
 }
