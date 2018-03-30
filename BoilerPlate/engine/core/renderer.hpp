@@ -25,6 +25,7 @@ namespace engine
 			void switch_polygon_mode();
 			void determine_polygon_mode();
 			void generate_buffers();
+			void update_screen_parameters(int pWidth, int pHeight);
 
 		private:
 			GLuint mVertexArrayObject;    //VAO
@@ -34,6 +35,8 @@ namespace engine
 			utilities::shader_utilities mShaderManager;
 			texture::texture_manager mTexturesContainer[TEXTURE_NUMBER];
 			int mLoadedTextures;
+			int mWidth;
+			int mHeight;
 			bool mIsPolygonModeFill;
 		};
 	}

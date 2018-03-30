@@ -25,5 +25,10 @@ namespace engine
 		{
 			return mTextureIndex;
 		}
+
+		void ball::warp()
+		{
+			
+		}
 	}
 }

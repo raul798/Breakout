@@ -41,7 +41,8 @@ namespace engine
 			void rotate_z(float pRadians);
 			void make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 				const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis);
-			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane);
+			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane, 
+				const float &pScreenAspect);
 			void make_look_at(vector_3 pLookingPosition, vector_3 pTargetPosition);
 			matrix_4 invert();
 			void transform(matrix_4 pTranslation, matrix_4 pRotation, matrix_4 pScale);

@@ -24,7 +24,8 @@ namespace game
 		void input_controller();
 		void reset_input_controller();
 		void update_input_controller();
-		
+		void update_screen_paremeter(int pWidth, int pHeight);
+
 		engine::utilities::input_manager mInputManager;
 
 	private:
