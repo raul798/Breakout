@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 namespace engine
 {
 	namespace core
@@ -50,21 +51,23 @@ namespace engine
 			view.translate_vector(math::vector_4(0.0f, 0.0f, -3.0f, 1.0f));
 
 			projection.make_perspective(45.0f, 0.1f, 100.0f);
+
 			// retrieve the matrix uniform locations
 			GLuint modelLoc = glGetUniformLocation(mProgramID, "model");
 			GLuint viewLoc = glGetUniformLocation(mProgramID, "view");
 			GLuint projectionLoc = glGetUniformLocation(mProgramID, "projection");
 
-			//std::cout << model;
 			float modelMatrix[16];
 			float viewMatrix[16];
-			float a[16];
-			pModelMatrix.get_matrix(modelMatrix);
-			view.get_matrix(viewMatrix);
-			projection.get_matrix(a);
+			float projectionMatrix[16];
+
+			pModelMatrix.assign_matrix(modelMatrix);
+			view.assign_matrix(viewMatrix);
+			projection.assign_matrix(projectionMatrix);
+
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix);
 			glUniformMatrix4fv(viewLoc, 1, GL_TRUE, viewMatrix);
-			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, a);
+			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projectionMatrix);
 	
 			float resolution[] = { static_cast<float>(1136), static_cast<float>(640) };
 

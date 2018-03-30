@@ -83,28 +83,9 @@ namespace engine
 			mMatrix[15] = pSixteenthValue;
 		}
 
-		float *matrix_4::get_matrix(float a[])
+		float *matrix_4::get_matrix()
 		{
-			float matrix[16];
-
-			a[0] = mMatrix[0];
-			a[1] = mMatrix[1];
-			a[2] = mMatrix[2];
-			a[3] = mMatrix[3];
-			a[4] = mMatrix[4];
-			a[5] = mMatrix[5];
-			a[6] = mMatrix[6];
-			a[7] = mMatrix[7];
-			a[8] = mMatrix[8];
-			a[9] = mMatrix[9];
-			a[10] = mMatrix[10];
-			a[11] = mMatrix[11];
-			a[12] = mMatrix[12];
-			a[13] = mMatrix[13];
-			a[14] = mMatrix[14];
-			a[15] = mMatrix[15];
-
-			return matrix;
+			return mMatrix;
 		}
 
 		float *matrix_4::get_matrix_pointer()
@@ -134,6 +115,26 @@ namespace engine
 			matrixColumn[3] = mMatrix[pColumnIndex + 3];
 
 			return matrixColumn;
+		}
+
+		void matrix_4::assign_matrix(float pMatrix[])
+		{
+			pMatrix[0] = mMatrix[0];
+			pMatrix[1] = mMatrix[1];
+			pMatrix[2] = mMatrix[2];
+			pMatrix[3] = mMatrix[3];
+			pMatrix[4] = mMatrix[4];
+			pMatrix[5] = mMatrix[5];
+			pMatrix[6] = mMatrix[6];
+			pMatrix[7] = mMatrix[7];
+			pMatrix[8] = mMatrix[8];
+			pMatrix[9] = mMatrix[9];
+			pMatrix[10] = mMatrix[10];
+			pMatrix[11] = mMatrix[11];
+			pMatrix[12] = mMatrix[12];
+			pMatrix[13] = mMatrix[13];
+			pMatrix[14] = mMatrix[14];
+			pMatrix[15] = mMatrix[15];
 		}
 
 		void matrix_4::set_identity()

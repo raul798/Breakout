@@ -14,6 +14,7 @@ namespace engine
 
 			//public functions
 			void virtual update(double pDeltaTime) { mUpdates++; };
+
 		protected:
 			//members
 			int	mUpdates;

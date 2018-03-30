@@ -22,10 +22,11 @@ namespace engine
 				float pThirteenthValue, float pFourteenthValue, float pFifteenthValue, float pSixteenthValue);
 
 			//functions
-			float *get_matrix(float a[]);
+			float *get_matrix();
 			float *get_matrix_pointer();
 			float *get_matrix_row(int pRowIndex);
 			float *get_matrix_column(int pColumnIndex);
+			void assign_matrix(float pMatrix[]);
 			void set_identity();
 			matrix_4 get_transpose();
 			float& matrix_4::operator[](const int pRightSide);
