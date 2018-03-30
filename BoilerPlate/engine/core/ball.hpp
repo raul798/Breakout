@@ -15,9 +15,6 @@ namespace engine
 			//constructor
 			ball();
 
-			//functions
-			void warp();
-
 			//getter
 			vertex *get_ball_vertices();
 			int *get_ball_indices();

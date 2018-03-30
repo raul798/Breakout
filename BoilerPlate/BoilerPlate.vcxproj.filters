@@ -119,6 +119,15 @@
     <ClInclude Include="engine\texture\texture_manager.hpp">
       <Filter>engine\texture</Filter>
     </ClInclude>
+    <ClInclude Include="engine\components\vertex_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\texture_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\model_matrix_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="engine">
@@ -144,6 +153,9 @@
     </Filter>
     <Filter Include="engine\utilities">
       <UniqueIdentifier>{7de3207b-1094-400e-b78a-d17b59796945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\components">
+      <UniqueIdentifier>{aa6c6173-6ac5-4c7c-be0f-fdc5ea99bd4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

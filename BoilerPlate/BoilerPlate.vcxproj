@@ -194,6 +194,9 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="engine\components\model_matrix_component.hpp" />
+    <ClInclude Include="engine\components\texture_component.hpp" />
+    <ClInclude Include="engine\components\vertex_component.hpp" />
     <ClInclude Include="engine\core\ball.hpp" />
     <ClInclude Include="engine\core\block.hpp" />
     <ClInclude Include="engine\core\component.hpp" />
