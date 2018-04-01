@@ -13,7 +13,7 @@ namespace engine
 		{
 		public:
 			explicit model_matrix_component(const std::string& pName);
-			math::matrix_4 get_model_matrix();
+			math::matrix_4* get_model_matrix();
 		private:
 			math::matrix_4 mModelMatrix;
 		};

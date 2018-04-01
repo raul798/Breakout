@@ -28,11 +28,11 @@ namespace engine
 			mLoadedTextures++;
 		}
 
-		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex, math::matrix_4 pModelMatrix)
+		void renderer::render(std::vector<vertex> pVertices, std::vector<int> pIndices, int pTextureIndex, math::matrix_4 pModelMatrix)
 		{
 			int localIndices[sizeof(pIndices)];
 
-			for (int i = 0; i < sizeof(pIndices); i++)
+			for (int i = 0; i < pIndices.size(); i++)
 			{
 				localIndices[i] = pIndices[i];
 			}
@@ -93,17 +93,17 @@ namespace engine
 			glGenBuffers(1, &mElementsBufferObject);
 		}
 
-		void renderer::vertices_manager(vertex pVertices[], int pIndices[])
+		void renderer::vertices_manager(std::vector<vertex> pVertices, std::vector<int> pIndices)
 		{
 			vertex localVertex[sizeof(pVertices)];
 			int localIndices[sizeof(pIndices)];
 
-			for (int i = 0; i < sizeof(pVertices); i++)
+			for (int i = 0; i < pVertices.size(); i++)
 			{
 				localVertex[i] = pVertices[i];
 			}
 
-			for (int i = 0; i < sizeof(pIndices); i++)
+			for (int i = 0; i < pIndices.size(); i++)
 			{
 				localIndices[i] = pIndices[i];
 			}

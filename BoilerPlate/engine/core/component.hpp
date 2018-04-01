@@ -28,7 +28,7 @@ namespace engine
 			game_object* get_owner() const { return mOwner; }
 			std::string get_name() const { return mName; }
 			//virtual funtions
-			virtual math::matrix_4 get_model_matrix() { return math::matrix_4(); }
+			virtual math::matrix_4* get_model_matrix() { return &math::matrix_4(); }
 			virtual std::vector<vertex> get_vertex() { std::vector<vertex> emptyVertexVector; return emptyVertexVector; }
 			virtual std::vector<int> get_indices() { std::vector<int> emptyIndexVector; return emptyIndexVector; }
 			virtual std::string get_texture_path() { return ""; }
