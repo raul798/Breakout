@@ -39,6 +39,7 @@ namespace engine
 			void rotate_x(float pRadians);
 			void rotate_y(float pRadians);
 			void rotate_z(float pRadians);
+			void rotate_quaternions(float pAngle, int pRotationAxes);
 			void make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 				const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis);
 			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane, 

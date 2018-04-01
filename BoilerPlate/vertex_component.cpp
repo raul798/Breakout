@@ -10,5 +10,15 @@ namespace engine
 			mObjectVertices = pVertices;
 			mObjectIndices = pIndices;
 		}
+		
+		std::vector<int> vertex_component::get_indices()
+		{
+			return mObjectIndices;
+		}
+
+		std::vector<core::vertex> vertex_component::get_vertex()
+		{
+			return mObjectVertices;
+		}
 	}
 }

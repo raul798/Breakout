@@ -9,5 +9,9 @@ namespace engine
 			mName = pName;
 			mTexturePath = pTexturePath;
 		}
+		std::string texture_component::get_texture_path()
+		{
+			return mTexturePath;
+		}
 	}
 }

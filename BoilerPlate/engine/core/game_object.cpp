@@ -19,7 +19,8 @@ namespace engine
 			//delete all attached components
 			while (!mComponents.empty())
 			{
-				delete mComponents.back(), mComponents.pop_back();
+				delete mComponents[mComponents.size() - 1];
+				mComponents.pop_back();
 			}
 
 			//delete all attached children

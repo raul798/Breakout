@@ -9,5 +9,9 @@ namespace engine
 			mName = pName;
 			mModelMatrix = math::matrix_4();
 		}
+		math::matrix_4 model_matrix_component::get_model_matrix()
+		{
+			return mModelMatrix;
+		}
 	}
 }

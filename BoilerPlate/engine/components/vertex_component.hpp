@@ -2,10 +2,9 @@
 #ifndef VERTEX_COMPONENT_HPP_
 #define VERTEX_COMPONENT_HPP_
 
-#include <vector>
+
 
 #include "../core/component.hpp"
-#include "../core/vertex.hpp"
 
 namespace engine
 {
@@ -16,12 +15,13 @@ namespace engine
 
 		struct vertex_component : public core::component
 		{
-			
-			std::vector<core::vertex> mObjectVertices;
-			std::vector<int> mObjectIndices;
-
 		public:
 			vertex_component(std::string& pName, std::vector<core::vertex> pVertices, std::vector<int> pIndices);
+			std::vector<core::vertex> get_vertex();
+			std::vector<int> get_indices();
+		private:
+			std::vector<core::vertex> mObjectVertices;
+			std::vector<int> mObjectIndices;
 		};
 	}
 }

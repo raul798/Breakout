@@ -4,8 +4,8 @@ namespace game
 {
 	game::game()
 	{
-		//engine::component::model_matrix_component ballModel = engine::component::model_matrix_component("mModel");
-		//mBall.attach_component(&ballModel);
+		engine::component::model_matrix_component* ballModel = new engine::component::model_matrix_component("mModel");
+		mBall.attach_component(ballModel);
 		mInputCounter = 0;
 	}
 
@@ -25,7 +25,7 @@ namespace game
 	void game::render()
 	{
 		mRenderManager.render(mBlock.get_block_vertices(), mBlock.get_block_indices(), mBlock.get_texture_index(), mBlock.get_model_matrix());
-		mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index(), mBall.get_model_matrix());
+		mRenderManager.render(mBall.get_ball_vertices(), mBall.get_ball_indices(), mBall.get_texture_index(), mBall.GetComponents()[0]->get_model_matrix());
 	}
 
 	void game::update()

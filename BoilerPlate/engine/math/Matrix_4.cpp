@@ -746,5 +746,18 @@ namespace engine
 			mMatrix[10] = forward.mZ;
 			mMatrix[11] = pLookingPosition.mZ;
 		}
+
+		void matrix_4::rotate_quaternions(float pAngle, int pRotationAxes)
+		{
+			vector_4 quaternion;
+			float margin = 1.0f / (pRotationAxes);
+			float halfAngle = pAngle / 2.0f;
+			float sinHalfAngle = sin(halfAngle);
+			quaternion.mX = sinHalfAngle * (int)(1 * margin);
+			quaternion.mY = sinHalfAngle * (int)((2 - 2 * (int)margin) * margin);
+			quaternion.mZ = sinHalfAngle * (int)((3 - 3 * margin) * 0.5f);
+			quaternion.mW = cos(halfAngle);
+
+		}
 	}
 }
