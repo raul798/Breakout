@@ -710,7 +710,7 @@ namespace engine
 			math_utilities mathMaster;
 			//scale based on field of view, used mathmaster for angles managing
 			//operation pi/180 can be used with degrees_to_radians with 1 as angle
-			float scale = 1.0f / (tan(mathMaster.degrees_to_radians(pFieldOfView * 0.5)));
+			float scale = (float) (1.0f / (tan(mathMaster.degrees_to_radians(pFieldOfView * 0.5f))));
 
 			float inverseClippingPlaneDifference = 1.0f / (pFarClippingPlane - pNearClippingPlane);
 

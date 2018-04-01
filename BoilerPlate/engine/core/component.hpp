@@ -15,6 +15,7 @@ namespace engine
 		{
 		public:
 			//public functions
+			explicit component();
 			explicit component(const std::string& pName);
 			~component();
 			void update(double pDeltaTime) override;

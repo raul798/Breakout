@@ -53,6 +53,15 @@
     <ClCompile Include="engine\texture\texture_manager.cpp">
       <Filter>engine\texture</Filter>
     </ClCompile>
+    <ClCompile Include="model_matrix_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vertex_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />

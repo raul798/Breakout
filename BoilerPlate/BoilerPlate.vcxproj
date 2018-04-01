@@ -189,8 +189,11 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\utilities\shader_utilities.cpp" />
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="model_matrix_component.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
+    <ClCompile Include="texture_component.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="vertex_component.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />

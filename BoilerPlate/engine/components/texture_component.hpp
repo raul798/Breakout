@@ -1,6 +1,6 @@
 #pragma once
-#ifndef VERTEX_COMPONENT_HPP_
-#define VERTEX_COMPONENT_HPP_
+#ifndef TEXTURE_COMPONENT_HPP_
+#define TEXTURE_COMPONENT_HPP_
 
 #include <string>
 
@@ -10,9 +10,11 @@ namespace engine
 {
 	namespace component
 	{
-		struct texture_component : core::component
+		struct texture_component : public core::component
 		{
 			std::string mTexturePath;
+		public:
+			texture_component(std::string& pName, std::string& pTexturePath);
 		};
 	}
 }

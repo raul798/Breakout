@@ -9,9 +9,12 @@ namespace engine
 {
 	namespace component
 	{
-		class model_matrix_component : core::component
+		class model_matrix_component : public core::component
 		{
 			math::matrix_4 mModelMatrix;
+
+		public:
+			explicit model_matrix_component(const std::string& pName);
 		};
 	}
 }

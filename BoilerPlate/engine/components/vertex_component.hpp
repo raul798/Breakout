@@ -2,6 +2,8 @@
 #ifndef VERTEX_COMPONENT_HPP_
 #define VERTEX_COMPONENT_HPP_
 
+#include <vector>
+
 #include "../core/component.hpp"
 #include "../core/vertex.hpp"
 
@@ -12,10 +14,14 @@ namespace engine
 		const int NUMBER_OF_INDICES = 7;
 		const int NUMBER_OF_VERTICES = 4;
 
-		struct vertex_component : core::component
+		struct vertex_component : public core::component
 		{
-			core::vertex mObjectVertices[NUMBER_OF_VERTICES];
-			int mObjectIndices[NUMBER_OF_INDICES];
+			
+			std::vector<core::vertex> mObjectVertices;
+			std::vector<int> mObjectIndices;
+
+		public:
+			vertex_component(std::string& pName, std::vector<core::vertex> pVertices, std::vector<int> pIndices);
 		};
 	}
 }

@@ -4,6 +4,8 @@ namespace game
 {
 	game::game()
 	{
+		//engine::component::model_matrix_component ballModel = engine::component::model_matrix_component("mModel");
+		//mBall.attach_component(&ballModel);
 		mInputCounter = 0;
 	}
 

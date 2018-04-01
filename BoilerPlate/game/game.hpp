@@ -7,6 +7,11 @@
 #include "../engine/core/block.hpp"
 #include "../engine/core/ball.hpp"
 #include "../engine/utilities/input_manager.hpp"
+//adds components
+#include "../engine/components/texture_component.hpp"
+#include "../engine/components/vertex_component.hpp"
+#include "../engine/components/model_matrix_component.hpp"
+
 
 namespace game
 {
