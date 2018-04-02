@@ -86,15 +86,17 @@ namespace game
 		ballIndices.push_back(3);
 		ballIndices.push_back(2);
 		ballIndices.push_back(0);
-		engine::component::vertex_component* ballVertices = new engine::component::vertex_component(std::string::basic_string("mVertex"), ballVertex, ballIndices);
+		engine::component::vertex_component* ballVertices = 
+			new engine::component::vertex_component(std::string::basic_string("mVertex"), ballVertex, ballIndices);
 		mBall.attach_component(ballVertices);
-
 	}
 
 	void game::create_block()
 	{
 		engine::component::model_matrix_component* blockModel = new engine::component::model_matrix_component("mModel");
+
 		blockModel->get_model_matrix()->translate_vector(engine::math::vector_4(0.0f, 0.6f, 0.0f, 1.0f));
+		//blockModel->get_model_matrix()->rotate_quaternions(0.0f, 0.0f, 0.0f, 1.0f);
 		blockModel->get_model_matrix()->rotate_z(0.5f);
 		mBlock.attach_component(blockModel);
 		std::vector<engine::core::vertex> blockVertex;
@@ -110,7 +112,8 @@ namespace game
 		blockIndices.push_back(3);
 		blockIndices.push_back(2);
 		blockIndices.push_back(0);
-		engine::component::vertex_component* blockVertices = new engine::component::vertex_component(std::string::basic_string("mVertex"), blockVertex, blockIndices);
+		engine::component::vertex_component* blockVertices = 
+			new engine::component::vertex_component(std::string::basic_string("mVertex"), blockVertex, blockIndices);
 		mBlock.attach_component(blockVertices);
 	}
 }

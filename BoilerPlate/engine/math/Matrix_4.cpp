@@ -473,7 +473,7 @@ namespace engine
 			rotationMatrix[8] = -sin(-pRadians);
 			rotationMatrix[10] = cos(-pRadians);
 
-			*this = *this * rotationMatrix;
+			*this = rotationMatrix * *this;
 		}
 
 		void matrix_4::rotate_z(float pRadians)
@@ -747,17 +747,34 @@ namespace engine
 			mMatrix[11] = pLookingPosition.mZ;
 		}
 
-		void matrix_4::rotate_quaternions(float pAngle, int pRotationAxes)
+		void matrix_4::rotate_quaternions(float pAngle, float pRotateX, float pRotateY, float pRotateZ)
 		{
 			vector_4 quaternion;
-			float margin = 1.0f / (pRotationAxes);
-			float halfAngle = pAngle / 2.0f;
+			matrix_4 rotationMatrix;
+			math_utilities mathMaster;
+			float halfAngle = mathMaster.degrees_to_radians(pAngle / 2.0f);
 			float sinHalfAngle = sin(halfAngle);
-			quaternion.mX = sinHalfAngle * (int)(1 * margin);
-			quaternion.mY = sinHalfAngle * (int)((2 - 2 * (int)margin) * margin);
-			quaternion.mZ = sinHalfAngle * (int)((3 - 3 * margin) * 0.5f);
+			quaternion.mX = sinHalfAngle * pRotateX;
+			quaternion.mY = sinHalfAngle * pRotateY;
+			quaternion.mZ = sinHalfAngle * pRotateZ;
 			quaternion.mW = cos(halfAngle);
-
+			rotationMatrix[0] = quaternion.mW;
+			rotationMatrix[1] = quaternion.mX;
+			rotationMatrix[2] = quaternion.mY;
+			rotationMatrix[3] = quaternion.mZ;
+			rotationMatrix[4] = -quaternion.mX;
+			rotationMatrix[5] = quaternion.mW;
+			rotationMatrix[6] = quaternion.mZ;
+			rotationMatrix[7] = -quaternion.mY;
+			rotationMatrix[8] = -quaternion.mY;
+			rotationMatrix[9] = -quaternion.mZ;
+			rotationMatrix[10] = quaternion.mW;
+			rotationMatrix[11] = quaternion.mX;
+			rotationMatrix[12] = -quaternion.mZ;
+			rotationMatrix[13] = quaternion.mY;
+			rotationMatrix[14] = -quaternion.mX;
+			rotationMatrix[15] = quaternion.mW;
+			*this = *this * rotationMatrix;
 		}
 	}
 }
