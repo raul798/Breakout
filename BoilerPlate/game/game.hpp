@@ -3,6 +3,7 @@
 #define GAME_HPP
 
 #include "../engine/components/model_matrix_component.hpp"
+#include "../engine/components/position_component.hpp"
 #include "../engine/components/texture_component.hpp"
 #include "../engine/components/vertex_component.hpp"
 #include "../engine/core/renderer.hpp"

@@ -53,13 +53,16 @@
     <ClCompile Include="engine\texture\texture_manager.cpp">
       <Filter>engine\texture</Filter>
     </ClCompile>
-    <ClCompile Include="model_matrix_component.cpp">
+    <ClCompile Include="engine\components\model_matrix_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
-    <ClCompile Include="texture_component.cpp">
+    <ClCompile Include="engine\components\texture_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
-    <ClCompile Include="vertex_component.cpp">
+    <ClCompile Include="engine\components\vertex_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\position_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,6 +138,9 @@
       <Filter>engine\components</Filter>
     </ClInclude>
     <ClInclude Include="engine\components\model_matrix_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\position_component.hpp">
       <Filter>engine\components</Filter>
     </ClInclude>
   </ItemGroup>

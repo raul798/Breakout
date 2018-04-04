@@ -32,6 +32,9 @@ namespace engine
 			virtual std::vector<vertex> get_vertex() { std::vector<vertex> emptyVertexVector; return emptyVertexVector; }
 			virtual std::vector<int> get_indices() { std::vector<int> emptyIndexVector; return emptyIndexVector; }
 			virtual std::string get_texture_path() { return ""; }
+			virtual math::vector_4* get_position() { return &math::vector_4(); }
+			virtual float* get_angle() { float a; return &a; }
+
 		protected:
 			//members
 			game_object *mOwner;
