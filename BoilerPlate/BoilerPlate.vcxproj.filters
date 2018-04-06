@@ -68,6 +68,9 @@
     <ClCompile Include="engine\components\physics_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
+    <ClCompile Include="engine\core\paddle.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="engine\components\phisics_component.hpp">
       <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\core\paddle.hpp">
+      <Filter>engine\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,10 +13,11 @@ namespace engine
 		struct texture_component : public core::component
 		{
 		public:
-			texture_component(std::string& pName, std::string& pTexturePath);
-			std::string get_texture_path();
+			texture_component(std::string& pName, int pTextureIndex);
+			int get_texture_index();
+
 		private:
-			std::string mTexturePath;
+			int mTextureIndex;
 		
 		};
 	}

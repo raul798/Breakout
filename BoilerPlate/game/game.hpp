@@ -3,13 +3,14 @@
 #define GAME_HPP
 
 #include "../engine/components/model_matrix_component.hpp"
+#include "../engine/components/phisics_component.hpp"
 #include "../engine/components/position_component.hpp"
 #include "../engine/components/texture_component.hpp"
 #include "../engine/components/vertex_component.hpp"
-#include "../engine/components/phisics_component.hpp"
 #include "../engine/core/renderer.hpp"
-#include "../engine/core/block.hpp"
 #include "../engine/core/ball.hpp"
+#include "../engine/core/block.hpp"
+#include "../engine/core/paddle.hpp"
 #include "../engine/utilities/input_manager.hpp"
 
 namespace game
@@ -31,6 +32,7 @@ namespace game
 		void update_screen_paremeter(int pWidth, int pHeight);
 		void create_ball();
 		void create_block();
+		void create_paddle();
 		void movement();
 		engine::utilities::input_manager mInputManager;
 
@@ -38,6 +40,7 @@ namespace game
 		engine::core::renderer mRenderManager;
 		engine::core::ball mBall;
 		engine::core::block mBlock;
+		engine::core::paddle mPaddle;
 		int mBlockCounter;
 		int mInputCounter;
 	};

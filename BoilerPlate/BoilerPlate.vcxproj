@@ -181,6 +181,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\core\block.cpp" />
     <ClCompile Include="engine\core\component.cpp" />
     <ClCompile Include="engine\core\game_object.cpp" />
+    <ClCompile Include="engine\core\paddle.cpp" />
     <ClCompile Include="engine\core\renderer.cpp" />
     <ClCompile Include="engine\core\unique_id.cpp" />
     <ClCompile Include="engine\math\math_utilities.cpp" />
@@ -210,6 +211,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="engine\core\game_object.hpp" />
     <ClInclude Include="engine\core\IRender.hpp" />
     <ClInclude Include="engine\core\IUpdate.hpp" />
+    <ClInclude Include="engine\core\paddle.hpp" />
     <ClInclude Include="engine\core\renderer.hpp" />
     <ClInclude Include="engine\core\unique_id.hpp" />
     <ClInclude Include="engine\core\vertex.hpp" />

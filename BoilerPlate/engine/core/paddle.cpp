@@ -1,9 +1,9 @@
-#include "ball.hpp"
+#include "paddle.hpp"
 
 namespace engine
 {
 	namespace core
 	{
-		ball::ball(){}
+		paddle::paddle() {}
 	}
 }

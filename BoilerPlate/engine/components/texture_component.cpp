@@ -4,14 +4,15 @@ namespace engine
 {
 	namespace component
 	{
-		texture_component::texture_component(std::string& pName, std::string& pTexturePath)
+		texture_component::texture_component(std::string& pName, int pTextureIndex)
 		{
 			mName = pName;
-			mTexturePath = pTexturePath;
+			mTextureIndex = pTextureIndex;
 		}
-		std::string texture_component::get_texture_path()
+
+		int texture_component::get_texture_index()
 		{
-			return mTexturePath;
+			return mTextureIndex;
 		}
 	}
 }

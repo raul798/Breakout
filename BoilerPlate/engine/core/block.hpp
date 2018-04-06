@@ -12,25 +12,7 @@ namespace engine
 		class block :public game_object
 		{
 		public:
-			//constructor
 			block();
-
-			//getter
-			vertex *get_block_vertices();
-			int *get_block_indices();
-			int get_texture_index();
-
-		private:
-			vertex mBlockVertices[4] = {
-				// positions         // colors           // texture coords
-				{ 0.06f, 0.06f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 1.0f },   // top right
-			{ 0.06f, -0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 0.0f },   // bottom right
-			{ -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 1.0f },   // top left
-			{ -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 0.0f }    // bottom left    
-			};
-
-			int mBlockIndices[7] = { 0, 1, 2, 1, 3, 2, 0 };
-			int mTextureIndex;
 		};
 	}
 }

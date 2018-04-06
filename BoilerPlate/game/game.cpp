@@ -7,6 +7,8 @@ namespace game
 		mInputCounter = 0;
 		mBlockCounter = 0;
 		create_ball();
+		create_paddle();
+		
 	}
 
 	game::~game()
@@ -19,6 +21,9 @@ namespace game
 		mRenderManager.assign_program_id();
 		mRenderManager.assign_textures("game/assets/block.png");
 		mRenderManager.assign_textures("game/assets/ball.png");
+		mRenderManager.assign_textures("game/assets/block_solid.png");
+		//convert from jpg to png
+		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
 	}
 
@@ -26,9 +31,9 @@ namespace game
 	{
 		mRenderManager.render
 		(
-			mBlock.get_component("mVertex")->get_vertex(), 
-			mBlock.get_component("mVertex")->get_indices(), 
-			mBlock.get_texture_index(), 
+			mBlock.get_component("mVertex")->get_vertex(),
+			mBlock.get_component("mVertex")->get_indices(),
+			mBlock.get_component("mTextureIndex")->get_texture_index(),
 			*mBlock.get_component("mModel")->get_model_matrix()
 		);
 
@@ -36,8 +41,16 @@ namespace game
 		(
 			mBall.get_component("mVertex")->get_vertex(),
 			mBall.get_component("mVertex")->get_indices(),
-			mBall.get_texture_index(), 
+			mBall.get_component("mTextureIndex")->get_texture_index(),
 			*mBall.get_component("mModel")->get_model_matrix()
+		);
+
+		mRenderManager.render
+		(
+			mPaddle.get_component("mVertex")->get_vertex(),
+			mPaddle.get_component("mVertex")->get_indices(),
+			mPaddle.get_component("mTextureIndex")->get_texture_index(),
+			*mPaddle.get_component("mModel")->get_model_matrix()
 		);
 	}
 
@@ -105,6 +118,8 @@ namespace game
 
 		engine::component::position_component *ballPosition = new engine::component::position_component(std::string::basic_string("mOrigin"));
 
+		engine::component::texture_component *ballTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 1);
+
 		engine::component::phisics_component *ballPhisics = new engine::component::phisics_component
 		(std::string::basic_string("mPhisics"), engine::math::vector_4(0.0f, 0.0f, 0.0f, 0.0f), 0.001f);
 
@@ -115,6 +130,7 @@ namespace game
 		mBall.attach_component(ballVertices);
 		mBall.attach_component(ballPosition);
 		mBall.attach_component(ballPhisics);
+		mBall.attach_component(ballTexture);
 	}
 
 	void game::create_block()
@@ -135,6 +151,8 @@ namespace game
 
 		engine::component::model_matrix_component *blockModel = new engine::component::model_matrix_component("mModel");
 
+		engine::component::texture_component *blockTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 0);
+
 		engine::component::position_component *blockPosition = new engine::component::position_component
 		(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, 0.6f, 0.0f, 0.0f));
 
@@ -147,6 +165,42 @@ namespace game
 		mBlock.attach_component(blockModel);
 		mBlock.attach_component(blockVertices);
 		mBlock.attach_component(blockPosition);
+		mBlock.attach_component(blockTexture);
+	}
+
+	void game::create_paddle()
+	{
+		std::vector<engine::core::vertex> paddleVertex;
+		std::vector<int> paddleIndices;
+		paddleVertex.push_back({ 0.03f, 0.03f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f });
+		paddleVertex.push_back({ 0.03f, -0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f });
+		paddleVertex.push_back({ -0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f });
+		paddleVertex.push_back({ -0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f });
+		paddleIndices.push_back(0);
+		paddleIndices.push_back(1);
+		paddleIndices.push_back(2);
+		paddleIndices.push_back(1);
+		paddleIndices.push_back(3);
+		paddleIndices.push_back(2);
+		paddleIndices.push_back(0);
+
+		engine::component::model_matrix_component *paddleModel = new engine::component::model_matrix_component("mModel");
+
+		engine::component::position_component *paddlePosition = new engine::component::position_component(std::string::basic_string("mOrigin"));
+
+		engine::component::texture_component *paddleTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 0);
+
+		engine::component::phisics_component *paddlePhisics = new engine::component::phisics_component
+		(std::string::basic_string("mPhisics"), engine::math::vector_4(0.0f, 0.0f, 0.0f, 0.0f), 0.001f);
+
+		engine::component::vertex_component *paddleVertices = new engine::component::vertex_component
+		(std::string::basic_string("mVertex"), paddleVertex, paddleIndices);
+
+		mPaddle.attach_component(paddleModel);
+		mPaddle.attach_component(paddleVertices);
+		mPaddle.attach_component(paddlePosition);
+		mPaddle.attach_component(paddlePhisics);
+		mPaddle.attach_component(paddleTexture);
 	}
 
 	void game::movement()
