@@ -50,7 +50,7 @@ namespace engine
 
 			view.translate_vector(math::vector_4(0.0f, 0.0f, -3.0f, 1.0f));
 			view.rotate_z(0.0f);
-			projection.make_perspective(30.0f, 0.1f, 100.0f, (float)mHeight/mWidth);
+			projection.make_perspective(35.0f, 0.1f, 100.0f, (float)mHeight/mWidth);
 
 			// retrieve the matrix uniform locations
 			GLuint modelLoc = glGetUniformLocation(mProgramID, "model");

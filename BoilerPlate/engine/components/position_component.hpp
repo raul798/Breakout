@@ -15,6 +15,7 @@ namespace engine
 			position_component(std::string& pName, math::vector_4 pOrigin);
 			//override
 			math::vector_4* get_position();
+			void set_position(math::vector_4 pNewPosition);
 
 		private:
 			math::vector_4 mOrigin;

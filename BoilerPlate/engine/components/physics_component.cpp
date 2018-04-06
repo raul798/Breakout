@@ -4,11 +4,10 @@ namespace engine
 {
 	namespace component
 	{
-		phisics_component::phisics_component(std::string& pName, math::vector_4 pVelocity, float pMovementValue)
+		phisics_component::phisics_component(std::string& pName, float pMovementValue)
 		{
 			mName = pName;
 			mAngleDegree = 0.0f;
-			velocity = pVelocity;
 			mMovementValue = pMovementValue;
 		}
 

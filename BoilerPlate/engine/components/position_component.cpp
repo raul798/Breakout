@@ -20,5 +20,10 @@ namespace engine
 		{
 			return &mOrigin;
 		}
+
+		void position_component::set_position(math::vector_4 pNewPosition)
+		{
+			mOrigin = pNewPosition;
+		}
 	}
 }

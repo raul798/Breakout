@@ -7,6 +7,8 @@ namespace engine
 		input_manager::input_manager()
 		{
 			mF = false;
+			mA = false;
+			mD = false;
 		}
 
 		//setters
@@ -15,10 +17,30 @@ namespace engine
 			mF = pF;
 		}
 
+		void input_manager::set_a(bool pA)
+		{
+			mA = pA;
+		}
+
+		void input_manager::set_d(bool pD)
+		{
+			mD = pD;
+		}
+
 		//getters
 		bool input_manager::get_f()
 		{
 			return mF;
+		}
+
+		bool input_manager::get_a()
+		{
+			return mA;
+		}
+
+		bool input_manager::get_d()
+		{
+			return mD;
 		}
 	}
 }

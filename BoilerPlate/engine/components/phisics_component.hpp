@@ -13,14 +13,13 @@ namespace engine
 		class phisics_component : public core::component
 		{
 		public:
-			phisics_component(std::string& pName, math::vector_4 pVelocity, float pMovementValue);
+			phisics_component(std::string& pName, float pMovementValue);
 			float *get_movement_value();
 			float *get_angle();
 	
 		private:
 			float mMovementValue;
 			float mAngleDegree;
-			math::vector_4 velocity;
 		};
 	}
 }

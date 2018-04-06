@@ -14,11 +14,22 @@ namespace engine
 			input_manager();
 
 			//getters and setters
+			//F key
 			void set_f(bool pF);
 			bool get_f();
 
+			//A key
+			void set_a(bool pA);
+			bool get_a();
+
+			//D key
+			void set_d(bool pD);
+			bool get_d();
+
 		private:
 			bool mF;
+			bool mA;
+			bool mD;
 		};
 	}
 }
