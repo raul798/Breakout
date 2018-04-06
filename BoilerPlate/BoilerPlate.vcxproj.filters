@@ -65,6 +65,9 @@
     <ClCompile Include="engine\components\position_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
+    <ClCompile Include="engine\components\physics_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -141,6 +144,9 @@
       <Filter>engine\components</Filter>
     </ClInclude>
     <ClInclude Include="engine\components\position_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\phisics_component.hpp">
       <Filter>engine\components</Filter>
     </ClInclude>
   </ItemGroup>

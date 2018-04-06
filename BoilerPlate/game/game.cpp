@@ -6,7 +6,7 @@ namespace game
 	{
 		mInputCounter = 0;
 		mBlockCounter = 0;
-		add_player_component();
+		create_ball();
 	}
 
 	game::~game()
@@ -24,14 +24,30 @@ namespace game
 
 	void game::render()
 	{
-		mRenderManager.render(mBlock.GetComponents()[1]->get_vertex(), mBlock.GetComponents()[1]->get_indices(), mBlock.get_texture_index(), *mBlock.GetComponents()[0]->get_model_matrix());
-		mRenderManager.render(mBall.GetComponents()[1]->get_vertex(), mBall.GetComponents()[1]->get_indices(), mBall.get_texture_index(), *mBall.GetComponents()[0]->get_model_matrix());
+		mRenderManager.render
+		(
+			mBlock.get_component("mVertex")->get_vertex(), 
+			mBlock.get_component("mVertex")->get_indices(), 
+			mBlock.get_texture_index(), 
+			*mBlock.get_component("mModel")->get_model_matrix()
+		);
+
+		mRenderManager.render
+		(
+			mBall.get_component("mVertex")->get_vertex(),
+			mBall.get_component("mVertex")->get_indices(),
+			mBall.get_texture_index(), 
+			*mBall.get_component("mModel")->get_model_matrix()
+		);
 	}
 
 	void game::update()
 	{
 		update_input_controller();
 		mRenderManager.determine_polygon_mode();
+		//borrar
+		movement();
+
 		if (mBlockCounter == 0)
 		{
 			create_block();
@@ -69,11 +85,8 @@ namespace game
 		mRenderManager.update_screen_parameters(pWidth, pHeight);
 	}
 
-	void game::add_player_component()
+	void game::create_ball()
 	{
-		engine::component::model_matrix_component* ballModel = new engine::component::model_matrix_component("mModel");
-		engine::component::position_component* ballPosition = new engine::component::position_component(std::string::basic_string("mOrigin"));
-		mBall.attach_component(ballModel);
 		std::vector<engine::core::vertex> ballVertex;
 		std::vector<int> ballIndices;
 		ballVertex.push_back({ 0.03f, 0.03f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f });
@@ -87,20 +100,25 @@ namespace game
 		ballIndices.push_back(3);
 		ballIndices.push_back(2);
 		ballIndices.push_back(0);
-		engine::component::vertex_component* ballVertices = 
-			new engine::component::vertex_component(std::string::basic_string("mVertex"), ballVertex, ballIndices);
+
+		engine::component::model_matrix_component *ballModel = new engine::component::model_matrix_component("mModel");
+
+		engine::component::position_component *ballPosition = new engine::component::position_component(std::string::basic_string("mOrigin"));
+
+		engine::component::phisics_component *ballPhisics = new engine::component::phisics_component
+		(std::string::basic_string("mPhisics"), engine::math::vector_4(0.0f, 0.0f, 0.0f, 0.0f), 0.001f);
+
+		engine::component::vertex_component *ballVertices = new engine::component::vertex_component
+		(std::string::basic_string("mVertex"), ballVertex, ballIndices);
+
+		mBall.attach_component(ballModel);
 		mBall.attach_component(ballVertices);
 		mBall.attach_component(ballPosition);
+		mBall.attach_component(ballPhisics);
 	}
 
 	void game::create_block()
 	{
-		engine::component::model_matrix_component* blockModel = new engine::component::model_matrix_component("mModel");
-		engine::component::position_component* blockPosition = 
-			new engine::component::position_component(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, 0.6f, 0.0f, 0.0f), 0.0f);
-		blockModel->get_model_matrix()->translate_vector(*blockPosition->get_position());
-		blockModel->get_model_matrix()->rotate_z(0.0f);
-		mBlock.attach_component(blockModel);
 		std::vector<engine::core::vertex> blockVertex;
 		std::vector<int> blockIndices;
 		blockVertex.push_back({ 0.06f, 0.06f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 1.0f });
@@ -114,9 +132,37 @@ namespace game
 		blockIndices.push_back(3);
 		blockIndices.push_back(2);
 		blockIndices.push_back(0);
-		engine::component::vertex_component* blockVertices = 
-			new engine::component::vertex_component(std::string::basic_string("mVertex"), blockVertex, blockIndices);
+
+		engine::component::model_matrix_component *blockModel = new engine::component::model_matrix_component("mModel");
+
+		engine::component::position_component *blockPosition = new engine::component::position_component
+		(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, 0.6f, 0.0f, 0.0f));
+
+		engine::component::vertex_component *blockVertices = new engine::component::vertex_component
+		(std::string::basic_string("mVertex"), blockVertex, blockIndices);
+
+		blockModel->get_model_matrix()->translate_vector(*blockPosition->get_position());
+		blockModel->get_model_matrix()->rotate_z(0.0f);
+
+		mBlock.attach_component(blockModel);
 		mBlock.attach_component(blockVertices);
 		mBlock.attach_component(blockPosition);
+	}
+
+	void game::movement()
+	{
+		engine::math::math_utilities mathUtilities;
+		engine::math::vector_4 *position;
+		float *angle;
+		angle = mBall.get_component("mPhisics")->get_angle();
+		float diablo = mathUtilities.degrees_to_radians(*angle);
+		
+		position = mBall.get_component("mOrigin")->get_position();
+
+		position->mX += (*mBall.get_component("mPhisics")->get_movement_value())*-sinf(diablo);
+		position->mY += (*mBall.get_component("mPhisics")->get_movement_value())*cosf(diablo);
+		mBall.get_component("mModel")->get_model_matrix()->set_identity();
+		mBall.get_component("mModel")->get_model_matrix()->translate_vector(*position);
+		mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 	}
 }

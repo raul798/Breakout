@@ -173,6 +173,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="engine\components\model_matrix_component.cpp" />
+    <ClCompile Include="engine\components\physics_component.cpp" />
     <ClCompile Include="engine\components\position_component.cpp" />
     <ClCompile Include="engine\components\texture_component.cpp" />
     <ClCompile Include="engine\components\vertex_component.cpp" />
@@ -199,6 +200,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="engine\components\model_matrix_component.hpp" />
+    <ClInclude Include="engine\components\phisics_component.hpp" />
     <ClInclude Include="engine\components\position_component.hpp" />
     <ClInclude Include="engine\components\texture_component.hpp" />
     <ClInclude Include="engine\components\vertex_component.hpp" />

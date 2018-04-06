@@ -6,11 +6,11 @@
 #include "../engine/components/position_component.hpp"
 #include "../engine/components/texture_component.hpp"
 #include "../engine/components/vertex_component.hpp"
+#include "../engine/components/phisics_component.hpp"
 #include "../engine/core/renderer.hpp"
 #include "../engine/core/block.hpp"
 #include "../engine/core/ball.hpp"
 #include "../engine/utilities/input_manager.hpp"
-
 
 namespace game
 {
@@ -29,8 +29,9 @@ namespace game
 		void reset_input_controller();
 		void update_input_controller();
 		void update_screen_paremeter(int pWidth, int pHeight);
-		void add_player_component();
+		void create_ball();
 		void create_block();
+		void movement();
 		engine::utilities::input_manager mInputManager;
 
 	private:

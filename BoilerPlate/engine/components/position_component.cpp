@@ -8,24 +8,17 @@ namespace engine
 		{
 			mName = pName;
 			mOrigin = math::vector_4();
-			mAngleDegree = 0.0f;
 		}
 		
-		position_component::position_component(std::string& pName, math::vector_4 pOrigin, float pAngle)
+		position_component::position_component(std::string& pName, math::vector_4 pOrigin)
 		{
 			mName = pName;
 			mOrigin = pOrigin;
-			mAngleDegree = pAngle;
 		}
 
 		math::vector_4* position_component::get_position()
 		{
 			return &mOrigin;
-		}
-
-		float* position_component::get_angle()
-		{
-			return &mAngleDegree;
 		}
 	}
 }

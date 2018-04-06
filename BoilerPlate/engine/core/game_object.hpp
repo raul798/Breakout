@@ -4,11 +4,11 @@
 
 #include <vector>
 
-//
 #include "IUpdate.hpp"
 #include "IRender.hpp"
 #include "../BoilerPlate/engine/math/Matrix_4.hpp"
 #include "unique_id.hpp"
+#include <string>
 
 namespace engine
 {
@@ -29,35 +29,15 @@ namespace engine
 			void remove_child(game_object *pGame_object);
 			void update(double pDeltaTime) override;
 			void render() override;
+
 			//getters
-			std::vector<component*>GetComponents() const { return mComponents; }
-			std::vector<game_object*> GetChildren() const { return mChildren; }
-			game_object* GetParent() const { return mParent; }
+			std::vector<game_object*> get_children() const { return mChildren; }
+			game_object* get_parent() const { return mParent; }
 			math::matrix_4 get_model_matrix();
-
-			template<typename T>
-			T* GetComponent()
-			{
-				// If no components have been attached then return nothing
-				if (mComponents.size() == 0) return nullptr;
-
-				std::vector< component* >::iterator comp = mComponents.begin();
-				for (; comp != mComponents.end(); ++comp)
-				{
-					T* theComponent = dynamic_cast<T*>(*comp);
-					if (theComponent)
-					{
-						return theComponent;
-					}
-				}
-
-				return nullptr;
-			}
+			component *get_component(std::string pComponentName);
 
 		protected:
-			/* =============================================================
-			* MEMBERS
-			* ============================================================= */
+			//members
 			std::vector<component*>	mComponents;
 			std::vector<game_object*> mChildren;
 			game_object *mParent;

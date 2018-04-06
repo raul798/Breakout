@@ -12,14 +12,12 @@ namespace engine
 		{
 		public:
 			position_component(std::string& pName);
-			position_component(std::string& pName, math::vector_4 pOrigin, float pAngle);
+			position_component(std::string& pName, math::vector_4 pOrigin);
 			//override
 			math::vector_4* get_position();
-			float* get_angle();
+
 		private:
 			math::vector_4 mOrigin;
-			float mAngleDegree;
-			
 		};
 	}
 }

@@ -27,13 +27,15 @@ namespace engine
 			void set_owner(game_object* pOwner) { mOwner = pOwner; }
 			game_object* get_owner() const { return mOwner; }
 			std::string get_name() const { return mName; }
+
 			//virtual funtions
-			virtual math::matrix_4* get_model_matrix() { return &math::matrix_4(); }
+			virtual math::matrix_4* get_model_matrix() { return NULL; }
 			virtual std::vector<vertex> get_vertex() { std::vector<vertex> emptyVertexVector; return emptyVertexVector; }
 			virtual std::vector<int> get_indices() { std::vector<int> emptyIndexVector; return emptyIndexVector; }
-			virtual std::string get_texture_path() { return ""; }
-			virtual math::vector_4* get_position() { return &math::vector_4(); }
-			virtual float* get_angle() { float a; return &a; }
+			virtual std::string get_texture_path() { return NULL; }
+			virtual math::vector_4* get_position() { return NULL; }
+			virtual float *get_movement_value() { return NULL; }
+			virtual float *get_angle() { return NULL; }
 
 		protected:
 			//members

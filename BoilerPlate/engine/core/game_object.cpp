@@ -96,5 +96,19 @@ namespace engine
 				}
 			}
 		}
+
+		component *game_object::get_component(std::string pComponentName)
+		{
+			for (int i = 0; i < mComponents.size(); i++)
+			{
+				if (mComponents[i]->get_name() == pComponentName)
+				{
+					return mComponents[i];
+				}
+			}
+
+			return NULL;
+		}
+
 	}
 }
