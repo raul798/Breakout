@@ -4,10 +4,14 @@ namespace game
 {
 	game::game()
 	{
+
+		
 		mInputCounter = 0;
 		mBlockCounter = 0;
+		mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), true, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
 		create_paddle();
 		create_ball();	
+		
 	}
 
 	game::~game()
@@ -181,40 +185,8 @@ namespace game
 	}
 
 	void game::create_block()
-	{
-		std::vector<engine::core::vertex> blockVertex;
-		std::vector<int> blockIndices;
-		blockVertex.push_back({ 0.06f, 0.06f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 1.0f });
-		blockVertex.push_back({ 0.06f, -0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   1.0f, 0.0f });
-		blockVertex.push_back({ -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 1.0f });
-		blockVertex.push_back({ -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,   0.0f, 0.0f });
-		blockIndices.push_back(0);
-		blockIndices.push_back(1);
-		blockIndices.push_back(2);
-		blockIndices.push_back(1);
-		blockIndices.push_back(3);
-		blockIndices.push_back(2);
-		blockIndices.push_back(0);
-
-		engine::component::model_matrix_component *blockModel = new engine::component::model_matrix_component("mModel");
-
-		engine::component::texture_component *blockTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 0);
-
-		engine::component::position_component *blockPosition = new engine::component::position_component
-		(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, 0.6f, 0.0f, 0.0f));
-
-		engine::component::vertex_component *blockVertices = new engine::component::vertex_component
-		(std::string::basic_string("mVertex"), blockVertex, blockIndices);
-
-		//move this
-		blockModel->get_model_matrix()->translate_vector(*blockPosition->get_position());
-		blockModel->get_model_matrix()->rotate_z(0.0f);
-
-		mBlock.attach_component(blockModel);
-		mBlock.attach_component(blockVertices);
-		mBlock.attach_component(blockPosition);
-		mBlock.attach_component(blockTexture);
-	}
+	{}
+		
 
 	void game::create_paddle()
 	{

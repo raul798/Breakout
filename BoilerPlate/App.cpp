@@ -72,6 +72,7 @@ namespace engine
 		// Setup the viewport
 		//
 		SetupViewport();
+		
 
 		// Change game state
 		//

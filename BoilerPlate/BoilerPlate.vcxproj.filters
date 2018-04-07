@@ -71,6 +71,9 @@
     <ClCompile Include="engine\core\paddle.cpp">
       <Filter>engine\core</Filter>
     </ClCompile>
+    <ClCompile Include="game\game levels\game_level.cpp">
+      <Filter>game\game levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -155,6 +158,9 @@
     <ClInclude Include="engine\core\paddle.hpp">
       <Filter>engine\core</Filter>
     </ClInclude>
+    <ClInclude Include="game\game levels\game_level.hpp">
+      <Filter>game\game levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="engine">
@@ -183,6 +189,9 @@
     </Filter>
     <Filter Include="engine\components">
       <UniqueIdentifier>{aa6c6173-6ac5-4c7c-be0f-fdc5ea99bd4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\game levels">
+      <UniqueIdentifier>{5a84c6b2-bb9c-4d75-a8a5-93dfcf2df427}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
