@@ -72,25 +72,29 @@ namespace game
 
 	void game::input_controller()
 	{
-		if (mInputManager.get_f() && mInputCounter == 0) {
-
+		if (mInputManager.get_f() && mInputCounter == 0)
+		{
 			mRenderManager.switch_polygon_mode();
 
 			reset_input_controller();
 		}
 
-		if (mInputManager.get_a() && mInputCounter == 0) {
-
-			mPaddle.get_component("mOrigin")->set_position(mPaddle.get_component("mPhisics")->get_position() + engine::math::vector_4(mPaddle.get_component("mPhisics")->get_movement_value(), 0.0f, 0.0f, 0.0f));
-
-			reset_input_controller();
+		if (mInputManager.get_a()) 
+		{
+			mPaddle.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhisics")->get_movement_value();
+		
+			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
+			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
+			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 		}
 
-		if (mInputManager.get_d() && mInputCounter == 0) {
+		if (mInputManager.get_d())
+		{
+			mPaddle.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhisics")->get_movement_value();
 
-			
-
-			reset_input_controller();
+			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
+			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
+			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 		}
 	}
 
@@ -99,8 +103,8 @@ namespace game
 		mInputCounter = 10;
 	}
 
-	void game::update_input_controller() {
-
+	void game::update_input_controller() 
+	{
 		input_controller();
 
 		if (mInputCounter > 0) {
@@ -213,7 +217,7 @@ namespace game
 		engine::component::texture_component *paddleTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 3);
 
 		engine::component::phisics_component *paddlePhisics = new engine::component::phisics_component
-		(std::string::basic_string("mPhisics"), 0.1f);
+		(std::string::basic_string("mPhisics"), 0.02f);
 
 		engine::component::vertex_component *paddleVertices = new engine::component::vertex_component
 		(std::string::basic_string("mVertex"), paddleVertex, paddleIndices);

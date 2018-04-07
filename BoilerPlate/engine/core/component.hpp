@@ -37,7 +37,7 @@ namespace engine
 			virtual float *get_movement_value() { return NULL; }
 			virtual float *get_angle() { return NULL; }
 			virtual int get_texture_index() { return 0; }
-			virtual void set_position() {}
+			virtual void set_position(math::vector_4 pNewPosition) {}
 
 		protected:
 			//members
