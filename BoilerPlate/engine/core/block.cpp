@@ -4,6 +4,9 @@ namespace engine
 {
 	namespace core
 	{
-		block::block() {}
+		block::block()
+		{
+
+		}
 	}
 }

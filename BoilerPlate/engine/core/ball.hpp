@@ -12,9 +12,15 @@ namespace engine
 		class ball:public game_object
 		{
 		public:
+			//constructor
 			ball();
 
+			//functions
+			bool get_AttchToPaddle();
+			void change_AttchToPaddle();
+
 		private:
+			bool mIsAttachToPaddle;
 		};
 	}
 }

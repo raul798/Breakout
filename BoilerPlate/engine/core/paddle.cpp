@@ -4,6 +4,9 @@ namespace engine
 {
 	namespace core
 	{
-		paddle::paddle() {}
+		paddle::paddle() 
+		{
+
+		}
 	}
 }

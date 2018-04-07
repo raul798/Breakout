@@ -2,13 +2,15 @@
 #ifndef _GAMEOBJECT_HPP_
 #define _GAMEOBJECT_HPP_
 
+#include <string>
 #include <vector>
 
 #include "IUpdate.hpp"
 #include "IRender.hpp"
 #include "../BoilerPlate/engine/math/Matrix_4.hpp"
 #include "unique_id.hpp"
-#include <string>
+#include "component.hpp"
+
 
 namespace engine
 {

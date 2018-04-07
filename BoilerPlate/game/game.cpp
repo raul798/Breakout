@@ -7,9 +7,7 @@ namespace game
 		mInputCounter = 0;
 		mBlockCounter = 0;
 		create_paddle();
-		create_ball();
-		
-		
+		create_ball();	
 	}
 
 	game::~game()
@@ -86,6 +84,15 @@ namespace game
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
 			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+
+			if (mBall.get_AttchToPaddle() == true)
+			{
+				mBall.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhisics")->get_movement_value();
+
+				mBall.get_component("mModel")->get_model_matrix()->set_identity();
+				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
+				mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+			}
 		}
 
 		if (mInputManager.get_d())
@@ -95,6 +102,22 @@ namespace game
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
 			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+
+			if (mBall.get_AttchToPaddle() == true)
+			{
+				mBall.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhisics")->get_movement_value();
+
+				mBall.get_component("mModel")->get_model_matrix()->set_identity();
+				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
+				mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+			}
+		}
+
+		if (mInputManager.get_space() && mInputCounter == 0)
+		{
+			mBall.change_AttchToPaddle();
+
+			reset_input_controller();
 		}
 	}
 

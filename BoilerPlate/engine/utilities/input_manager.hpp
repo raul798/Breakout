@@ -26,10 +26,15 @@ namespace engine
 			void set_d(bool pD);
 			bool get_d();
 
+			//Space key
+			void set_space(bool pSpace);
+			bool get_space();
+
 		private:
 			bool mF;
 			bool mA;
 			bool mD;
+			bool mSpace;
 		};
 	}
 }

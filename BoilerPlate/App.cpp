@@ -93,6 +93,9 @@ namespace engine
 		case SDL_SCANCODE_D:
 			mGame.mInputManager.set_d(true);
 			break;
+		case SDL_SCANCODE_SPACE:
+			mGame.mInputManager.set_space(true);
+			break;
 
 		default:
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
@@ -115,6 +118,9 @@ namespace engine
 			break;
 		case SDL_SCANCODE_D:
 			mGame.mInputManager.set_d(false);
+			break;
+		case SDL_SCANCODE_SPACE:
+			mGame.mInputManager.set_space(false);
 			break;
 
 		default:

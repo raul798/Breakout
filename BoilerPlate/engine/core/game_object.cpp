@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-#include "component.hpp"
-
 namespace engine
 {
 	namespace core

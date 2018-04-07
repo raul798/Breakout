@@ -9,6 +9,7 @@ namespace engine
 			mF = false;
 			mA = false;
 			mD = false;
+			mSpace = false;
 		}
 
 		//setters
@@ -27,6 +28,11 @@ namespace engine
 			mD = pD;
 		}
 
+		void input_manager::set_space(bool pSpace)
+		{
+			mSpace = pSpace;
+		}
+
 		//getters
 		bool input_manager::get_f()
 		{
@@ -41,6 +47,12 @@ namespace engine
 		bool input_manager::get_d()
 		{
 			return mD;
+		}
+
+
+		bool input_manager::get_space()
+		{
+			return mSpace;
 		}
 	}
 }
