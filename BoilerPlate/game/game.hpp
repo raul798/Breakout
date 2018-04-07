@@ -12,6 +12,7 @@
 #include "../engine/core/block.hpp"
 #include "../engine/core/paddle.hpp"
 #include "../engine/utilities/input_manager.hpp"
+#include "../game/game levels/game_level.hpp"
 
 namespace game
 {
@@ -19,8 +20,9 @@ namespace game
 	{
 	public:
 		//constructors
-		game();
+		game(int width, int height);
 		~game();
+		game();
 
 		//functions
 		void execute();
@@ -39,10 +41,13 @@ namespace game
 	private:
 		engine::core::renderer mRenderManager;
 		engine::core::ball mBall;
-		engine::core::block mBlock;
+		engine::core::block mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), false, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
 		engine::core::paddle mPaddle;
+		std::vector<level::game_level> mGameLevels;
 		int mBlockCounter;
 		int mInputCounter;
+		int mWidth;
+		int mHeight;
 	};
 }
 

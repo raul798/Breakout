@@ -51,8 +51,12 @@ namespace game
 						engine::core::block block(size, true, engine::math::vector_4(0.8f, 0.8f, 0.7f, 1.0f));
 						
 						*block.get_component("mOrigin")->get_position() = position;
+
+						block.get_component("mModel")->get_model_matrix()->set_identity();
+						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
+						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 						
-						blocks.push_back(block);
+						mBlocks.push_back(block);
 					}
 					else if (pTileData[y][x] > 1)
 					{
@@ -80,11 +84,25 @@ namespace game
 
 						engine::core::block block(size, false, color);
 						*block.get_component("mOrigin")->get_position() = position;
-						blocks.push_back(block);
+
+						block.get_component("mModel")->get_model_matrix()->set_identity();
+						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
+						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+
+						std::cout << "hola" << std::endl;
+
+						mBlocks.push_back(block);
 					}
 				}
 			}
+			std::cout << mBlocks.size() << std::endl;
 		}
+
+		std::vector<engine::core::block> game_level::get_blocks()
+		{
+			return mBlocks;
+		}
+
 	}
 }
 

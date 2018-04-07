@@ -248,6 +248,9 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <Image Include="game\assets\paddle.png" />
     <Image Include="game\assets\test.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="game\assets\first_level.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

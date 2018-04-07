@@ -21,11 +21,13 @@ namespace engine
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
+
+		mGame = game::game(width, height);
 	}
 
 	App::~App()
 	{
-		mGame.~game();
+		//mGame.~game();
 
 		CleanupSDL();
 	}

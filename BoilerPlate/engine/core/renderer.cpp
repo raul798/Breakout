@@ -15,9 +15,9 @@ namespace engine
 
 		renderer::~renderer()
 		{
-			glDeleteBuffers(1, &mVertexBufferObject);
-			glDeleteVertexArrays(1, &mVertexArrayObject);
-			glDeleteProgram(mProgramID);
+			//glDeleteBuffers(1, &mVertexBufferObject);
+			//glDeleteVertexArrays(1, &mVertexArrayObject);
+			//glDeleteProgram(mProgramID);
 		}
 
 		void renderer::assign_textures(const char pTextures[])

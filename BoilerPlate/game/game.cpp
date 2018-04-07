@@ -2,21 +2,25 @@
 
 namespace game
 {
-	game::game()
+	game::game(){}
+
+	game::game(int width, int height)
 	{
 
 		
 		mInputCounter = 0;
 		mBlockCounter = 0;
-		mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), true, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
+	//	mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), true, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
 		create_paddle();
 		create_ball();	
 		
+		mWidth = width;
+		mHeight = height;
 	}
 
 	game::~game()
 	{
-		mRenderManager.~renderer();
+		//mRenderManager.~renderer();
 	}
 
 	void game::execute()
@@ -29,6 +33,10 @@ namespace game
 		//convert from jpg to png
 		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
+
+		level::game_level one;
+		one.load_level("game/assets/first_level.txt", this->mWidth, this->mHeight * 0.5);
+		this->mGameLevels.push_back(one);
 	}
 
 	void game::render()
@@ -56,6 +64,15 @@ namespace game
 			mPaddle.get_component("mTextureIndex")->get_texture_index(),
 			*mPaddle.get_component("mModel")->get_model_matrix()
 		);
+
+		for (int i = 0; i < mGameLevels[0].get_blocks().size() ; i++)
+		{
+			mRenderManager.render(mGameLevels[0].get_blocks()[i].get_component("mVertex")->get_vertex(),
+				mGameLevels[0].get_blocks()[i].get_component("mVertex")->get_indices(),
+				mGameLevels[0].get_blocks()[i].get_component("mTextureIndex")->get_texture_index(),
+				*mGameLevels[0].get_blocks()[i].get_component("mModel")->get_model_matrix());
+		}
+		
 	}
 
 	void game::update()
@@ -239,6 +256,7 @@ namespace game
 
 		position->mX += (*mBall.get_component("mPhisics")->get_movement_value())*-sinf(diablo);
 		position->mY += (*mBall.get_component("mPhisics")->get_movement_value())*cosf(diablo);
+
 		mBall.get_component("mModel")->get_model_matrix()->set_identity();
 		mBall.get_component("mModel")->get_model_matrix()->translate_vector(*position);
 		mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);

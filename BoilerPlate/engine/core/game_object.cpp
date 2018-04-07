@@ -15,11 +15,11 @@ namespace engine
 		game_object::~game_object()
 		{
 			//delete all attached components
-			while (!mComponents.empty())
-			{
-				delete mComponents[mComponents.size() - 1];
-				mComponents.pop_back();
-			}
+			//while (!mComponents.empty())
+			//{
+			//	delete mComponents[mComponents.size() - 1];
+			//	mComponents.pop_back();
+			//}
 
 			//delete all attached children
 			while (!mChildren.empty())

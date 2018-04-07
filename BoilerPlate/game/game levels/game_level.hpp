@@ -17,19 +17,20 @@ namespace game
 		class game_level
 		{
 		public:
-			std::vector<engine::core::block> blocks;
+			//constructor
+			game_level() {}
 
-			game_level() { }
-			// Loads level from file
+			//functions
 			void load_level(const char *pFile, GLuint pLevelWidth, GLuint pLevelHeight);
-			// Render level
-			void draw_level();
-			// Check if the level is completed (all non-solid tiles are destroyed)
-			bool is_completed();
-
-		private:
-			// Initialize level from tile data
 			void init_level(std::vector<std::vector<GLuint>> tileData, GLuint levelWidth, GLuint levelHeight);
+
+			//gettter
+			std::vector<engine::core::block> get_blocks();
+			
+		private:
+			std::vector<engine::core::block> mBlocks;
+			
+			
 		};
 	}
 }

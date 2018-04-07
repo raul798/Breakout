@@ -26,7 +26,7 @@ namespace engine
 
 			engine::component::texture_component *blockTexture;
 
-			if (pIsSolid = true) 
+			if (pIsSolid == true) 
 			{
 				blockTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 2);
 			}
