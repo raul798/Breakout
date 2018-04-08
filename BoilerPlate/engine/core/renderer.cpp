@@ -95,8 +95,8 @@ namespace engine
 
 		void renderer::vertices_manager(std::vector<vertex> pVertices, std::vector<int> pIndices)
 		{
-			vertex localVertex[sizeof(pVertices)];
-			int localIndices[sizeof(pIndices)];
+			vertex localVertex[36];
+			int localIndices[6];
 
 			for (int i = 0; i < pVertices.size(); i++)
 			{

@@ -176,7 +176,7 @@ namespace game
 		ballIndices.push_back(1);
 		ballIndices.push_back(3);
 		ballIndices.push_back(2);
-		ballIndices.push_back(0);
+		//ballIndices.push_back(0);
 
 		engine::component::model_matrix_component *ballModel = new engine::component::model_matrix_component("mModel");
 
@@ -219,7 +219,7 @@ namespace game
 		paddleIndices.push_back(1);
 		paddleIndices.push_back(3);
 		paddleIndices.push_back(2);
-		paddleIndices.push_back(0);
+		//paddleIndices.push_back(0);
 
 		engine::component::model_matrix_component *paddleModel = new engine::component::model_matrix_component("mModel");
 

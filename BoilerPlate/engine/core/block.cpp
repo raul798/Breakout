@@ -14,13 +14,13 @@ namespace engine
 			blockVertex.push_back({ 0.06f, -0.06f, 0.0f,   color.mX, color.mY, color.mZ, color.mW,  1.0f, 0.0f });
 			blockVertex.push_back({ -0.06f, 0.06f, 0.0f,   color.mX, color.mY, color.mZ, color.mW,  0.0f, 1.0f });
 			blockVertex.push_back({ -0.06f, -0.06f, 0.0f,  color.mX, color.mY, color.mZ, color.mW,  0.0f, 0.0f });
-			blockIndices.push_back(0);
-			blockIndices.push_back(1);
 			blockIndices.push_back(2);
 			blockIndices.push_back(1);
 			blockIndices.push_back(3);
-			blockIndices.push_back(2);
 			blockIndices.push_back(0);
+			blockIndices.push_back(1);
+			blockIndices.push_back(2);
+			//blockIndices.push_back(0);
 
 			engine::component::model_matrix_component *blockModel = new engine::component::model_matrix_component("mModel");
 
