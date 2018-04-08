@@ -689,9 +689,6 @@ namespace engine
 		void matrix_4::make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 			const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis)
 		{
-			//setting identity matrix, saves 10 lines of codes...
-			set_identity();
-			//setting inverse of the difference, save 3 divisions...
 			float inverseXAxesDifference = 1 / (pMaximumXAxis - pMinimumXAxis);
 			float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
 			float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
@@ -775,6 +772,16 @@ namespace engine
 			rotationMatrix[14] = -quaternion.mX;
 			rotationMatrix[15] = quaternion.mW;
 			*this = *this * rotationMatrix;
+		}
+
+		void matrix_4::scale(float pX, float pY, float pZ)
+		{
+			matrix_4 scaleMatrix;
+			scaleMatrix.set_identity();
+			scaleMatrix[0] = pX;
+			scaleMatrix[5] = pY;
+			scaleMatrix[10] = pZ;
+			*this = scaleMatrix;
 		}
 	}
 }

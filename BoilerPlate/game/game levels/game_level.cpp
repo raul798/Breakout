@@ -53,6 +53,7 @@ namespace game
 						*block.get_component("mOrigin")->get_position() = position;
 
 						block.get_component("mModel")->get_model_matrix()->set_identity();
+						block.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 						
@@ -85,7 +86,9 @@ namespace game
 						engine::core::block block(size, false, color);
 						*block.get_component("mOrigin")->get_position() = position;
 
+						//block.get_component("mModel")->get_model_matrix()->make_ortho(0, 500, 0, 1024, -3, 1);
 						block.get_component("mModel")->get_model_matrix()->set_identity();
+						block.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 

@@ -41,14 +41,10 @@ namespace engine
 
 			
 			glUseProgram(mProgramID);
-			math::matrix_4 model = math::matrix_4();
 			math::matrix_4 view = math::matrix_4();
 			math::matrix_4 projection = math::matrix_4();
 
-			model.translate_vector(math::vector_4(0.0f, 0.80f, 0.0f, 1.0f));
-			model.rotate_z(0.0f);
-
-			view.translate_vector(math::vector_4(0.0f, 0.0f, -3.0f, 1.0f));
+			view.translate_vector(math::vector_4(0.0f, 0.0f, -6.0f, 1.0f));
 			view.rotate_z(0.0f);
 			projection.make_perspective(35.0f, 0.1f, 100.0f, (float)mHeight/mWidth);
 

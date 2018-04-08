@@ -40,6 +40,7 @@ namespace engine
 			void rotate_y(float pRadians);
 			void rotate_z(float pRadians);
 			void rotate_quaternions(float pAngle, float pRotateX, float pRotateY, float pRotateZ);
+			void scale(float pX, float pY, float pZ);
 			void make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 				const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis);
 			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane, 
