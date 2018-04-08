@@ -33,6 +33,7 @@ namespace game
 			// Calculate dimensions
 			GLuint height = pTileData.size();
 			GLuint width = pTileData[0].size();
+			GLfloat halfWidth = pLvlWidth / static_cast<GLfloat>(2);
 			GLfloat unitWidth = pLvlWidth / static_cast<GLfloat>(width);
 			GLfloat unitHeight = pLvlHeight / height;
 
@@ -44,7 +45,7 @@ namespace game
 					// Check block type from level data (2D level array)
 					if (pTileData[y][x] == 1) // Solid
 					{
-						engine::math::vector_2 position(unitWidth * x, unitHeight * y);
+						engine::math::vector_2 position( -halfWidth + unitWidth * x, unitHeight * y);
 						engine::math::vector_2 size(unitWidth, unitHeight);
 
 						//create the object
@@ -80,7 +81,7 @@ namespace game
 							color = engine::math::vector_4(1.0f, 0.5f, 0.0f, 1.0f);
 						}
 							
-						engine::math::vector_2 position(unitWidth * x, unitHeight * y);
+						engine::math::vector_2 position(-halfWidth + unitWidth * x, unitHeight * y);
 						engine::math::vector_2 size(unitWidth, unitHeight);
 
 						engine::core::block block(size, false, color);

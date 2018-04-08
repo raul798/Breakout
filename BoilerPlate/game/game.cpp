@@ -36,7 +36,7 @@ namespace game
 
 		level::game_level one;
 		//one.load_level("game/assets/first_level.txt", mWidth, mHeight*0.5);
-		one.load_level("game/assets/first_level.txt", 1.0, 0.5);
+		one.load_level("game/assets/first_level.txt", 2.0, 0.5);
 
 		this->mGameLevels.push_back(one);
 	}
