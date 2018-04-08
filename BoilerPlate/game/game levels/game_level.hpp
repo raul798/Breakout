@@ -21,8 +21,8 @@ namespace game
 			game_level() {}
 
 			//functions
-			void load_level(const char *pFile, GLuint pLevelWidth, GLuint pLevelHeight);
-			void init_level(std::vector<std::vector<GLuint>> tileData, GLuint levelWidth, GLuint levelHeight);
+			void load_level(const char *pFile, GLuint pLevelWidth, GLfloat pLevelHeight);
+			void init_level(std::vector<std::vector<GLuint>> tileData, GLuint levelWidth, GLfloat levelHeight);
 
 			//gettter
 			std::vector<engine::core::block> get_blocks();

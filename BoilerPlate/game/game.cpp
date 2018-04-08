@@ -35,19 +35,19 @@ namespace game
 		mRenderManager.generate_buffers();
 
 		level::game_level one;
-		one.load_level("game/assets/first_level.txt", this->mWidth, this->mHeight * 0.5);
+		one.load_level("game/assets/first_level.txt", 1.0, 0.5);
 		this->mGameLevels.push_back(one);
 	}
 
 	void game::render()
 	{
-		mRenderManager.render
+		/*mRenderManager.render
 		(
 			mBlock.get_component("mVertex")->get_vertex(),
 			mBlock.get_component("mVertex")->get_indices(),
 			mBlock.get_component("mTextureIndex")->get_texture_index(),
 			*mBlock.get_component("mModel")->get_model_matrix()
-		);
+		);*/
 
 		mRenderManager.render
 		(

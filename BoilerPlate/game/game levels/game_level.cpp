@@ -4,7 +4,7 @@ namespace game
 {
 	namespace level
 	{
-		void game_level::load_level(const char *pFile, GLuint pLevelWidth, GLuint pLevelHeight)
+		void game_level::load_level(const char *pFile, GLuint pLevelWidth, GLfloat pLevelHeight)
 		{
 			// Load from file
 			GLuint tileCode;
@@ -28,7 +28,7 @@ namespace game
 			}
 		}
 
-		void game_level::init_level(std::vector<std::vector<GLuint>> pTileData, GLuint pLvlWidth, GLuint pLvlHeight)
+		void game_level::init_level(std::vector<std::vector<GLuint>> pTileData, GLuint pLvlWidth, GLfloat pLvlHeight)
 		{
 			// Calculate dimensions
 			GLuint height = pTileData.size();
