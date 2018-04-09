@@ -11,6 +11,7 @@ namespace engine
 		texture_manager::texture_manager(const char *pTexture)
 		{
 			mTexture = load_texture(pTexture);
+			std::cout << "que diablo";
 		}
 
 		GLuint texture_manager::get_texture()

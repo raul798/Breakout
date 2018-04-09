@@ -4,19 +4,29 @@ namespace engine
 {
 	namespace component
 	{
-		vertex_component::vertex_component(std::string& pName, std::vector<core::vertex> pVertices, std::vector<int> pIndices)
+		vertex_component::vertex_component(std::string& pName, core::vertex pVertices[], int pIndices[])
 		{
 			mName = pName;
-			mObjectVertices = pVertices;
-			mObjectIndices = pIndices;
+
+			for (int i = 0; i < 36; i++)
+			{
+				mObjectVertices[i] = pVertices[i];
+			}
+
+			for (int i = 0; i < 6; i++)
+			{
+				mObjectIndices[i] = pIndices[i];
+			}
+			
+			
 		}
 		
-		std::vector<int> vertex_component::get_indices()
+		int *vertex_component::get_indices()
 		{
 			return mObjectIndices;
 		}
 
-		std::vector<core::vertex> vertex_component::get_vertex()
+		core::vertex *vertex_component::get_vertex()
 		{
 			return mObjectVertices;
 		}

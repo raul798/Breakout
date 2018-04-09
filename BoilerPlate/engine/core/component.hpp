@@ -30,8 +30,8 @@ namespace engine
 
 			//virtual funtions
 			virtual math::matrix_4* get_model_matrix() { return NULL; }
-			virtual std::vector<vertex> get_vertex() { std::vector<vertex> emptyVertexVector; return emptyVertexVector; }
-			virtual std::vector<int> get_indices() { std::vector<int> emptyIndexVector; return emptyIndexVector; }
+			virtual vertex *get_vertex() { vertex *emptyVertexVector; return emptyVertexVector; }
+			virtual int *get_indices() { int *emptyIndexVector; return emptyIndexVector; }
 			virtual std::string get_texture_path() { return NULL; }
 			virtual math::vector_4* get_position() { return NULL; }
 			virtual float *get_movement_value() { return NULL; }

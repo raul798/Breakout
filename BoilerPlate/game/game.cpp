@@ -170,18 +170,18 @@ namespace game
 
 	void game::create_ball()
 	{
-		std::vector<engine::core::vertex> ballVertex;
-		std::vector<int> ballIndices;
-		ballVertex.push_back({ 0.03f, 0.03f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f });
-		ballVertex.push_back({ 0.03f, -0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f });
-		ballVertex.push_back({ -0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f });
-		ballVertex.push_back({ -0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f });
-		ballIndices.push_back(0);
-		ballIndices.push_back(1);
-		ballIndices.push_back(2);
-		ballIndices.push_back(1);
-		ballIndices.push_back(3);
-		ballIndices.push_back(2);
+		engine::core::vertex ballVertex[36];
+		int ballIndices[6];
+		ballVertex[0] = { 0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
+		ballVertex[1] = { 0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
+		ballVertex[2] = { -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
+		ballVertex[3] = { -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
+		ballIndices[0] = 0;
+		ballIndices[1] = 1;
+		ballIndices[2] = 2;
+		ballIndices[3] = 1;
+		ballIndices[4] = 3;
+		ballIndices[5] = 2;
 		//ballIndices.push_back(0);
 
 		engine::component::model_matrix_component *ballModel = new engine::component::model_matrix_component("mModel");
@@ -214,19 +214,18 @@ namespace game
 
 	void game::create_paddle()
 	{
-		std::vector<engine::core::vertex> paddleVertex;
-		std::vector<int> paddleIndices;
-		paddleVertex.push_back({ 0.15f, 0.035f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f });
-		paddleVertex.push_back({ 0.15f, -0.035f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f });
-		paddleVertex.push_back({ -0.15f, 0.035f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f });
-		paddleVertex.push_back({ -0.15f, -0.035f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f });
-		paddleIndices.push_back(0);
-		paddleIndices.push_back(1);
-		paddleIndices.push_back(2);
-		paddleIndices.push_back(1);
-		paddleIndices.push_back(3);
-		paddleIndices.push_back(2);
-		//paddleIndices.push_back(0);
+		engine::core::vertex paddleVertex[36];
+		int paddleIndices[6];
+		paddleVertex[0] = { 0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
+		paddleVertex[1] = { 0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
+		paddleVertex[2] = { -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
+		paddleVertex[3] = { -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
+		paddleIndices[0] = 0;
+		paddleIndices[1] = 1;
+		paddleIndices[2] = 2;
+		paddleIndices[3] = 1;
+		paddleIndices[4] = 3;
+		paddleIndices[5] = 2;
 
 		engine::component::model_matrix_component *paddleModel = new engine::component::model_matrix_component("mModel");
 
