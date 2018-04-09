@@ -71,8 +71,8 @@
     <ClCompile Include="engine\core\paddle.cpp">
       <Filter>engine\core</Filter>
     </ClCompile>
-    <ClCompile Include="game\game levels\game_level.cpp">
-      <Filter>game\game levels</Filter>
+    <ClCompile Include="game\level_generator\game_level.cpp">
+      <Filter>game\level_generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,14 +152,17 @@
     <ClInclude Include="engine\components\position_component.hpp">
       <Filter>engine\components</Filter>
     </ClInclude>
-    <ClInclude Include="engine\components\phisics_component.hpp">
-      <Filter>engine\components</Filter>
-    </ClInclude>
     <ClInclude Include="engine\core\paddle.hpp">
       <Filter>engine\core</Filter>
     </ClInclude>
-    <ClInclude Include="game\game levels\game_level.hpp">
-      <Filter>game\game levels</Filter>
+    <ClInclude Include="engine\components\physics_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="game\level_generator\game_level.hpp">
+      <Filter>game\level_generator</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utilities\color.hpp">
+      <Filter>engine\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,8 +193,11 @@
     <Filter Include="engine\components">
       <UniqueIdentifier>{aa6c6173-6ac5-4c7c-be0f-fdc5ea99bd4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="game\game levels">
+    <Filter Include="game\level_generator">
       <UniqueIdentifier>{5a84c6b2-bb9c-4d75-a8a5-93dfcf2df427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\levels">
+      <UniqueIdentifier>{fc2a9a7d-1c8a-4d58-aec1-bf064a307b32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -229,8 +235,8 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="game\assets\first_level.txt">
-      <Filter>game\assets</Filter>
+    <Text Include="game\levels\first_level.txt">
+      <Filter>game\levels</Filter>
     </Text>
   </ItemGroup>
 </Project>

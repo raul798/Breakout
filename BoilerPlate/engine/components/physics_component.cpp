@@ -1,4 +1,4 @@
-#include "engine\components\phisics_component.hpp"
+#include "engine\components\physics_component.hpp"
 
 namespace engine
 {

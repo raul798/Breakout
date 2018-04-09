@@ -18,7 +18,7 @@ namespace game
 
 	game::~game()
 	{
-		//mRenderManager.~renderer();
+		mRenderManager.~renderer();
 	}
 
 	void game::execute()
@@ -32,9 +32,9 @@ namespace game
 		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
 
-		level::game_level one;
+		level_generator::game_level one;
 		//one.load_level("game/assets/first_level.txt", mWidth, mHeight*0.5);
-		one.load_level("game/assets/first_level.txt", 2.0, 1.0);
+		one.load_level("game/levels/first_level.txt", 2.0, 1.0);
 
 		this->mGameLevels.push_back(one);
 	}
@@ -174,7 +174,6 @@ namespace game
 		ballIndices[3] = 1;
 		ballIndices[4] = 3;
 		ballIndices[5] = 2;
-		//ballIndices.push_back(0);
 
 		engine::component::model_matrix_component *ballModel = new engine::component::model_matrix_component("mModel");
 

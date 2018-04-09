@@ -2,7 +2,7 @@
 
 namespace game
 {
-	namespace level
+	namespace level_generator
 	{
 		void game_level::load_level(const char *pFile, GLuint pLevelWidth, GLfloat pLevelHeight)
 		{
@@ -24,12 +24,14 @@ namespace game
 					tileData.push_back(row);
 				}
 				if (tileData.size() > 0)
-					this->init_level(tileData, pLevelWidth, pLevelHeight);
+					init_level(tileData, pLevelWidth, pLevelHeight);
 			}
 		}
 
 		void game_level::init_level(std::vector<std::vector<GLuint>> pTileData, GLuint pLvlWidth, GLfloat pLvlHeight)
 		{
+			engine::utilities::color colorManager;
+
 			// Calculate dimensions
 			GLuint height = pTileData.size();
 			GLuint width = pTileData[0].size();
@@ -49,7 +51,7 @@ namespace game
 						engine::math::vector_2 size(unitWidth, unitHeight);
 
 						//create the object
-						engine::core::block block(size, true, engine::math::vector_4(0.8f, 0.8f, 0.7f, 1.0f));
+						engine::core::block block(size, true, colorManager.GREY);
 						
 						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);
 
@@ -62,37 +64,34 @@ namespace game
 					}
 					else if (pTileData[y][x] > 1)
 					{
-						engine::math::vector_4 color = engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f); // original: white
+						engine::math::vector_4 color = colorManager.WHITE;
 
 						if (pTileData[y][x] == 2)
 						{
-							color = engine::math::vector_4(0.2f, 0.6f, 1.0f, 1.0f);
+							color = colorManager.BLUE;
 						}
 						else if (pTileData[y][x] == 3)
 						{
-							color = engine::math::vector_4(0.0f, 0.7f, 0.0f, 1.0f);
+							color = colorManager.GREEN;
 						}
 						else if (pTileData[y][x] == 4)
 						{
-							color = engine::math::vector_4(0.8f, 0.8f, 0.4f, 1.0f);
+							color = colorManager.YELLOW;
 						}
 						else if (pTileData[y][x] == 5)
 						{
-							color = engine::math::vector_4(1.0f, 0.5f, 0.0f, 1.0f);
+							color = colorManager.ORANGE;
 						}
 							
 						engine::math::vector_2 position(-halfWidth + unitWidth * x, unitHeight * y);
 						engine::math::vector_2 size(unitWidth, unitHeight);
-
 						engine::core::block block(size, false, color);
-						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);
 
-						//block.get_component("mModel")->get_model_matrix()->make_ortho(0, 500, 0, 1024, -3, 1);
+						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);
 						block.get_component("mModel")->get_model_matrix()->set_identity();
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 						block.get_component("mModel")->get_model_matrix()->scale(8*unitWidth, 8*unitHeight, 1.0f);
-						std::cout << "hola" << std::endl;
 
 						mBlocks.push_back(block);
 					}

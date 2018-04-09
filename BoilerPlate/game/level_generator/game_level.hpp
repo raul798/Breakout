@@ -9,10 +9,11 @@
 #include "../BoilerPlate//engine/math/vector_4.hpp"
 #include "../BoilerPlate/engine/core/block.hpp"
 #include "../BoilerPlate//engine/texture/texture_manager.hpp"
+#include "../BoilerPlate//engine/utilities/color.hpp"
 
 namespace game
 {
-	namespace level
+	namespace level_generator
 	{
 		class game_level
 		{

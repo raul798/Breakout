@@ -31,7 +31,9 @@ namespace engine
 		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex, math::matrix_4 pModelMatrix)
 		{
 			vertices_manager(pVertices, pIndices);
+
 			glUseProgram(mProgramID);
+
 			math::matrix_4 view = math::matrix_4();
 			math::matrix_4 projection = math::matrix_4();
 

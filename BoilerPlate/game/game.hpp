@@ -3,7 +3,7 @@
 #define GAME_HPP
 
 #include "../engine/components/model_matrix_component.hpp"
-#include "../engine/components/phisics_component.hpp"
+#include "../engine/components/physics_component.hpp"
 #include "../engine/components/position_component.hpp"
 #include "../engine/components/texture_component.hpp"
 #include "../engine/components/vertex_component.hpp"
@@ -12,7 +12,7 @@
 #include "../engine/core/block.hpp"
 #include "../engine/core/paddle.hpp"
 #include "../engine/utilities/input_manager.hpp"
-#include "../game/game levels/game_level.hpp"
+#include "../game/level_generator/game_level.hpp"
 
 namespace game
 {
@@ -43,7 +43,7 @@ namespace game
 		engine::core::ball mBall;
 		engine::core::block mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), false, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
 		engine::core::paddle mPaddle;
-		std::vector<level::game_level> mGameLevels;
+		std::vector<level_generator::game_level> mGameLevels;
 		int mBlockCounter;
 		int mInputCounter;
 		int mWidth;

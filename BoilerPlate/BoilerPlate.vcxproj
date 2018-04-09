@@ -193,8 +193,8 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\utilities\error_manager.cpp" />
     <ClCompile Include="engine\utilities\input_manager.cpp" />
     <ClCompile Include="engine\utilities\shader_utilities.cpp" />
-    <ClCompile Include="game\game levels\game_level.cpp" />
     <ClCompile Include="game\game.cpp" />
+    <ClCompile Include="game\level_generator\game_level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="TimeManager.cpp" />
@@ -202,7 +202,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="engine\components\model_matrix_component.hpp" />
-    <ClInclude Include="engine\components\phisics_component.hpp" />
+    <ClInclude Include="engine\components\physics_component.hpp" />
     <ClInclude Include="engine\components\position_component.hpp" />
     <ClInclude Include="engine\components\texture_component.hpp" />
     <ClInclude Include="engine\components\vertex_component.hpp" />
@@ -222,12 +222,13 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="engine\math\vector_3.hpp" />
     <ClInclude Include="engine\math\vector_4.hpp" />
     <ClInclude Include="engine\texture\texture_manager.hpp" />
+    <ClInclude Include="engine\utilities\color.hpp" />
     <ClInclude Include="engine\utilities\error_manager.hpp" />
     <ClInclude Include="engine\utilities\input_manager.hpp" />
     <ClInclude Include="engine\utilities\shader_utilities.hpp" />
     <ClInclude Include="engine\utilities\stb_image.h" />
-    <ClInclude Include="game\game levels\game_level.hpp" />
     <ClInclude Include="game\game.hpp" />
+    <ClInclude Include="game\level_generator\game_level.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
@@ -249,7 +250,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <Image Include="game\assets\test.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="game\assets\first_level.txt" />
+    <Text Include="game\levels\first_level.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
