@@ -34,7 +34,7 @@ namespace game
 
 		level::game_level one;
 		//one.load_level("game/assets/first_level.txt", mWidth, mHeight*0.5);
-		one.load_level("game/assets/first_level.txt", 2.0, 0.5);
+		one.load_level("game/assets/first_level.txt", 2.0, 1.0);
 
 		this->mGameLevels.push_back(one);
 	}
@@ -57,13 +57,13 @@ namespace game
 			mPaddle.get_component("mTextureIndex")->get_texture_index(),
 			*mPaddle.get_component("mModel")->get_model_matrix()
 		);
-
-		for (int i = 0; i < mGameLevels[0].get_blocks().size() ; i++)
+		std::vector<engine::core::block> blockRenderer = mGameLevels[0].get_blocks();
+		for (int i = 0; i < blockRenderer.size() ; i++)
 		{
-			mRenderManager.render(mGameLevels[0].get_blocks()[i].get_component("mVertex")->get_vertex(),
-				mGameLevels[0].get_blocks()[i].get_component("mVertex")->get_indices(),
-				mGameLevels[0].get_blocks()[i].get_component("mTextureIndex")->get_texture_index(),
-				*mGameLevels[0].get_blocks()[i].get_component("mModel")->get_model_matrix());
+			mRenderManager.render(blockRenderer[i].get_component("mVertex")->get_vertex(),
+				blockRenderer[i].get_component("mVertex")->get_indices(),
+				blockRenderer[i].get_component("mTextureIndex")->get_texture_index(),
+				*blockRenderer[i].get_component("mModel")->get_model_matrix());
 				
 		}
 		
@@ -97,18 +97,18 @@ namespace game
 			mPaddle.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhisics")->get_movement_value();
 		
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
-			mPaddle.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
 			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+			mPaddle.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 
 			if (mBall.get_AttchToPaddle() == true)
 			{
 				mBall.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhisics")->get_movement_value();
 
 				mBall.get_component("mModel")->get_model_matrix()->set_identity();
-				mBall.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
 				mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+				mBall.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 			}
 		}
 
@@ -116,19 +116,19 @@ namespace game
 		{
 			mPaddle.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhisics")->get_movement_value();
 
-			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
-			mPaddle.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
+			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();		
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
 			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+			mPaddle.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 
 			if (mBall.get_AttchToPaddle() == true)
 			{
 				mBall.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhisics")->get_movement_value();
 
 				mBall.get_component("mModel")->get_model_matrix()->set_identity();
-				mBall.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
 				mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+				mBall.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 			}
 		}
 
@@ -164,10 +164,10 @@ namespace game
 	{
 		engine::core::vertex ballVertex[36];
 		int ballIndices[6];
-		ballVertex[0] = { 0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
-		ballVertex[1] = { 0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
-		ballVertex[2] = { -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
-		ballVertex[3] = { -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
+		ballVertex[0] = { 0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
+		ballVertex[1] = { 0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
+		ballVertex[2] = { -0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
+		ballVertex[3] = { -0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
 		ballIndices[0] = 0;
 		ballIndices[1] = 1;
 		ballIndices[2] = 2;
@@ -189,9 +189,9 @@ namespace game
 		engine::component::vertex_component *ballVertices = new engine::component::vertex_component
 		(std::string::basic_string("mVertex"), ballVertex, ballIndices);
 
-		ballModel->get_model_matrix()->scale(2.0, 2.0, 1.0);
 		ballModel->get_model_matrix()->translate_vector(*ballPosition->get_position());
 		ballModel->get_model_matrix()->rotate_z(0.0f);
+		ballModel->get_model_matrix()->scale(1.0, 1.0, 1.0);
 
 		mBall.attach_component(ballModel);
 		mBall.attach_component(ballVertices);
@@ -232,9 +232,9 @@ namespace game
 		engine::component::vertex_component *paddleVertices = new engine::component::vertex_component
 		(std::string::basic_string("mVertex"), paddleVertex, paddleIndices);
 
-		paddleModel->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 		paddleModel->get_model_matrix()->translate_vector(*paddlePosition->get_position());
 		paddleModel->get_model_matrix()->rotate_z(0.0f);
+		paddleModel->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 
 		mPaddle.attach_component(paddleModel);
 		mPaddle.attach_component(paddleVertices);
@@ -257,8 +257,8 @@ namespace game
 		position->mY += (*mBall.get_component("mPhisics")->get_movement_value())*cosf(diablo);
 
 		mBall.get_component("mModel")->get_model_matrix()->set_identity();
-		mBall.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 		mBall.get_component("mModel")->get_model_matrix()->translate_vector(*position);
 		mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+		mBall.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 	}
 }

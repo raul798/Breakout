@@ -35,7 +35,7 @@ namespace engine
 			math::matrix_4 view = math::matrix_4();
 			math::matrix_4 projection = math::matrix_4();
 
-			view.translate_vector(math::vector_4(0.0f, 0.0f, -6.0f, 1.0f));
+			view.translate_vector(math::vector_4(0.0f, 0.0f, -3.0f, 1.0f));
 			view.rotate_z(0.0f);
 			projection.make_perspective(35.0f, 0.1f, 100.0f, (float)mHeight/mWidth);
 
@@ -52,7 +52,7 @@ namespace engine
 			view.assign_matrix(viewMatrix);
 			projection.assign_matrix(projectionMatrix);
 
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix);
+			glUniformMatrix4fv(modelLoc, 1, GL_TRUE, modelMatrix);
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, viewMatrix);
 			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projectionMatrix);
 	

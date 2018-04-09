@@ -51,13 +51,13 @@ namespace game
 						//create the object
 						engine::core::block block(size, true, engine::math::vector_4(0.8f, 0.8f, 0.7f, 1.0f));
 						
-						*block.get_component("mOrigin")->get_position() = position;
+						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);
 
 						block.get_component("mModel")->get_model_matrix()->set_identity();
-						block.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
+						
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
-						
+						block.get_component("mModel")->get_model_matrix()->scale(8 * unitWidth, 8*unitHeight, 1.0f);
 						mBlocks.push_back(block);
 					}
 					else if (pTileData[y][x] > 1)
@@ -85,14 +85,13 @@ namespace game
 						engine::math::vector_2 size(unitWidth, unitHeight);
 
 						engine::core::block block(size, false, color);
-						*block.get_component("mOrigin")->get_position() = position;
+						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);
 
 						//block.get_component("mModel")->get_model_matrix()->make_ortho(0, 500, 0, 1024, -3, 1);
 						block.get_component("mModel")->get_model_matrix()->set_identity();
-						block.get_component("mModel")->get_model_matrix()->scale(2.0f, 2.0f, 1.0f);
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
-
+						block.get_component("mModel")->get_model_matrix()->scale(8*unitWidth, 8*unitHeight, 1.0f);
 						std::cout << "hola" << std::endl;
 
 						mBlocks.push_back(block);

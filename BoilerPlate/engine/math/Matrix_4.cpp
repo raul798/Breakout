@@ -781,7 +781,7 @@ namespace engine
 			scaleMatrix[0] = pX;
 			scaleMatrix[5] = pY;
 			scaleMatrix[10] = pZ;
-			*this = scaleMatrix;
+			*this = *this * scaleMatrix;
 		}
 	}
 }
