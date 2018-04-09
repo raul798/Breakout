@@ -31,9 +31,7 @@ namespace engine
 		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex, math::matrix_4 pModelMatrix)
 		{
 			vertices_manager(pVertices, pIndices);
-
 			glUseProgram(mProgramID);
-
 			math::matrix_4 view = math::matrix_4();
 			math::matrix_4 projection = math::matrix_4();
 
@@ -83,6 +81,19 @@ namespace engine
 
 		void renderer::vertices_manager(vertex pVertices[], int pIndices[])
 		{
+			vertex localVertex[36];
+			int localIndices[6];
+
+			for (int i = 0; i < 36; i++)
+			{
+				localVertex[i] = pVertices[i];
+			}
+
+			for (int i = 0; i < 6; i++)
+			{
+				localIndices[i] = pIndices[i];
+			}
+
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
 
@@ -90,11 +101,11 @@ namespace engine
 			glBindVertexArray(mVertexArrayObject);
 
 			glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferObject);
-			glBufferData(GL_ARRAY_BUFFER, 36, pVertices, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(localVertex), localVertex, GL_STATIC_DRAW);
 
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementsBufferObject);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6, pIndices, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(localIndices), localIndices, GL_STATIC_DRAW);
 
 			//vertex position
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0);

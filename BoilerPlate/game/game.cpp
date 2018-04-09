@@ -6,11 +6,9 @@ namespace game
 
 	game::game(int width, int height)
 	{
-
-		
 		mInputCounter = 0;
 		mBlockCounter = 0;
-	//	mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), true, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
+
 		create_paddle();
 		create_ball();	
 		
@@ -43,13 +41,6 @@ namespace game
 
 	void game::render()
 	{
-		/*mRenderManager.render
-		(
-			mBlock.get_component("mVertex")->get_vertex(),
-			mBlock.get_component("mVertex")->get_indices(),
-			mBlock.get_component("mTextureIndex")->get_texture_index(),
-			*mBlock.get_component("mModel")->get_model_matrix()
-		);*/
 
 		mRenderManager.render
 		(
@@ -73,6 +64,7 @@ namespace game
 				mGameLevels[0].get_blocks()[i].get_component("mVertex")->get_indices(),
 				mGameLevels[0].get_blocks()[i].get_component("mTextureIndex")->get_texture_index(),
 				*mGameLevels[0].get_blocks()[i].get_component("mModel")->get_model_matrix());
+				
 		}
 		
 	}
