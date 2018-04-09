@@ -30,16 +30,7 @@ namespace engine
 
 		void renderer::render(std::vector<vertex> pVertices, std::vector<int> pIndices, int pTextureIndex, math::matrix_4 pModelMatrix)
 		{
-			int localIndices[sizeof(pIndices)];
-
-			for (int i = 0; i < pIndices.size(); i++)
-			{
-				localIndices[i] = pIndices[i];
-			}
-
 			vertices_manager(pVertices, pIndices);
-
-			
 			glUseProgram(mProgramID);
 			math::matrix_4 view = math::matrix_4();
 			math::matrix_4 projection = math::matrix_4();
@@ -62,7 +53,6 @@ namespace engine
 			projection.assign_matrix(projectionMatrix);
 
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, modelMatrix);
-
 			glUniformMatrix4fv(viewLoc, 1, GL_FALSE, viewMatrix);
 			glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projectionMatrix);
 	
@@ -74,7 +64,7 @@ namespace engine
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, mTexturesContainer[pTextureIndex].get_texture());
 
-			glDrawElements(GL_TRIANGLES, sizeof(localIndices), GL_UNSIGNED_INT, (void*)0);
+			glDrawElements(GL_TRIANGLES, 6*sizeof(int), GL_UNSIGNED_INT, (void*)0);
 		}
 
 		void renderer::assign_program_id()
@@ -129,7 +119,7 @@ namespace engine
 
 			// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 			// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
 			// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
