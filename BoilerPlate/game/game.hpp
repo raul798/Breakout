@@ -32,9 +32,6 @@ namespace game
 		void reset_input_controller();
 		void update_input_controller();
 		void update_screen_paremeter(int pWidth, int pHeight);
-		void create_ball();
-		void create_block();
-		void create_paddle();
 		void movement();
 		engine::utilities::input_manager mInputManager;
 

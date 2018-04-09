@@ -8,9 +8,6 @@ namespace game
 	{
 		mInputCounter = 0;
 		mBlockCounter = 0;
-
-		create_paddle();
-		create_ball();	
 		
 		mWidth = width;
 		mHeight = height;
@@ -33,7 +30,6 @@ namespace game
 		mRenderManager.generate_buffers();
 
 		level_generator::game_level one;
-		//one.load_level("game/assets/first_level.txt", mWidth, mHeight*0.5);
 		one.load_level("game/levels/first_level.txt", 2.0, 1.0);
 
 		this->mGameLevels.push_back(one);
@@ -78,7 +74,6 @@ namespace game
 
 		if (mBlockCounter == 0)
 		{
-			create_block();
 			mBlockCounter++;
 		}
 	}
@@ -158,88 +153,6 @@ namespace game
 	void game::update_screen_paremeter(int pWidth, int pHeight)
 	{
 		mRenderManager.update_screen_parameters(pWidth, pHeight);
-	}
-
-	void game::create_ball()
-	{
-		engine::core::vertex ballVertex[36];
-		int ballIndices[6];
-		ballVertex[0] = { 0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
-		ballVertex[1] = { 0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
-		ballVertex[2] = { -0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
-		ballVertex[3] = { -0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
-		ballIndices[0] = 0;
-		ballIndices[1] = 1;
-		ballIndices[2] = 2;
-		ballIndices[3] = 1;
-		ballIndices[4] = 3;
-		ballIndices[5] = 2;
-
-		engine::component::model_matrix_component *ballModel = new engine::component::model_matrix_component("mModel");
-
-		engine::component::position_component *ballPosition = new engine::component::position_component(std::string::basic_string
-		("mOrigin"), *mPaddle.get_component("mOrigin")->get_position() + engine::math::vector_4(0.0f, 0.077f, 0.0f, 0.0f));
-
-		engine::component::texture_component *ballTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 1);
-
-		engine::component::phisics_component *ballPhisics = new engine::component::phisics_component
-		(std::string::basic_string("mPhisics"), 0.001f);
-
-		engine::component::vertex_component *ballVertices = new engine::component::vertex_component
-		(std::string::basic_string("mVertex"), ballVertex, ballIndices);
-
-		ballModel->get_model_matrix()->translate_vector(*ballPosition->get_position());
-		ballModel->get_model_matrix()->rotate_z(0.0f);
-		ballModel->get_model_matrix()->scale(1.0, 1.0, 1.0);
-
-		mBall.attach_component(ballModel);
-		mBall.attach_component(ballVertices);
-		mBall.attach_component(ballPosition);
-		mBall.attach_component(ballPhisics);
-		mBall.attach_component(ballTexture);
-	}
-
-	void game::create_block()
-	{}
-		
-
-	void game::create_paddle()
-	{
-		engine::core::vertex paddleVertex[36];
-		int paddleIndices[6];
-		paddleVertex[0] = { 0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
-		paddleVertex[1] = { 0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
-		paddleVertex[2] = { -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
-		paddleVertex[3] = { -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
-		paddleIndices[0] = 0;
-		paddleIndices[1] = 1;
-		paddleIndices[2] = 2;
-		paddleIndices[3] = 1;
-		paddleIndices[4] = 3;
-		paddleIndices[5] = 2;
-
-		engine::component::model_matrix_component *paddleModel = new engine::component::model_matrix_component("mModel");
-
-		engine::component::position_component *paddlePosition = new engine::component::position_component
-		(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, -0.9f, 0.0f, 0.0f));
-
-		engine::component::texture_component *paddleTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 3);
-
-		engine::component::phisics_component *paddlePhisics = new engine::component::phisics_component
-		(std::string::basic_string("mPhisics"), 0.02f);
-
-		engine::component::vertex_component *paddleVertices = new engine::component::vertex_component
-		(std::string::basic_string("mVertex"), paddleVertex, paddleIndices);
-
-		paddleModel->get_model_matrix()->translate_vector(*paddlePosition->get_position());
-		paddleModel->get_model_matrix()->rotate_z(0.0f);
-		paddleModel->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
-
-		mPaddle.attach_component(paddleModel);
-		mPaddle.attach_component(paddleVertices);
-		mPaddle.attach_component(paddlePosition);
-		mPaddle.attach_component(paddlePhisics);
-		mPaddle.attach_component(paddleTexture);
 	}
 
 	void game::movement()
