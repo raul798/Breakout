@@ -21,7 +21,7 @@ namespace engine
 			renderer();
 			~renderer();
 			void assign_textures(const char pTextures[]);
-			void vertices_manager(vertex *pVertices[], int *pIndices[]);
+			void vertices_manager(vertex pVertices[], int pIndices[]);
 			void render(vertex pVertices[], int pIndices[], int pTextureIndex, math::matrix_4 pModelMatrix);
 			void assign_program_id();
 			void switch_polygon_mode();

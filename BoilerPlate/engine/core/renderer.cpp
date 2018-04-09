@@ -31,7 +31,9 @@ namespace engine
 		void renderer::render(vertex pVertices[], int pIndices[], int pTextureIndex, math::matrix_4 pModelMatrix)
 		{
 			vertices_manager(pVertices, pIndices);
+
 			glUseProgram(mProgramID);
+
 			math::matrix_4 view = math::matrix_4();
 			math::matrix_4 projection = math::matrix_4();
 
@@ -79,7 +81,7 @@ namespace engine
 			glGenBuffers(1, &mElementsBufferObject);
 		}
 
-		void renderer::vertices_manager(vertex *pVertices[], int *pIndices[])
+		void renderer::vertices_manager(vertex pVertices[], int pIndices[])
 		{
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
