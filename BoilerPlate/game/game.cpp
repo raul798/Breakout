@@ -29,10 +29,10 @@ namespace game
 		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
 
-		level_generator::game_level one;
-		one.load_level("game/levels/first_level.txt", 2.0, 1.0);
+		level_generator::game_level firstLevel;
+		firstLevel.load_level("game/levels/first_level.txt", 2.0, 1.0);
 
-		this->mGameLevels.push_back(one);
+		this->mGameLevels.push_back(firstLevel);
 	}
 
 	void game::render()
@@ -53,7 +53,9 @@ namespace game
 			mPaddle.get_component("mTextureIndex")->get_texture_index(),
 			*mPaddle.get_component("mModel")->get_model_matrix()
 		);
+
 		std::vector<engine::core::block> blockRenderer = mGameLevels[0].get_blocks();
+
 		for (int i = 0; i < blockRenderer.size() ; i++)
 		{
 			mRenderManager.render(blockRenderer[i].get_component("mVertex")->get_vertex(),

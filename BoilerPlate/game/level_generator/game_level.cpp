@@ -56,7 +56,6 @@ namespace game
 						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);
 
 						block.get_component("mModel")->get_model_matrix()->set_identity();
-						
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 						block.get_component("mModel")->get_model_matrix()->scale(8 * unitWidth, 8*unitHeight, 1.0f);
@@ -97,7 +96,6 @@ namespace game
 					}
 				}
 			}
-			std::cout << mBlocks.size() << std::endl;
 		}
 
 		std::vector<engine::core::block> game_level::get_blocks()

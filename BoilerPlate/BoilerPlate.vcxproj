@@ -241,7 +241,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="game\assets\background.jpg" />
+    <Image Include="game\assets\background.png" />
     <Image Include="game\assets\ball.png" />
     <Image Include="game\assets\block.png" />
     <Image Include="game\assets\block_solid.png" />

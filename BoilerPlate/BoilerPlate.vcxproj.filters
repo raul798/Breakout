@@ -215,9 +215,6 @@
     <Image Include="game\assets\block_solid.png">
       <Filter>game\assets</Filter>
     </Image>
-    <Image Include="game\assets\background.jpg">
-      <Filter>game\assets</Filter>
-    </Image>
     <Image Include="game\assets\ball.png">
       <Filter>game\assets</Filter>
     </Image>
@@ -231,6 +228,9 @@
       <Filter>game\assets</Filter>
     </Image>
     <Image Include="game\assets\paddle.png">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\background.png">
       <Filter>game\assets</Filter>
     </Image>
   </ItemGroup>
