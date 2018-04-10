@@ -9,6 +9,7 @@
 #include "../components/position_component.hpp"
 #include "../components/texture_component.hpp"
 #include "../components/vertex_component.hpp"
+#include "../components/round_component.hpp"
 
 namespace engine
 {

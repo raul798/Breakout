@@ -4,7 +4,17 @@ namespace game
 {
 	namespace level_generator
 	{
-		void game_level::load_level(const char *pFile, GLuint pLevelWidth, GLfloat pLevelHeight)
+		const float NORMAL_SCREEN_HEIGHT_FACTOR = 1.0/640.0;
+		const float NORMAL_SCREEN_WIDTH_FACTOR = 1.0/1136.0;
+		game_level::game_level() {}
+
+		game_level::game_level(int pWidth, int pHeight)
+		{
+			mGameLevelWidth = pWidth;
+			mGameLevelHeight = pHeight;
+		}
+
+		void game_level::load_level(const char *pFile, float pLevelWidth, float pLevelHeight)
 		{
 			// Load from file
 			GLuint tileCode;
@@ -28,16 +38,19 @@ namespace game
 			}
 		}
 
-		void game_level::init_level(std::vector<std::vector<GLuint>> pTileData, GLuint pLvlWidth, GLfloat pLvlHeight)
+		void game_level::init_level(std::vector<std::vector<GLuint>> pTileData, float pLvlWidth, float pLvlHeight)
 		{
 			engine::utilities::color colorManager;
+			float heightFactor = NORMAL_SCREEN_HEIGHT_FACTOR * mGameLevelHeight;
+			float widthFactor = NORMAL_SCREEN_WIDTH_FACTOR * mGameLevelWidth;
 
 			// Calculate dimensions
 			GLuint height = pTileData.size();
 			GLuint width = pTileData[0].size();
-			GLfloat halfWidth = pLvlWidth / static_cast<GLfloat>(2);
-			GLfloat unitWidth = pLvlWidth / static_cast<GLfloat>(width);
-			GLfloat unitHeight = pLvlHeight / height;
+			GLuint screenWidth = width - 1;
+			float halfWidth = pLvlWidth / static_cast<GLfloat>(2);
+			float unitWidth = pLvlWidth / static_cast<GLfloat>(screenWidth);
+			float unitHeight = pLvlHeight / height;
 
 			// Initialize level tiles based on tileData		
 			for (GLuint y = 0; y < height; ++y)
@@ -58,7 +71,7 @@ namespace game
 						block.get_component("mModel")->get_model_matrix()->set_identity();
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
-						block.get_component("mModel")->get_model_matrix()->scale(8 * unitWidth, 8*unitHeight, 1.0f);
+						block.get_component("mModel")->get_model_matrix()->scale(widthFactor * 10 *  unitWidth, heightFactor * 10 * unitHeight, 1.0f);
 						mBlocks.push_back(block);
 					}
 					else if (pTileData[y][x] > 1)
@@ -90,12 +103,18 @@ namespace game
 						block.get_component("mModel")->get_model_matrix()->set_identity();
 						block.get_component("mModel")->get_model_matrix()->translate_vector(*block.get_component("mOrigin")->get_position());
 						block.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
-						block.get_component("mModel")->get_model_matrix()->scale(8*unitWidth, 8*unitHeight, 1.0f);
+						block.get_component("mModel")->get_model_matrix()->scale(widthFactor * 10 * unitWidth, heightFactor * 10 * unitHeight, 1.0f);
 
 						mBlocks.push_back(block);
 					}
 				}
 			}
+		}
+
+		void game_level::update_screen_dimensions(int pWidth, int pHeight)
+		{
+			mGameLevelWidth = pWidth;
+			mGameLevelHeight = pHeight;
 		}
 
 		std::vector<engine::core::block> game_level::get_blocks()

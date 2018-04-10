@@ -10,10 +10,10 @@ namespace engine
 		{
 			engine::core::vertex blockVertex[36];
 			int blockIndices[6];
-			blockVertex[0] = { 0.06f, 0.06f, 0.0f,    color.mX, color.mY, color.mZ, color.mW,  1.0f, 1.0f };
-			blockVertex[1] = { 0.06f, -0.06f, 0.0f,   color.mX, color.mY, color.mZ, color.mW,  1.0f, 0.0f };
-			blockVertex[2] = { -0.06f, 0.06f, 0.0f,   color.mX, color.mY, color.mZ, color.mW,  0.0f, 1.0f };
-			blockVertex[3] = { -0.06f, -0.06f, 0.0f,  color.mX, color.mY, color.mZ, color.mW,  0.0f, 0.0f };
+			blockVertex[0] = { 0.05f, 0.05f, 0.0f,    color.mX, color.mY, color.mZ, color.mW,  1.0f, 1.0f };
+			blockVertex[1] = { 0.05f, -0.05f, 0.0f,   color.mX, color.mY, color.mZ, color.mW,  1.0f, 0.0f };
+			blockVertex[2] = { -0.05f, 0.05f, 0.0f,   color.mX, color.mY, color.mZ, color.mW,  0.0f, 1.0f };
+			blockVertex[3] = { -0.05f, -0.05f, 0.0f,  color.mX, color.mY, color.mZ, color.mW,  0.0f, 0.0f };
 			blockIndices[0] = 0;
 			blockIndices[1] = 1;
 			blockIndices[2] = 2;
@@ -40,14 +40,14 @@ namespace engine
 			engine::component::vertex_component *blockVertices = new engine::component::vertex_component
 			(std::string::basic_string("mVertex"), blockVertex, blockIndices);
 
-			//move this
-			//blockModel->get_model_matrix()->translate_vector(*blockPosition->get_position());
-			//blockModel->get_model_matrix()->rotate_z(0.0f);
+			engine::component::square_component *blockDimension = new engine::component::square_component
+			(std::string::basic_string("mDimension"), 0.05f, 0.05f);
 
 			attach_component(blockModel);
 			attach_component(blockVertices);
 			attach_component(blockPosition);
 			attach_component(blockTexture);
+			attach_component(blockDimension);
 
 			mSize = pSize;
 			mIsSolid = pIsSolid;

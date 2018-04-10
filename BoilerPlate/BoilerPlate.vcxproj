@@ -175,8 +175,11 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\components\model_matrix_component.cpp" />
     <ClCompile Include="engine\components\physics_component.cpp" />
     <ClCompile Include="engine\components\position_component.cpp" />
+    <ClCompile Include="engine\components\round_component.cpp" />
+    <ClCompile Include="engine\components\square_component.cpp" />
     <ClCompile Include="engine\components\texture_component.cpp" />
     <ClCompile Include="engine\components\vertex_component.cpp" />
+    <ClCompile Include="engine\core\background.cpp" />
     <ClCompile Include="engine\core\ball.cpp" />
     <ClCompile Include="engine\core\block.cpp" />
     <ClCompile Include="engine\core\component.cpp" />
@@ -204,8 +207,11 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="engine\components\model_matrix_component.hpp" />
     <ClInclude Include="engine\components\physics_component.hpp" />
     <ClInclude Include="engine\components\position_component.hpp" />
+    <ClInclude Include="engine\components\round_component.hpp" />
+    <ClInclude Include="engine\components\square_component.hpp" />
     <ClInclude Include="engine\components\texture_component.hpp" />
     <ClInclude Include="engine\components\vertex_component.hpp" />
+    <ClInclude Include="engine\core\background.hpp" />
     <ClInclude Include="engine\core\ball.hpp" />
     <ClInclude Include="engine\core\block.hpp" />
     <ClInclude Include="engine\core\component.hpp" />

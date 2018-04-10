@@ -19,17 +19,21 @@ namespace game
 		{
 		public:
 			//constructor
-			game_level() {}
+			game_level(int pWidth, int pHeight);
+			game_level();
 
 			//functions
-			void load_level(const char *pFile, GLuint pLevelWidth, GLfloat pLevelHeight);
-			void init_level(std::vector<std::vector<GLuint>> tileData, GLuint levelWidth, GLfloat levelHeight);
+			void load_level(const char *pFile, float pLevelWidth, float pLevelHeight);
+			void init_level(std::vector<std::vector<GLuint>> tileData, float levelWidth, float levelHeight);
+			void update_screen_dimensions(int pWidth, int pHeight);
 
 			//gettter
 			std::vector<engine::core::block> get_blocks();
 			
 		private:
 			std::vector<engine::core::block> mBlocks;
+			int mGameLevelWidth;
+			int mGameLevelHeight;
 			
 			
 		};

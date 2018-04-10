@@ -33,13 +33,14 @@ namespace game
 		void update_input_controller();
 		void update_screen_paremeter(int pWidth, int pHeight);
 		void movement();
+		void create_background();
 		engine::utilities::input_manager mInputManager;
 
 	private:
 		engine::core::renderer mRenderManager;
 		engine::core::ball mBall;
-		engine::core::block mBlock = engine::core::block(engine::math::vector_2(1.0f, 1.0f), false, engine::math::vector_4(1.0f, 1.0f, 1.0f, 1.0f));
 		engine::core::paddle mPaddle;
+		engine::core::game_object mBackground;
 		std::vector<level_generator::game_level> mGameLevels;
 		int mBlockCounter;
 		int mInputCounter;

@@ -8,10 +8,10 @@ namespace engine
 		{
 			engine::core::vertex paddleVertex[36];
 			int paddleIndices[6];
-			paddleVertex[0] = { 0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
-			paddleVertex[1] = { 0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
-			paddleVertex[2] = { -0.06f, 0.06f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
-			paddleVertex[3] = { -0.06f, -0.06f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
+			paddleVertex[0] = { 0.2f, 0.035f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f };
+			paddleVertex[1] = { 0.2f, -0.035f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f };
+			paddleVertex[2] = { -0.2f, 0.035f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f };
+			paddleVertex[3] = { -0.2f, -0.035f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f };
 			paddleIndices[0] = 0;
 			paddleIndices[1] = 1;
 			paddleIndices[2] = 2;
@@ -27,7 +27,7 @@ namespace engine
 			engine::component::texture_component *paddleTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 3);
 
 			engine::component::phisics_component *paddlePhisics = new engine::component::phisics_component
-			(std::string::basic_string("mPhisics"), 0.02f);
+			(std::string::basic_string("mPhysics"), 0.02f);
 
 			engine::component::vertex_component *paddleVertices = new engine::component::vertex_component
 			(std::string::basic_string("mVertex"), paddleVertex, paddleIndices);

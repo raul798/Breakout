@@ -74,6 +74,15 @@
     <ClCompile Include="game\level_generator\game_level.cpp">
       <Filter>game\level_generator</Filter>
     </ClCompile>
+    <ClCompile Include="engine\core\background.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\square_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\round_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -163,6 +172,15 @@
     </ClInclude>
     <ClInclude Include="engine\utilities\color.hpp">
       <Filter>engine\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\core\background.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\square_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\round_component.hpp">
+      <Filter>engine\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

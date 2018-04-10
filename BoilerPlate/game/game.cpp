@@ -8,9 +8,11 @@ namespace game
 	{
 		mInputCounter = 0;
 		mBlockCounter = 0;
-		
+
 		mWidth = width;
 		mHeight = height;
+
+		create_background();
 	}
 
 	game::~game()
@@ -25,18 +27,24 @@ namespace game
 		mRenderManager.assign_textures("game/assets/ball.png");
 		mRenderManager.assign_textures("game/assets/block_solid.png");
 		mRenderManager.assign_textures("game/assets/paddle.png");
-		//convert from jpg to png
 		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
 
-		level_generator::game_level firstLevel;
-		firstLevel.load_level("game/levels/first_level.txt", 2.0, 1.0);
+		level_generator::game_level firstLevel(mWidth, mHeight);
+		firstLevel.load_level("game/levels/first_level.txt", 3.12, 0.9);
 
 		this->mGameLevels.push_back(firstLevel);
 	}
 
 	void game::render()
 	{
+		/*mRenderManager.render
+		(
+			mBackground.get_component("mVertex")->get_vertex(),
+			mBackground.get_component("mVertex")->get_indices(),
+			mBackground.get_component("mTextureIndex")->get_texture_index(),
+			*mBackground.get_component("mModel")->get_model_matrix()
+		);*/
 
 		mRenderManager.render
 		(
@@ -71,8 +79,9 @@ namespace game
 	{
 		update_input_controller();
 		mRenderManager.determine_polygon_mode();
+		mGameLevels[0].update_screen_dimensions(mWidth, mHeight);
 		//borrar
-		//movement();
+		movement();
 
 		if (mBlockCounter == 0)
 		{
@@ -91,7 +100,7 @@ namespace game
 
 		if (mInputManager.get_a()) 
 		{
-			mPaddle.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhisics")->get_movement_value();
+			mPaddle.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhysics")->get_movement_value();
 		
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
@@ -100,7 +109,7 @@ namespace game
 
 			if (mBall.get_AttchToPaddle() == true)
 			{
-				mBall.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhisics")->get_movement_value();
+				mBall.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhysics")->get_movement_value();
 
 				mBall.get_component("mModel")->get_model_matrix()->set_identity();
 				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
@@ -111,7 +120,7 @@ namespace game
 
 		if (mInputManager.get_d())
 		{
-			mPaddle.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhisics")->get_movement_value();
+			mPaddle.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhysics")->get_movement_value();
 
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();		
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
@@ -120,7 +129,7 @@ namespace game
 
 			if (mBall.get_AttchToPaddle() == true)
 			{
-				mBall.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhisics")->get_movement_value();
+				mBall.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhysics")->get_movement_value();
 
 				mBall.get_component("mModel")->get_model_matrix()->set_identity();
 				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
@@ -131,8 +140,21 @@ namespace game
 
 		if (mInputManager.get_space() && mInputCounter == 0)
 		{
-			mBall.change_AttchToPaddle();
+			
+			if(mInputManager.get_d() == true && mBall.get_AttchToPaddle() == true)
+			{
+				*mBall.get_component("mPhysics")->get_angle() = 45.0f;
+			}
+			else if (mInputManager.get_a() == true && mBall.get_AttchToPaddle() == true)
+			{
+				*mBall.get_component("mPhysics")->get_angle() = 135.0f;
+			}
+			else if (mBall.get_AttchToPaddle() == true)
+			{
+				*mBall.get_component("mPhysics")->get_angle() = 90.0f;
+			}
 
+			mBall.change_AttchToPaddle();
 			reset_input_controller();
 		}
 	}
@@ -159,20 +181,57 @@ namespace game
 
 	void game::movement()
 	{
-		engine::math::math_utilities mathUtilities;
-		engine::math::vector_4 *position;
-		float *angle;
-		angle = mBall.get_component("mPhisics")->get_angle();
-		float diablo = mathUtilities.degrees_to_radians(*angle);
+		if (mBall.get_AttchToPaddle() == false)
+		{
+			engine::math::math_utilities mathUtilities;
+			engine::math::vector_4 *position;
+			float *angle;
+			angle = mBall.get_component("mPhysics")->get_angle();
+			float diablo = mathUtilities.degrees_to_radians(*angle);
+
+			position = mBall.get_component("mOrigin")->get_position();
+
+			position->mY += (*mBall.get_component("mPhysics")->get_movement_value())*sinf(diablo);
+			position->mX += (*mBall.get_component("mPhysics")->get_movement_value())*cosf(diablo);
+
+			mBall.get_component("mModel")->get_model_matrix()->set_identity();
+			mBall.get_component("mModel")->get_model_matrix()->translate_vector(*position);
+			mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+			mBall.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
+		}
+	}
+
+	void game::create_background()
+	{
+		engine::core::vertex backgroundVertex[36];
+		int backgroundIndices[6];
+		backgroundVertex[0] = { 1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f };
+		backgroundVertex[1] = { 1.0f, -1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f };
+		backgroundVertex[2] = { -1.0f, 1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f };
+		backgroundVertex[3] = { -1.0f, -1.0f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f };
+		backgroundIndices[0] = 0;
+		backgroundIndices[1] = 1;
+		backgroundIndices[2] = 2;
+		backgroundIndices[3] = 1;
+		backgroundIndices[4] = 3;
+		backgroundIndices[5] = 2;
+
+		engine::component::model_matrix_component *backgroundModel = new engine::component::model_matrix_component("mModel");
+
+		engine::component::texture_component *backgroundTexture = new engine::component::texture_component
+		(std::string::basic_string("mTextureIndex"), 4);
 		
-		position = mBall.get_component("mOrigin")->get_position();
+		engine::component::position_component *backgroundPosition = new engine::component::position_component
+		(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, 0.0f, 0.0f, 0.0f));
 
-		position->mX += (*mBall.get_component("mPhisics")->get_movement_value())*-sinf(diablo);
-		position->mY += (*mBall.get_component("mPhisics")->get_movement_value())*cosf(diablo);
+		engine::component::vertex_component *backgroundVertices = new engine::component::vertex_component
+		(std::string::basic_string("mVertex"), backgroundVertex, backgroundIndices);
 
-		mBall.get_component("mModel")->get_model_matrix()->set_identity();
-		mBall.get_component("mModel")->get_model_matrix()->translate_vector(*position);
-		mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
-		mBall.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
+		backgroundModel->get_model_matrix()->set_identity();
+
+		mBackground.attach_component(backgroundModel);
+		mBackground.attach_component(backgroundVertices);
+		mBackground.attach_component(backgroundPosition);
+		mBackground.attach_component(backgroundTexture);
 	}
 }

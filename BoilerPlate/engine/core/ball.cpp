@@ -29,7 +29,10 @@ namespace engine
 			engine::component::texture_component *ballTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 1);
 
 			engine::component::phisics_component *ballPhisics = new engine::component::phisics_component
-			(std::string::basic_string("mPhisics"), 0.001f);
+			(std::string::basic_string("mPhysics"), 0.02f);
+
+			engine::component::round_component *ballRadius = new engine::component::round_component
+			(std::string::basic_string("mRadius"), 0.03f);
 
 			engine::component::vertex_component *ballVertices = new engine::component::vertex_component
 			(std::string::basic_string("mVertex"), ballVertex, ballIndices);
@@ -43,6 +46,7 @@ namespace engine
 			attach_component(ballPosition);
 			attach_component(ballPhisics);
 			attach_component(ballTexture);
+			attach_component(ballRadius);
 		}
 
 		bool ball::get_AttchToPaddle()
