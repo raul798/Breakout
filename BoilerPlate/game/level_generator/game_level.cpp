@@ -71,7 +71,7 @@ namespace game
 						}
 						else if (pTileData[y][x] == 3)
 						{
-							color = colorManager.GREEN;
+							color = colorManager.PURPLE;
 						}
 						else if (pTileData[y][x] == 4)
 						{
@@ -79,7 +79,7 @@ namespace game
 						}
 						else if (pTileData[y][x] == 5)
 						{
-							color = colorManager.ORANGE;
+							color = colorManager.PINK;
 						}
 							
 						engine::math::vector_2 position(-halfWidth + unitWidth * x, unitHeight * y);
