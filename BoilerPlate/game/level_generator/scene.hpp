@@ -15,12 +15,12 @@ namespace game
 {
 	namespace level_generator
 	{
-		class game_level
+		class scene
 		{
 		public:
 			//constructor
-			game_level(int pWidth, int pHeight);
-			game_level();
+			scene(int pWidth, int pHeight);
+			scene();
 
 			//functions
 			void load_level(const char *pFile, float pLevelWidth, float pLevelHeight);

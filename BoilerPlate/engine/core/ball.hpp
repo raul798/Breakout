@@ -24,7 +24,7 @@ namespace engine
 			//functions
 			bool get_AttchToPaddle();
 			void change_AttchToPaddle();
-
+			void set_attchToPaddle(bool pStatus);
 		private:
 			bool mIsAttachToPaddle;
 		};

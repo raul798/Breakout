@@ -1,4 +1,4 @@
-#include "game_level.hpp"
+#include "scene.hpp"
 
 namespace game
 {
@@ -6,19 +6,20 @@ namespace game
 	{
 		const float NORMAL_SCREEN_HEIGHT_FACTOR = 1.0/640.0;
 		const float NORMAL_SCREEN_WIDTH_FACTOR = 1.0/1136.0;
-		game_level::game_level() {}
 
-		game_level::game_level(int pWidth, int pHeight)
+		scene::scene() {}
+
+		scene::scene(int pWidth, int pHeight)
 		{
 			mGameLevelWidth = pWidth;
 			mGameLevelHeight = pHeight;
 		}
 
-		void game_level::load_level(const char *pFile, float pLevelWidth, float pLevelHeight)
+		void scene::load_level(const char *pFile, float pLevelWidth, float pLevelHeight)
 		{
 			// Load from file
 			GLuint tileCode;
-			game_level level;
+			scene level;
 			std::string line;
 			std::ifstream fstream(pFile);
 			std::vector<std::vector<GLuint>> tileData;
@@ -38,7 +39,7 @@ namespace game
 			}
 		}
 
-		void game_level::init_level(std::vector<std::vector<GLuint>> pTileData, float pLvlWidth, float pLvlHeight)
+		void scene::init_level(std::vector<std::vector<GLuint>> pTileData, float pLvlWidth, float pLvlHeight)
 		{
 			engine::utilities::color colorManager;
 			float heightFactor = NORMAL_SCREEN_HEIGHT_FACTOR * mGameLevelHeight;
@@ -111,13 +112,13 @@ namespace game
 			}
 		}
 
-		void game_level::update_screen_dimensions(int pWidth, int pHeight)
+		void scene::update_screen_dimensions(int pWidth, int pHeight)
 		{
 			mGameLevelWidth = pWidth;
 			mGameLevelHeight = pHeight;
 		}
 
-		std::vector<engine::core::block> game_level::get_blocks()
+		std::vector<engine::core::block> scene::get_blocks()
 		{
 			return mBlocks;
 		}

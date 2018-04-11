@@ -10,10 +10,10 @@ namespace engine
 
 			engine::core::vertex ballVertex[36];
 			int ballIndices[6];
-			ballVertex[0] = { 0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 1.0f };
-			ballVertex[1] = { 0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  1.0f, 0.0f };
-			ballVertex[2] = { -0.03f, 0.03f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 1.0f };
-			ballVertex[3] = { -0.03f, -0.03f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f,  0.0f, 0.0f };
+			ballVertex[0] = { 0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f };
+			ballVertex[1] = { 0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f };
+			ballVertex[2] = { -0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f };
+			ballVertex[3] = { -0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f };
 			ballIndices[0] = 0;
 			ballIndices[1] = 1;
 			ballIndices[2] = 2;
@@ -60,6 +60,11 @@ namespace engine
 			{
 				mIsAttachToPaddle = false;
 			}
+		}
+
+		void ball::set_attchToPaddle(bool pStatus)
+		{
+			mIsAttachToPaddle = pStatus;
 		}
 	}
 }

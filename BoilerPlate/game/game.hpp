@@ -12,7 +12,7 @@
 #include "../engine/core/block.hpp"
 #include "../engine/core/paddle.hpp"
 #include "../engine/utilities/input_manager.hpp"
-#include "../game/level_generator/game_level.hpp"
+#include "../game/level_generator/scene.hpp"
 
 namespace game
 {
@@ -33,7 +33,6 @@ namespace game
 		void update_input_controller();
 		void update_screen_paremeter(int pWidth, int pHeight);
 		void movement();
-		void create_background();
 		void detect_screen_collision();
 		void paddle_collision();
 		bool check_ball_collision(engine::core::game_object pGameObject);
@@ -46,7 +45,7 @@ namespace game
 		engine::core::ball mBall;
 		engine::core::paddle mPaddle;
 		engine::core::game_object mBackground;
-		std::vector<level_generator::game_level> mGameLevels;
+		std::vector<level_generator::scene> mGameLevels;
 		int mBlockCounter;
 		int mInputCounter;
 		int mWidth;

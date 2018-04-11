@@ -12,7 +12,7 @@ namespace game
 		mWidth = width;
 		mHeight = height;
 
-		create_background();
+		mPlayerLives = 3;
 	}
 
 	game::~game()
@@ -30,10 +30,17 @@ namespace game
 		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
 
-		level_generator::game_level firstLevel(mWidth, mHeight);
+		level_generator::scene firstLevel(mWidth, mHeight);
+		level_generator::scene secondLevel(mWidth, mHeight);
+		level_generator::scene thirdLevel(mWidth, mHeight);
+
 		firstLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
+		secondLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
+		thirdLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
 
 		this->mGameLevels.push_back(firstLevel);
+		this->mGameLevels.push_back(secondLevel);
+		this->mGameLevels.push_back(thirdLevel);
 	}
 
 	void game::render()
@@ -71,8 +78,7 @@ namespace game
 		mGameLevels[0].update_screen_dimensions(mWidth, mHeight);
 		detect_screen_collision();
 		paddle_collision();
-		//check_blocks_collision();
-		//borrar
+		check_blocks_collision();
 		movement();
 
 		if (mBlockCounter == 0)
@@ -191,52 +197,18 @@ namespace game
 			engine::math::vector_4 *position;
 			float *angle;
 			angle = mBall.get_component("mPhysics")->get_angle();
-			float diablo = mathUtilities.degrees_to_radians(*angle);
+			float radians = mathUtilities.degrees_to_radians(*angle);
 
 			position = mBall.get_component("mOrigin")->get_position();
 
-			position->mY += (*mBall.get_component("mPhysics")->get_movement_value())*sinf(diablo);
-			position->mX += (*mBall.get_component("mPhysics")->get_movement_value())*cosf(diablo);
+			position->mY += (*mBall.get_component("mPhysics")->get_movement_value())*sinf(radians);
+			position->mX += (*mBall.get_component("mPhysics")->get_movement_value())*cosf(radians);
 
 			mBall.get_component("mModel")->get_model_matrix()->set_identity();
 			mBall.get_component("mModel")->get_model_matrix()->translate_vector(*position);
 			mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 			mBall.get_component("mModel")->get_model_matrix()->scale(1.0f, 1.0f, 1.0f);
 		}
-	}
-
-	void game::create_background()
-	{
-		engine::core::vertex backgroundVertex[36];
-		int backgroundIndices[6];
-		backgroundVertex[0] = { 1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f };
-		backgroundVertex[1] = { 1.0f, -1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f };
-		backgroundVertex[2] = { -1.0f, 1.0f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f };
-		backgroundVertex[3] = { -1.0f, -1.0f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f };
-		backgroundIndices[0] = 0;
-		backgroundIndices[1] = 1;
-		backgroundIndices[2] = 2;
-		backgroundIndices[3] = 1;
-		backgroundIndices[4] = 3;
-		backgroundIndices[5] = 2;
-
-		engine::component::model_matrix_component *backgroundModel = new engine::component::model_matrix_component("mModel");
-
-		engine::component::texture_component *backgroundTexture = new engine::component::texture_component
-		(std::string::basic_string("mTextureIndex"), 4);
-		
-		engine::component::position_component *backgroundPosition = new engine::component::position_component
-		(std::string::basic_string("mOrigin"), engine::math::vector_4(0.0f, 0.0f, 0.0f, 0.0f));
-
-		engine::component::vertex_component *backgroundVertices = new engine::component::vertex_component
-		(std::string::basic_string("mVertex"), backgroundVertex, backgroundIndices);
-
-		backgroundModel->get_model_matrix()->set_identity();
-
-		mBackground.attach_component(backgroundModel);
-		mBackground.attach_component(backgroundVertices);
-		mBackground.attach_component(backgroundPosition);
-		mBackground.attach_component(backgroundTexture);
 	}
 
 	void game::detect_screen_collision()
@@ -275,7 +247,7 @@ namespace game
 				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
 			}
 		}
-		else if (mBall.get_component("mOrigin")->get_position()->mY <= -0.9f)
+		else if (mBall.get_component("mOrigin")->get_position()->mY <= -0.95f)
 		{
 			mPlayerLives--;
 			
@@ -379,6 +351,11 @@ namespace game
 
 	void game::respawn_ball()
 	{
-		mBall = engine::core::ball();
+		*mBall.get_component("mOrigin")->get_position() = engine::math::vector_4(0.0f, -0.9f, 0.0f, 0.0f) + engine::math::vector_4(0.0f, 0.077f, 0.0f, 0.0f);
+		mBall.get_component("mOrigin")->get_position()->mX = mPaddle.get_component("mOrigin")->get_position()->mX;
+		mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
+		mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
+		mBall.get_component("mModel")->get_model_matrix()->scale(1.0, 1.0, 1.0);
+		mBall.set_attchToPaddle(true);
 	}
 }
