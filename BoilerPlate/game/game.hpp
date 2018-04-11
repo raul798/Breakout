@@ -38,6 +38,7 @@ namespace game
 		bool check_ball_collision(engine::core::game_object pGameObject);
 		void check_blocks_collision();
 		void respawn_ball();
+		void create_lives();
 		engine::utilities::input_manager mInputManager;
 
 	private:
@@ -52,6 +53,8 @@ namespace game
 		int mHeight;
 		int mPlayerScore;
 		int mPlayerLives;
+		engine::core::game_object mPlayerlife;
+		std::vector<engine::core::game_object> mPlayerRemainingLives;
 	};
 }
 

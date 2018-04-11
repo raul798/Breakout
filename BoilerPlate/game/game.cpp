@@ -13,6 +13,54 @@ namespace game
 		mHeight = height;
 
 		mPlayerLives = 3;
+		//create_lives();
+
+		mPlayerRemainingLives = std::vector<engine::core::game_object>(mPlayerLives);
+		
+		for (int i = 0; i < 3; i++)
+		{
+			engine::core::vertex liveVertex[36];
+			int liveIndices[6];
+			liveVertex[0] = { 0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f };
+			liveVertex[1] = { 0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f };
+			liveVertex[2] = { -0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f };
+			liveVertex[3] = { -0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f };
+			liveIndices[0] = 0;
+			liveIndices[1] = 1;
+			liveIndices[2] = 2;
+			liveIndices[3] = 1;
+			liveIndices[4] = 3;
+			liveIndices[5] = 2;
+
+			engine::component::model_matrix_component *liveModel = new engine::component::model_matrix_component("mModel");
+
+			engine::component::position_component *livePosition = new engine::component::position_component(std::string::basic_string
+			("mOrigin"), engine::math::vector_4(1.63f, 0.89f, 0.0f, 0.0f));
+
+			engine::component::texture_component *liveTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 1);
+
+			engine::component::vertex_component *liveVertices = new engine::component::vertex_component
+			(std::string::basic_string("mVertex"), liveVertex, liveIndices);
+
+			engine::math::vector_4 newPosition = engine::math::vector_4
+			(
+				livePosition->get_position()->mX - i * 0.1f,
+				livePosition->get_position()->mY,
+				livePosition->get_position()->mZ,
+				livePosition->get_position()->mW
+			);
+
+			//liveModel->get_model_matrix()->set_identity();
+			liveModel->get_model_matrix()->translate_vector(newPosition);
+			liveModel->get_model_matrix()->rotate_z(0.0f);
+			liveModel->get_model_matrix()->scale(1.0, 1.0, 1.0);
+
+			mPlayerRemainingLives[i].attach_component(liveModel);
+			mPlayerRemainingLives[i].attach_component(liveVertices);
+			mPlayerRemainingLives[i].attach_component(livePosition);
+			mPlayerRemainingLives[i].attach_component(liveTexture);
+		}
+		
 	}
 
 	game::~game()
@@ -33,8 +81,8 @@ namespace game
 		level_generator::scene secondLevel(mWidth, mHeight);
 		level_generator::scene thirdLevel(mWidth, mHeight);
 
-		firstLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
-		secondLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
+		firstLevel.load_level("game/levels/first_level.txt", 3.12, 0.9);
+		secondLevel.load_level("game/levels/second_level.txt", 3.12, 0.9);
 		thirdLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
 
 		this->mGameLevels.push_back(firstLevel);
@@ -56,7 +104,7 @@ namespace game
 
 		for (int i = 0; i < blockRenderer.size() ; i++)
 		{
-			mRenderManager.render(blockRenderer[i].get_component("mVertex")->get_vertex(),
+				mRenderManager.render(blockRenderer[i].get_component("mVertex")->get_vertex(),
 				blockRenderer[i].get_component("mVertex")->get_indices(),
 				blockRenderer[i].get_component("mTextureIndex")->get_texture_index(),
 				*blockRenderer[i].get_component("mModel")->get_model_matrix());
@@ -69,6 +117,17 @@ namespace game
 			mBall.get_component("mTextureIndex")->get_texture_index(),
 			*mBall.get_component("mModel")->get_model_matrix()
 		);
+
+		for (int i = 0; i < mPlayerLives; i++)
+		{
+			mRenderManager.render
+			(
+				mPlayerRemainingLives[i].get_component("mVertex")->get_vertex(),
+				mPlayerRemainingLives[i].get_component("mVertex")->get_indices(),
+				mPlayerRemainingLives[i].get_component("mTextureIndex")->get_texture_index(),
+				*mPlayerRemainingLives[i].get_component("mModel")->get_model_matrix()
+			);
+		}
 	}
 
 	void game::update()
@@ -217,22 +276,22 @@ namespace game
 		{
 			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.5f)
 			{
-				*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
 			}
 			else
 			{
-				*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
 			}
 		}
 		else if (mBall.get_component("mOrigin")->get_position()->mX <= -1.65f)
 		{
 			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.5f)
 			{
-				*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
 			}
 			else
 			{
-				*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
 			}
 		}
 
@@ -240,16 +299,22 @@ namespace game
 		{
 			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.25f)
 			{
-				*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
 			}
 			else
 			{
-				*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
 			}
 		}
 		else if (mBall.get_component("mOrigin")->get_position()->mY <= -0.95f)
 		{
+
 			mPlayerLives--;
+
+			if (mPlayerLives > 0)
+			{
+				mPlayerRemainingLives.pop_back();
+			}
 			
 			if (mPlayerLives >= 0)
 			{
@@ -318,15 +383,15 @@ namespace game
 				engine::math::math_utilities pi;
 				if(blockCollision[i].get_is_solid() == true)
 				{
-					if (*mBall.get_component("mPhysics")->get_angle() >= 89.0 && *mBall.get_component("mPhysics")->get_angle() <= 91.0f)
+					if (*mBall.get_component("mPhysics")->get_angle() >= 85.0 && *mBall.get_component("mPhysics")->get_angle() <= 95.0f)
 					{
 						*mBall.get_component("mPhysics")->get_angle() = 270.0f;
 					}
-					else if (*mBall.get_component("mPhysics")->get_angle() >= 269.0 && *mBall.get_component("mPhysics")->get_angle() <= 271.0f)
+					 if (*mBall.get_component("mPhysics")->get_angle() >= 265.0 && *mBall.get_component("mPhysics")->get_angle() <= 275.0f)
 					{
 						*mBall.get_component("mPhysics")->get_angle() = 90.0f;
 					}
-					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.25f)
+				 if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.25f)
 					{
 						float angle_radians = atan2f(
 							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
@@ -387,11 +452,11 @@ namespace game
 				else if(blockCollision[i].get_is_solid() == false)
 				{
 					mPlayerScore += blockCollision[i].get_score_value();
-					if (*mBall.get_component("mPhysics")->get_angle() >= 89.0 && *mBall.get_component("mPhysics")->get_angle() <= 91.0f)
+					if (*mBall.get_component("mPhysics")->get_angle() >= 85.0 && *mBall.get_component("mPhysics")->get_angle() <= 95.0f)
 					{
 						*mBall.get_component("mPhysics")->get_angle() = 270.0f;
 					}
-					else if (*mBall.get_component("mPhysics")->get_angle() >= 269.0 && *mBall.get_component("mPhysics")->get_angle() <= 271.0f)
+					else if (*mBall.get_component("mPhysics")->get_angle() >= 265.0 && *mBall.get_component("mPhysics")->get_angle() <= 275.0f)
 					{
 						*mBall.get_component("mPhysics")->get_angle() = 90.0f;
 					}
@@ -466,5 +531,40 @@ namespace game
 		mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
 		mBall.get_component("mModel")->get_model_matrix()->scale(1.0, 1.0, 1.0);
 		mBall.set_attchToPaddle(true);
+	}
+
+	void game::create_lives()
+	{
+		engine::core::vertex liveVertex[36];
+		int liveIndices[6];
+		liveVertex[0] = { 0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f };
+		liveVertex[1] = { 0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f };
+		liveVertex[2] = { -0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f };
+		liveVertex[3] = { -0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f };
+		liveIndices[0] = 0;
+		liveIndices[1] = 1;
+		liveIndices[2] = 2;
+		liveIndices[3] = 1;
+		liveIndices[4] = 3;
+		liveIndices[5] = 2;
+
+		engine::component::model_matrix_component *liveModel = new engine::component::model_matrix_component("mModel");
+
+		engine::component::position_component *livePosition = new engine::component::position_component(std::string::basic_string
+		("mOrigin"), engine::math::vector_4(0.0f, -0.9f, 0.0f, 0.0f) + engine::math::vector_4(1.63f, 1.79f, 0.0f, 0.0f));
+
+		engine::component::texture_component *liveTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 1);
+
+		engine::component::vertex_component *liveVertices = new engine::component::vertex_component
+		(std::string::basic_string("mVertex"), liveVertex, liveIndices);
+
+		liveModel->get_model_matrix()->translate_vector(*livePosition->get_position());
+		liveModel->get_model_matrix()->rotate_z(0.0f);
+		liveModel->get_model_matrix()->scale(1.0, 1.0, 1.0);
+
+		mPlayerlife.attach_component(liveModel);
+		mPlayerlife.attach_component(liveVertices);
+		mPlayerlife.attach_component(livePosition);
+		mPlayerlife.attach_component(liveTexture);
 	}
 }
