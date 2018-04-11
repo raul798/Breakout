@@ -129,5 +129,18 @@ namespace engine
 
 			return result;
 		}
+
+		float math_utilities::clamp(float pNumber, float pMin, float pMax)
+		{
+
+			if (pNumber < pMin) {
+				pNumber = pMin;
+			}
+			else if (pNumber > pMax) {
+				pNumber = pMax;
+			}
+
+			return pNumber;
+		}
 	}
 }

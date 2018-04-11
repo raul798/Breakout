@@ -26,6 +26,7 @@ namespace engine
 			float *get_matrix_pointer();
 			float *get_matrix_row(int pRowIndex);
 			float *get_matrix_column(int pColumnIndex);
+			void assign_matrix(float pMatrix[]);
 			void set_identity();
 			matrix_4 get_transpose();
 			float& matrix_4::operator[](const int pRightSide);
@@ -38,9 +39,12 @@ namespace engine
 			void rotate_x(float pRadians);
 			void rotate_y(float pRadians);
 			void rotate_z(float pRadians);
+			void rotate_quaternions(float pAngle, float pRotateX, float pRotateY, float pRotateZ);
+			void scale(float pX, float pY, float pZ);
 			void make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 				const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis);
-			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane);
+			void make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane, 
+				const float &pScreenAspect);
 			void make_look_at(vector_3 pLookingPosition, vector_3 pTargetPosition);
 			matrix_4 invert();
 			void transform(matrix_4 pTranslation, matrix_4 pRotation, matrix_4 pScale);

@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;..\BoilerPlate;..\Externals\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,17 +109,23 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;..\BoilerPlate;..\Externals\glm;..\Externals\irrKlang-64bit-1.6.0\include;..\Externals\SDL2-2.0.4\include\SDL2;..\Externals\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Externals\SDL2-2.0.4\lib\x64;..\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Externals\SDL2-2.0.4\lib\x64;..\Externals\glew-1.13.0\lib\Release\x64;..\Externals\irrKlang-64bit-1.6.0\lib\Winx64-visualStudio;..\Externals\SDL2_ttf-2.0.14\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;SDL2_ttf.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)\Externals\glew-1.13.0\bin\Release\x64\glew32.dll" "$(TargetDir)glew32.dll"
-copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"</Command>
+copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"
+copy /Y "$(SolutionDir)\Externals\irrKlang-64bit-1.6.0\bin\winx64-visualStudio\ikpFlac.dll" "$(TargetDir)ikpFlac.dll"
+copy /Y "$(SolutionDir)\Externals\irrKlang-64bit-1.6.0\bin\winx64-visualStudio\ikpMP3.dll" "$(TargetDir)ikpMP3.dll"
+copy /Y "$(SolutionDir)\Externals\irrKlang-64bit-1.6.0\bin\winx64-visualStudio\irrKlang.dll" "$(TargetDir)irrKlang.dll"
+copy /Y "$(SolutionDir)\Externals\SDL2_ttf-2.0.14\lib\x64\SDL2_ttf.dll" "$(TargetDir)SDL2_ttf.dll"
+copy /Y "$(SolutionDir)\Externals\SDL2_ttf-2.0.14\lib\x64\libfreetype-6.dll" "$(TargetDir)libfreetype-6.dll"
+copy /Y "$(SolutionDir)\Externals\SDL2_ttf-2.0.14\lib\x64\zlib1.dll" "$(TargetDir)zlib1.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,7 +137,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;..\BoilerPlate;..\Externals\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,31 +161,46 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Externals\SDL2-2.0.4\include;..\Externals\glew-1.13.0\include;..\BoilerPlate;..\Externals\glm;..\Externals\irrKlang-64bit-1.6.0\include;..\Externals\SDL2-2.0.4\include\SDL2;..\Externals\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Externals\SDL2-2.0.4\lib\x64;..\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Externals\SDL2-2.0.4\lib\x64;..\Externals\glew-1.13.0\lib\Release\x64;..\Externals\irrKlang-64bit-1.6.0\lib\Winx64-visualStudio;..\Externals\SDL2_ttf-2.0.14\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;SDL2_ttf.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)\Externals\glew-1.13.0\bin\Release\x64\glew32.dll" "$(TargetDir)glew32.dll"
-copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"</Command>
+copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"
+copy /Y "$(SolutionDir)\Externals\irrKlang-64bit-1.6.0\bin\winx64-visualStudio\ikpFlac.dll" "$(TargetDir)ikpFlac.dll"
+copy /Y "$(SolutionDir)\Externals\irrKlang-64bit-1.6.0\bin\winx64-visualStudio\ikpMP3.dll" "$(TargetDir)ikpMP3.dll"
+copy /Y "$(SolutionDir)\Externals\irrKlang-64bit-1.6.0\bin\winx64-visualStudio\irrKlang.dll" "$(TargetDir)irrKlang.dll"
+copy /Y "$(SolutionDir)\Externals\SDL2_ttf-2.0.14\lib\x64\SDL2_ttf.dll" "$(TargetDir)SDL2_ttf.dll"
+copy /Y "$(SolutionDir)\Externals\SDL2_ttf-2.0.14\lib\x64\libfreetype-6.dll" "$(TargetDir)libfreetype-6.dll"
+copy /Y "$(SolutionDir)\Externals\SDL2_ttf-2.0.14\lib\x64\zlib1.dll" "$(TargetDir)zlib1.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="engine\components\model_matrix_component.cpp" />
+    <ClCompile Include="engine\components\physics_component.cpp" />
+    <ClCompile Include="engine\components\position_component.cpp" />
+    <ClCompile Include="engine\components\round_component.cpp" />
+    <ClCompile Include="engine\components\square_component.cpp" />
+    <ClCompile Include="engine\components\texture_component.cpp" />
+    <ClCompile Include="engine\components\vertex_component.cpp" />
+    <ClCompile Include="engine\core\background.cpp" />
     <ClCompile Include="engine\core\ball.cpp" />
     <ClCompile Include="engine\core\block.cpp" />
     <ClCompile Include="engine\core\component.cpp" />
     <ClCompile Include="engine\core\game_object.cpp" />
+    <ClCompile Include="engine\core\paddle.cpp" />
     <ClCompile Include="engine\core\renderer.cpp" />
     <ClCompile Include="engine\core\unique_id.cpp" />
     <ClCompile Include="engine\math\math_utilities.cpp" />
-    <ClCompile Include="engine\math\matrix_4.cpp" />
+    <ClCompile Include="engine\math\Matrix_4.cpp" />
     <ClCompile Include="engine\math\vector_2.cpp" />
     <ClCompile Include="engine\math\vector_3.cpp" />
     <ClCompile Include="engine\math\vector_4.cpp" />
@@ -187,33 +208,47 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="engine\utilities\error_manager.cpp" />
     <ClCompile Include="engine\utilities\input_manager.cpp" />
     <ClCompile Include="engine\utilities\shader_utilities.cpp" />
+    <ClCompile Include="engine\utilities\text_mamager.cpp" />
     <ClCompile Include="game\game.cpp" />
+    <ClCompile Include="game\level_generator\scene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="engine\components\model_matrix_component.hpp" />
+    <ClInclude Include="engine\components\physics_component.hpp" />
+    <ClInclude Include="engine\components\position_component.hpp" />
+    <ClInclude Include="engine\components\round_component.hpp" />
+    <ClInclude Include="engine\components\square_component.hpp" />
+    <ClInclude Include="engine\components\texture_component.hpp" />
+    <ClInclude Include="engine\components\vertex_component.hpp" />
+    <ClInclude Include="engine\core\background.hpp" />
     <ClInclude Include="engine\core\ball.hpp" />
     <ClInclude Include="engine\core\block.hpp" />
     <ClInclude Include="engine\core\component.hpp" />
     <ClInclude Include="engine\core\game_object.hpp" />
     <ClInclude Include="engine\core\IRender.hpp" />
     <ClInclude Include="engine\core\IUpdate.hpp" />
+    <ClInclude Include="engine\core\paddle.hpp" />
     <ClInclude Include="engine\core\renderer.hpp" />
     <ClInclude Include="engine\core\unique_id.hpp" />
     <ClInclude Include="engine\core\vertex.hpp" />
     <ClInclude Include="engine\math\math_utilities.hpp" />
-    <ClInclude Include="engine\math\matrix_4.hpp" />
+    <ClInclude Include="engine\math\Matrix_4.hpp" />
     <ClInclude Include="engine\math\vector_2.hpp" />
     <ClInclude Include="engine\math\vector_3.hpp" />
     <ClInclude Include="engine\math\vector_4.hpp" />
     <ClInclude Include="engine\texture\texture_manager.hpp" />
+    <ClInclude Include="engine\utilities\color.hpp" />
     <ClInclude Include="engine\utilities\error_manager.hpp" />
     <ClInclude Include="engine\utilities\input_manager.hpp" />
     <ClInclude Include="engine\utilities\shader_utilities.hpp" />
     <ClInclude Include="engine\utilities\stb_image.h" />
+    <ClInclude Include="engine\utilities\text_manager.hpp" />
     <ClInclude Include="game\game.hpp" />
+    <ClInclude Include="game\level_generator\scene.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
@@ -226,12 +261,16 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="game\assets\background.jpg" />
+    <Image Include="game\assets\background.png" />
     <Image Include="game\assets\ball.png" />
     <Image Include="game\assets\block.png" />
     <Image Include="game\assets\block_solid.png" />
     <Image Include="game\assets\face.png" />
+    <Image Include="game\assets\paddle.png" />
     <Image Include="game\assets\test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="game\levels\first_level.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

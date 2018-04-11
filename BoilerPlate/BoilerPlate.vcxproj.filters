@@ -20,6 +20,9 @@
     <ClCompile Include="engine\math\math_utilities.cpp">
       <Filter>engine\math</Filter>
     </ClCompile>
+    <ClCompile Include="engine\math\Matrix_4.cpp">
+      <Filter>engine\math</Filter>
+    </ClCompile>
     <ClCompile Include="engine\math\vector_2.cpp">
       <Filter>engine\math</Filter>
     </ClCompile>
@@ -50,8 +53,38 @@
     <ClCompile Include="engine\texture\texture_manager.cpp">
       <Filter>engine\texture</Filter>
     </ClCompile>
-    <ClCompile Include="engine\math\matrix_4.cpp">
-      <Filter>engine\math</Filter>
+    <ClCompile Include="engine\components\model_matrix_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\texture_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\vertex_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\position_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\physics_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\core\paddle.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\core\background.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\square_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\components\round_component.cpp">
+      <Filter>engine\components</Filter>
+    </ClCompile>
+    <ClCompile Include="game\level_generator\scene.cpp">
+      <Filter>game\level_generator</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\utilities\text_mamager.cpp">
+      <Filter>engine\utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +114,9 @@
       <Filter>engine\core</Filter>
     </ClInclude>
     <ClInclude Include="engine\math\math_utilities.hpp">
+      <Filter>engine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\math\Matrix_4.hpp">
       <Filter>engine\math</Filter>
     </ClInclude>
     <ClInclude Include="engine\math\vector_2.hpp">
@@ -116,8 +152,41 @@
     <ClInclude Include="engine\texture\texture_manager.hpp">
       <Filter>engine\texture</Filter>
     </ClInclude>
-    <ClInclude Include="engine\math\matrix_4.hpp">
-      <Filter>engine\math</Filter>
+    <ClInclude Include="engine\components\vertex_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\texture_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\model_matrix_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\position_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\core\paddle.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\physics_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utilities\color.hpp">
+      <Filter>engine\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\core\background.hpp">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\square_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\components\round_component.hpp">
+      <Filter>engine\components</Filter>
+    </ClInclude>
+    <ClInclude Include="game\level_generator\scene.hpp">
+      <Filter>game\level_generator</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utilities\text_manager.hpp">
+      <Filter>engine\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +214,15 @@
     <Filter Include="engine\utilities">
       <UniqueIdentifier>{7de3207b-1094-400e-b78a-d17b59796945}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\components">
+      <UniqueIdentifier>{aa6c6173-6ac5-4c7c-be0f-fdc5ea99bd4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\level_generator">
+      <UniqueIdentifier>{5a84c6b2-bb9c-4d75-a8a5-93dfcf2df427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\levels">
+      <UniqueIdentifier>{fc2a9a7d-1c8a-4d58-aec1-bf064a307b32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BoilerPlate.rc" />
@@ -161,9 +239,6 @@
     <Image Include="game\assets\block_solid.png">
       <Filter>game\assets</Filter>
     </Image>
-    <Image Include="game\assets\background.jpg">
-      <Filter>game\assets</Filter>
-    </Image>
     <Image Include="game\assets\ball.png">
       <Filter>game\assets</Filter>
     </Image>
@@ -176,5 +251,16 @@
     <Image Include="game\assets\test.png">
       <Filter>game\assets</Filter>
     </Image>
+    <Image Include="game\assets\paddle.png">
+      <Filter>game\assets</Filter>
+    </Image>
+    <Image Include="game\assets\background.png">
+      <Filter>game\assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="game\levels\first_level.txt">
+      <Filter>game\levels</Filter>
+    </Text>
   </ItemGroup>
 </Project>

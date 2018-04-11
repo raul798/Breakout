@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	// Create Game Object
 	//
 	engine::App* app = new engine::App("Boiler Plate!", WIDTH, HEIGHT);
-
+	system("cls");
 	// Initialize game
 	//
 	if(!app->Init())
@@ -38,6 +38,7 @@ int main(int argc, char* argv[])
 	// Execute game
 	//
 	app->Execute();
+
 
 	// Delete game object
 	//
