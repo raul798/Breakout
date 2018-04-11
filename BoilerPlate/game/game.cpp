@@ -15,7 +15,7 @@ namespace game
 		mHeight = height;
 
 		mPlayerLives = 3;
-		//create_lives();
+		
 
 		mPlayerRemainingLives = std::vector<engine::core::game_object>(mPlayerLives);
 		
@@ -95,10 +95,12 @@ namespace game
 		SoundEngine->addSoundSourceFromFile("game/assets/solid.wav");
 		SoundEngine->addSoundSourceFromFile("game/assets/bleep.wav");
 		SoundEngine->addSoundSourceFromFile("game/assets/bleep.mp3");
+		
 	}
 
 	void game::render()
 	{
+
 		mRenderManager.render
 		(
 			mPaddle.get_component("mVertex")->get_vertex(),
@@ -134,6 +136,8 @@ namespace game
 				*mPlayerRemainingLives[i].get_component("mModel")->get_model_matrix()
 			);
 		}
+
+		render_score();
 	}
 
 	void game::update()
@@ -591,5 +595,26 @@ namespace game
 		mPlayerlife.attach_component(liveVertices);
 		mPlayerlife.attach_component(livePosition);
 		mPlayerlife.attach_component(liveTexture);
+	}
+
+	void game::render_score()
+	{
+		engine::utilities::text_manager textManager = engine::utilities::text_manager(4);
+
+		SDL_Color fontColor;
+		fontColor.r = 255;
+		fontColor.g = 255;
+		fontColor.b = 255;
+		fontColor.a = 255;
+
+		textManager.render_text(std::to_string(mPlayerScore), fontColor, 0.0, 0.0, 1);
+	}
+
+	bool game::init()
+	{
+		if (TTF_Init() == -1) {
+			SDL_Log("TTF_Init: %s\n", TTF_GetError());
+			return false;
+		}
 	}
 }

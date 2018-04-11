@@ -13,6 +13,7 @@
 #include "../engine/core/paddle.hpp"
 #include "../engine/utilities/input_manager.hpp"
 #include "../game/level_generator/scene.hpp"
+#include "../engine/utilities/text_manager.hpp"
 
 namespace game
 {
@@ -39,6 +40,8 @@ namespace game
 		void check_blocks_collision();
 		void respawn_ball();
 		void create_lives();
+		void render_score();
+		bool init();
 		engine::utilities::input_manager mInputManager;
 
 	private:

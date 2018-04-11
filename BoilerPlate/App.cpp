@@ -64,6 +64,7 @@ namespace engine
 	{
 		// Init the external dependencies
 		//
+
 		bool success = SDLInit() && GlewInit();
 		if (!success)
 		{
@@ -74,6 +75,7 @@ namespace engine
 		// Setup the viewport
 		//
 		SetupViewport();
+		mGame.init();
 		
 
 		// Change game state

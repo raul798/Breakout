@@ -83,6 +83,9 @@
     <ClCompile Include="game\level_generator\scene.cpp">
       <Filter>game\level_generator</Filter>
     </ClCompile>
+    <ClCompile Include="engine\utilities\text_mamager.cpp">
+      <Filter>engine\utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="game\level_generator\scene.hpp">
       <Filter>game\level_generator</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\utilities\text_manager.hpp">
+      <Filter>engine\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
