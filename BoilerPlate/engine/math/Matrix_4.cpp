@@ -201,121 +201,121 @@ namespace engine
 			duplicateMatrix = this;
 
 			inverse->mMatrix[0] = duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] -
-								  duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] -
-								  duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] +
-							   	  duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] +
-							   	  duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] -
-				                  duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10];
+				duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] +
+				duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] -
+				duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10];
 
 			inverse->mMatrix[4] = -duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] +
-								   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] +
-								   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] -
-				                   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[14] -
-				                   duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] +
-				                   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[10];
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[10];
 
 			inverse->mMatrix[8] = duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[15] -
-				                  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[13] -
-				                  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[15] +
-				                  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[13] +
-				                  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[1] -
-				                  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[9];
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[13] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[15] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[13] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[1] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[9];
 
 			inverse->mMatrix[12] = -duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[14] +
-				                    duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[13] +
-				                    duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[14] -
-			                       	duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[13] -
-			                     	duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[10] +
-			                      	duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[9];
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[13] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[13] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[10] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[9];
 
 			inverse->mMatrix[1] = -duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] +
-				                   duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] +
-				                   duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] -
-			                       duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] -
-				                   duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] +
-				                   duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10];
+				duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] -
+				duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] +
+				duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10];
 
 			inverse->mMatrix[5] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[15] -
-				                  duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] -
-				                  duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] +
-			                   	  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] +
-				                  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] -
-				                  duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10];
 
 			inverse->mMatrix[9] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[15] +
-								   duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[13] +
-							  	   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[15] -
-				                   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[13] -
-				                   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] +
-				                   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[9];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[11] * duplicateMatrix->mMatrix[13] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[15] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[13] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[9];
 
 			inverse->mMatrix[13] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[14] -
-								   duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[13] -
-								   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[14] +
-								   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[13] +
-								   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] -
-								   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[9];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[10] * duplicateMatrix->mMatrix[13] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[13] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[9];
 
 			inverse->mMatrix[2] = duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] -
-								  duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[14] -
-							   	  duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] +
-								  duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] +
-								  duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] -
-								  duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
+				duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] +
+				duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] -
+				duplicateMatrix->mMatrix[13] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
 			inverse->mMatrix[6] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[15] +
-								   duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] +
-								   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] -
-								   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] -
-								   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] +
-								   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[14] +
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[15] -
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
 			inverse->mMatrix[10] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[15] -
-							   	   duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[13] -
-				                   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[15] +
-				                   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[13] +
-				                   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] -
-				                   duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[5];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[13] -
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[15] +
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[13] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[5];
 
 			inverse->mMatrix[14] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[14] +
-				                    duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[13] +
-				                    duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[14] -
-				                    duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[13] -
-				                    duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] +
-				                    duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[5];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[13] +
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[14] -
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[13] -
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] +
+				duplicateMatrix->mMatrix[12] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[5];
 
 			inverse->mMatrix[3] = -duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] +
-			                       duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10] +
-				                   duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] -
-				                   duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10] -
-				                   duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] +
-				                   duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
+				duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10] +
+				duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] -
+				duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10] -
+				duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] +
+				duplicateMatrix->mMatrix[9] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
 			inverse->mMatrix[7] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[11] -
-				                  duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10] -
-				                  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] +
-				                  duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10] +
-				                  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] -
-			                   	  duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[10] -
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[11] +
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[10] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[7] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[6];
 
 			inverse->mMatrix[11] = -duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[11] +
-				                    duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[9] +
-				                    duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] -
-				                    duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[9] -
-				                    duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] +
-				                    duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[5];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[7] * duplicateMatrix->mMatrix[9] +
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[11] -
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[9] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[7] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[3] * duplicateMatrix->mMatrix[5];
 
 			inverse->mMatrix[15] = duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[5] * duplicateMatrix->mMatrix[10] -
-			                 	   duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[9] -
-				                   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] +
-				                   duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[9] +
-			                       duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] -
-				                   duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[5];
+				duplicateMatrix->mMatrix[0] * duplicateMatrix->mMatrix[6] * duplicateMatrix->mMatrix[9] -
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[10] +
+				duplicateMatrix->mMatrix[4] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[9] +
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[1] * duplicateMatrix->mMatrix[6] -
+				duplicateMatrix->mMatrix[8] * duplicateMatrix->mMatrix[2] * duplicateMatrix->mMatrix[5];
 
 			determinant = duplicateMatrix->mMatrix[0] * inverse->mMatrix[0] +
-				          duplicateMatrix->mMatrix[1] * inverse->mMatrix[4] +
-				          duplicateMatrix->mMatrix[2] * inverse->mMatrix[8] +
-				          duplicateMatrix->mMatrix[3] * inverse->mMatrix[12];
+				duplicateMatrix->mMatrix[1] * inverse->mMatrix[4] +
+				duplicateMatrix->mMatrix[2] * inverse->mMatrix[8] +
+				duplicateMatrix->mMatrix[3] * inverse->mMatrix[12];
 
 			if (determinant != 0)
 			{
@@ -663,27 +663,6 @@ namespace engine
 		{
 			vector_4 result;
 
-<<<<<<< HEAD
-			result.mX = pLeftSide[0]  * pRightSide.mX + 
-						pLeftSide[4]  * pRightSide.mY + 
-						pLeftSide[8]  * pRightSide.mZ +
-						pLeftSide[12] * pRightSide.mW;
-
-			result.mY = pLeftSide[1]  * pRightSide.mX + 
-						pLeftSide[5]  * pRightSide.mY + 
-						pLeftSide[9]  * pRightSide.mZ +
-						pLeftSide[13] * pRightSide.mW;
-
-			result.mZ = pLeftSide[2]  * pRightSide.mX + 
-						pLeftSide[6]  * pRightSide.mY +
-						pLeftSide[10] * pRightSide.mZ +
-						pLeftSide[14] * pRightSide.mW;
-
-			result.mX = pLeftSide[3]  * pRightSide.mX +
-						pLeftSide[7]  * pRightSide.mY + 
-						pLeftSide[11] * pRightSide.mZ +
-						pLeftSide[15] * pRightSide.mW;
-=======
 			result.mX = pLeftSide[0] * pRightSide.mX +
 				pLeftSide[4] * pRightSide.mY +
 				pLeftSide[8] * pRightSide.mZ +
@@ -703,28 +682,17 @@ namespace engine
 				pLeftSide[7] * pRightSide.mY +
 				pLeftSide[11] * pRightSide.mZ +
 				pLeftSide[15] * pRightSide.mW;
->>>>>>> feature/lvl_generator
 
 			return result;
 		}
 
 		void matrix_4::make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
-								  const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis)
+			const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis)
 		{
-<<<<<<< HEAD
-			//setting identity matrix, saves 10 lines of codes...
-			set_identity();
-			//setting inverse of the difference, save 3 divisions...
-			float inverseXAxesDifference = 1 / (pMaximumXAxis - pMinimumXAxis);
-			float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
-			float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
-	
-=======
 			float inverseXAxesDifference = 1 / (pMaximumXAxis - pMinimumXAxis);
 			float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
 			float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
 
->>>>>>> feature/lvl_generator
 			mMatrix[0] = 2.0f * inverseXAxesDifference;
 			mMatrix[5] = 2.0f * inverseYAxesDifference;
 			mMatrix[10] = -2.0f * inverseZAxesDifference;
@@ -739,19 +707,11 @@ namespace engine
 			math_utilities mathMaster;
 			//scale based on field of view, used mathmaster for angles managing
 			//operation pi/180 can be used with degrees_to_radians with 1 as angle
-<<<<<<< HEAD
-			float scale = 1 / (tan(pFieldOfView * 0.5) * mathMaster.degrees_to_radians(1));
-	
-			float inverseClippingPlaneDifference = 1 / (pFarClippingPlane - pNearClippingPlane);
-
-			mMatrix[0] = scale;
-=======
 			float scale = (float) (1.0f / (tan(mathMaster.degrees_to_radians(pFieldOfView * 0.5f))));
 
 			float inverseClippingPlaneDifference = 1.0f / (pFarClippingPlane - pNearClippingPlane);
 
 			mMatrix[0] = scale * pScreenAspect;
->>>>>>> feature/lvl_generator
 			mMatrix[5] = scale;
 			mMatrix[10] = -pFarClippingPlane * inverseClippingPlaneDifference;
 			mMatrix[11] = -1;

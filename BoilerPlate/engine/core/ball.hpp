@@ -26,20 +26,7 @@ namespace engine
 			void change_AttchToPaddle();
 			void set_attchToPaddle(bool pStatus);
 		private:
-<<<<<<< HEAD
-			vertex mBallVertices[4] = {
-				// positions         // colors           // texture coords
-				{0.03f, 0.03f, 0.0f,    1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 1.0f},   // top right
-				{0.03f, -0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  1.0f, 0.0f},   // bottom right
-				{-0.03f, 0.03f, 0.0f,   1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 1.0f},   // top left
-				{-0.03f, -0.03f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f,  0.0f, 0.0f}    // bottom left     
-			};
-
-			int mBallIndices[7] = { 0, 1, 2, 1, 3, 2, 0 };
-			int mTextureIndex;
-=======
 			bool mIsAttachToPaddle;
->>>>>>> feature/lvl_generator
 		};
 	}
 }

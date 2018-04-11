@@ -75,11 +75,8 @@ namespace engine
 		// Setup the viewport
 		//
 		SetupViewport();
-<<<<<<< HEAD
-=======
 		mGame.init();
 		
->>>>>>> feature/lvl_generator
 
 		// Change game state
 		//

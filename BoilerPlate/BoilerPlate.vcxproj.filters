@@ -20,6 +20,9 @@
     <ClCompile Include="engine\math\math_utilities.cpp">
       <Filter>engine\math</Filter>
     </ClCompile>
+    <ClCompile Include="engine\math\Matrix_4.cpp">
+      <Filter>engine\math</Filter>
+    </ClCompile>
     <ClCompile Include="engine\math\vector_2.cpp">
       <Filter>engine\math</Filter>
     </ClCompile>
@@ -50,10 +53,6 @@
     <ClCompile Include="engine\texture\texture_manager.cpp">
       <Filter>engine\texture</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="engine\math\matrix_4.cpp">
-      <Filter>engine\math</Filter>
-=======
     <ClCompile Include="engine\components\model_matrix_component.cpp">
       <Filter>engine\components</Filter>
     </ClCompile>
@@ -86,7 +85,6 @@
     </ClCompile>
     <ClCompile Include="engine\utilities\text_mamager.cpp">
       <Filter>engine\utilities</Filter>
->>>>>>> feature/lvl_generator
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +114,9 @@
       <Filter>engine\core</Filter>
     </ClInclude>
     <ClInclude Include="engine\math\math_utilities.hpp">
+      <Filter>engine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\math\Matrix_4.hpp">
       <Filter>engine\math</Filter>
     </ClInclude>
     <ClInclude Include="engine\math\vector_2.hpp">
@@ -151,10 +152,6 @@
     <ClInclude Include="engine\texture\texture_manager.hpp">
       <Filter>engine\texture</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="engine\math\matrix_4.hpp">
-      <Filter>engine\math</Filter>
-=======
     <ClInclude Include="engine\components\vertex_component.hpp">
       <Filter>engine\components</Filter>
     </ClInclude>
@@ -190,7 +187,6 @@
     </ClInclude>
     <ClInclude Include="engine\utilities\text_manager.hpp">
       <Filter>engine\utilities</Filter>
->>>>>>> feature/lvl_generator
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
