@@ -29,6 +29,9 @@ namespace engine
 			engine::component::phisics_component *paddlePhisics = new engine::component::phisics_component
 			(std::string::basic_string("mPhysics"), 0.02f);
 
+			engine::component::square_component *paddleDimension = new engine::component::square_component
+			(std::string::basic_string("mDimension"), 0.4f, 0.035f);
+
 			engine::component::vertex_component *paddleVertices = new engine::component::vertex_component
 			(std::string::basic_string("mVertex"), paddleVertex, paddleIndices);
 
@@ -41,6 +44,7 @@ namespace engine
 			attach_component(paddlePosition);
 			attach_component(paddlePhisics);
 			attach_component(paddleTexture);
+			attach_component(paddleDimension);
 		}
 	}
 }

@@ -9,6 +9,7 @@
 #include "../components/position_component.hpp"
 #include "../components/texture_component.hpp"
 #include "../components/vertex_component.hpp"
+#include "../components/square_component.hpp"
 
 namespace engine
 {

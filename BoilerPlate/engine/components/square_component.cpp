@@ -4,11 +4,21 @@ namespace engine
 {
 	namespace component
 	{
-		square_component::square_component(std::string& pName, float pObjectWidth, float pObejctHeigth)
+		square_component::square_component(std::string& pName, float pObjectWidth, float pObjectHeigth)
 		{
 			mName = pName;
 			mObjectWidth = pObjectWidth;
-			mObejctHeigth = pObejctHeigth;
+			mObjectHeigth = pObjectHeigth;
+		}
+
+		float square_component::get_object_width()
+		{
+			return mObjectWidth;
+		}
+
+		float square_component::get_object_height()
+		{
+			return mObjectHeigth;
 		}
 	}
 }

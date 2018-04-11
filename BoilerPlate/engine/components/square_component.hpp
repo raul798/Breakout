@@ -11,11 +11,13 @@ namespace engine
 		class square_component : public core::component
 		{
 		public:
-			square_component(std::string& pName, float pObjectWidth, float pObejctHeigth);
+			square_component(std::string& pName, float pObjectWidth, float pObjectHeigth);
+			float get_object_width();
+			float get_object_height();
 
 		private:
 			float mObjectWidth;
-			float mObejctHeigth;
+			float mObjectHeigth;
 		};
 	}
 }

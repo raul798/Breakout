@@ -9,5 +9,10 @@ namespace engine
 			mName = pName;
 			mRadius = pRadius;
 		}
+
+		float round_component::get_radius()
+		{
+			return mRadius;
+		}
 	}
 }

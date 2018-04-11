@@ -38,6 +38,9 @@ namespace engine
 			virtual float *get_angle() { return NULL; }
 			virtual int get_texture_index() { return 0; }
 			virtual void set_position(math::vector_4 pNewPosition) {}
+			virtual float get_radius() { return 0; }
+			virtual float get_object_width() { return 0; }
+			virtual float get_object_height() { return 0; }
 
 		protected:
 			//members

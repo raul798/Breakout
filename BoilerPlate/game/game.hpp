@@ -34,6 +34,9 @@ namespace game
 		void update_screen_paremeter(int pWidth, int pHeight);
 		void movement();
 		void create_background();
+		void detect_screen_collision();
+		void paddle_collision();
+		bool check_ball_collision(engine::core::game_object pGameObject);
 		engine::utilities::input_manager mInputManager;
 
 	private:

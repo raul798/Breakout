@@ -46,13 +46,6 @@ namespace game
 			*mBackground.get_component("mModel")->get_model_matrix()
 		);*/
 
-		mRenderManager.render
-		(
-			mBall.get_component("mVertex")->get_vertex(),
-			mBall.get_component("mVertex")->get_indices(),
-			mBall.get_component("mTextureIndex")->get_texture_index(),
-			*mBall.get_component("mModel")->get_model_matrix()
-		);
 
 		mRenderManager.render
 		(
@@ -70,9 +63,14 @@ namespace game
 				blockRenderer[i].get_component("mVertex")->get_indices(),
 				blockRenderer[i].get_component("mTextureIndex")->get_texture_index(),
 				*blockRenderer[i].get_component("mModel")->get_model_matrix());
-				
 		}
-		
+		mRenderManager.render
+		(
+			mBall.get_component("mVertex")->get_vertex(),
+			mBall.get_component("mVertex")->get_indices(),
+			mBall.get_component("mTextureIndex")->get_texture_index(),
+			*mBall.get_component("mModel")->get_model_matrix()
+		);
 	}
 
 	void game::update()
@@ -80,6 +78,8 @@ namespace game
 		update_input_controller();
 		mRenderManager.determine_polygon_mode();
 		mGameLevels[0].update_screen_dimensions(mWidth, mHeight);
+		detect_screen_collision();
+		paddle_collision();
 		//borrar
 		movement();
 
@@ -233,5 +233,79 @@ namespace game
 		mBackground.attach_component(backgroundVertices);
 		mBackground.attach_component(backgroundPosition);
 		mBackground.attach_component(backgroundTexture);
+	}
+
+	void game::detect_screen_collision()
+	{
+		if (mBall.get_component("mOrigin")->get_position()->mX >= 1.6f)
+		{
+			*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+		}
+
+		else if (mBall.get_component("mOrigin")->get_position()->mX <= -1.6f)
+		{
+			*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+		}
+
+		if (mBall.get_component("mOrigin")->get_position()->mY >= 0.9f)
+		{
+			if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+			{
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+			}
+			else
+			{
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+			}
+			
+		}
+	}
+
+	void game::paddle_collision()
+	{
+		if (check_ball_collision(mPaddle))
+		{
+			if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+			{
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+			}
+			else
+			{
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+			}
+		}
+	}
+
+	bool game::check_ball_collision(engine::core::game_object pGameObject) // AABB 
+	{
+		if (mBall.get_AttchToPaddle() == false)
+		{
+			engine::math::math_utilities mathUtilities;
+
+			engine::math::vector_2 center(mBall.get_component("mOrigin")->get_position()->mX , mBall.get_component("mOrigin")->get_position()->mY);
+			engine::math::vector_2 aabb_half_extents
+			(
+			pGameObject.get_component("mDimension")->get_object_width() / 2, 
+			pGameObject.get_component("mDimension")->get_object_height() / 2
+			);
+
+			engine::math::vector_2 aabb_center
+			(
+				pGameObject.get_component("mOrigin")->get_position()->mX,
+				pGameObject.get_component("mOrigin")->get_position()->mY 
+			);
+			
+			engine::math::vector_2 difference = center - aabb_center;
+
+			float clampedX = mathUtilities.clamp(difference.mX, -1 * aabb_half_extents.mX, aabb_half_extents.mX);
+			float clampedY = mathUtilities.clamp(difference.mY, -1 * aabb_half_extents.mY, aabb_half_extents.mY);
+
+			engine::math::vector_2 clamped(clampedX, clampedY);
+			engine::math::vector_2  closest = aabb_center + clamped;
+			difference = closest - center;
+
+			return engine::math::vector_2(difference).length() < engine::math::vector_2(mBall.get_component("mRadius")->get_radius()).length();
+		}
+		
 	}
 }

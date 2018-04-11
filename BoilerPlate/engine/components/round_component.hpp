@@ -12,6 +12,7 @@ namespace engine
 		{
 		public:
 			round_component(std::string& pName, float pRadius);
+			float get_radius();
 
 		private:
 			float mRadius;
