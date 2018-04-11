@@ -26,12 +26,13 @@ namespace game
 			void load_level(const char *pFile, float pLevelWidth, float pLevelHeight);
 			void init_level(std::vector<std::vector<GLuint>> tileData, float levelWidth, float levelHeight);
 			void update_screen_dimensions(int pWidth, int pHeight);
+			std::vector<engine::core::block> mBlocks;
 
 			//gettter
 			std::vector<engine::core::block> get_blocks();
 			
 		private:
-			std::vector<engine::core::block> mBlocks;
+			
 			int mGameLevelWidth;
 			int mGameLevelHeight;
 			

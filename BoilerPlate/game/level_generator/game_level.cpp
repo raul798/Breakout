@@ -61,7 +61,7 @@ namespace game
 					if (pTileData[y][x] == 1) // Solid
 					{
 						engine::math::vector_2 position( -halfWidth + unitWidth * x, unitHeight * y);
-						engine::math::vector_2 size(unitWidth, unitHeight);
+						engine::math::vector_2 size(widthFactor * 10 * unitWidth, heightFactor * 10 * unitHeight);
 
 						//create the object
 						engine::core::block block(size, true, colorManager.GREY);
@@ -96,7 +96,7 @@ namespace game
 						}
 							
 						engine::math::vector_2 position(-halfWidth + unitWidth * x, unitHeight * y);
-						engine::math::vector_2 size(unitWidth, unitHeight);
+						engine::math::vector_2 size(widthFactor * 10 * unitWidth, heightFactor * 10 * unitHeight);
 						engine::core::block block(size, false, color);
 
 						*block.get_component("mOrigin")->get_position() = engine::math::vector_4(position.mX, position.mY, 0.0f, 1.0f);

@@ -22,10 +22,12 @@ namespace engine
 			block();
 
 			bool get_is_solid();
+			int get_score_value();
 
 		private:
 			bool mIsSolid;
 			math::vector_2 mSize;
+			int mScoreValue = 10;
 		};
 	}
 }

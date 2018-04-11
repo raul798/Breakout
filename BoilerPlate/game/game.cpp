@@ -31,22 +31,13 @@ namespace game
 		mRenderManager.generate_buffers();
 
 		level_generator::game_level firstLevel(mWidth, mHeight);
-		firstLevel.load_level("game/levels/first_level.txt", 3.12, 0.9);
+		firstLevel.load_level("game/levels/third_level.txt", 3.12, 0.9);
 
 		this->mGameLevels.push_back(firstLevel);
 	}
 
 	void game::render()
 	{
-		/*mRenderManager.render
-		(
-			mBackground.get_component("mVertex")->get_vertex(),
-			mBackground.get_component("mVertex")->get_indices(),
-			mBackground.get_component("mTextureIndex")->get_texture_index(),
-			*mBackground.get_component("mModel")->get_model_matrix()
-		);*/
-
-
 		mRenderManager.render
 		(
 			mPaddle.get_component("mVertex")->get_vertex(),
@@ -80,6 +71,7 @@ namespace game
 		mGameLevels[0].update_screen_dimensions(mWidth, mHeight);
 		detect_screen_collision();
 		paddle_collision();
+		//check_blocks_collision();
 		//borrar
 		movement();
 
@@ -251,17 +243,18 @@ namespace game
 	{
 		if (mBall.get_component("mOrigin")->get_position()->mX >= 1.6f)
 		{
-			*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.5f)
+			{
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+			}
+			else
+			{
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+			}
 		}
-
 		else if (mBall.get_component("mOrigin")->get_position()->mX <= -1.6f)
 		{
-			*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
-		}
-
-		if (mBall.get_component("mOrigin")->get_position()->mY >= 0.9f)
-		{
-			if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.5f)
 			{
 				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
 			}
@@ -269,7 +262,31 @@ namespace game
 			{
 				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
 			}
+		}
+
+		if (mBall.get_component("mOrigin")->get_position()->mY >= 0.9f)
+		{
+			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.25f)
+			{
+				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+			}
+			else
+			{
+				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+			}
+		}
+		else if (mBall.get_component("mOrigin")->get_position()->mY <= -0.9f)
+		{
+			mPlayerLives--;
 			
+			if (mPlayerLives >= 0)
+			{
+				respawn_ball();
+			}
+			else
+			{
+				//game over
+			}
 		}
 	}
 
@@ -318,14 +335,50 @@ namespace game
 
 			return engine::math::vector_2(difference).length() < engine::math::vector_2(mBall.get_component("mRadius")->get_radius()).length();
 		}
+		return false;
 	}
 
-	void game::limit_paddle_movement()
+	void game::check_blocks_collision()
 	{
-		if (mPaddle.get_component("mOrigin")->get_position()->mX >= 1.6f  ||
-			mPaddle.get_component("mOrigin")->get_position()->mX <= -1.6f)
+		std::vector<engine::core::block> blockCollision = mGameLevels[0].get_blocks();
+
+		for (int i = 0; i < blockCollision.size(); i++)
 		{
-			
+			if (check_ball_collision(blockCollision[i]))
+			{
+				if(blockCollision[i].get_is_solid() == true)
+				{
+					if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+					{
+						*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+					}
+					else
+					{
+						*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+					}
+				}
+				else if(blockCollision[i].get_is_solid() == false)
+				{
+					mPlayerScore += blockCollision[i].get_score_value();
+
+					mGameLevels[0].mBlocks.erase(mGameLevels[0].mBlocks.begin() + i);
+
+					if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+					{
+						*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+					}
+					else
+					{
+						*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+					}
+				}
+				break;
+			}
 		}
+	}
+
+	void game::respawn_ball()
+	{
+		mBall = engine::core::ball();
 	}
 }

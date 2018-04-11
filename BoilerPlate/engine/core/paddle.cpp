@@ -27,7 +27,7 @@ namespace engine
 			engine::component::texture_component *paddleTexture = new engine::component::texture_component(std::string::basic_string("mTextureIndex"), 3);
 
 			engine::component::phisics_component *paddlePhisics = new engine::component::phisics_component
-			(std::string::basic_string("mPhysics"), 0.02f);
+			(std::string::basic_string("mPhysics"), 0.03f);
 
 			engine::component::square_component *paddleDimension = new engine::component::square_component
 			(std::string::basic_string("mDimension"), 0.4f, 0.035f);

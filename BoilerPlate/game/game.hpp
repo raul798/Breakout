@@ -37,7 +37,8 @@ namespace game
 		void detect_screen_collision();
 		void paddle_collision();
 		bool check_ball_collision(engine::core::game_object pGameObject);
-		void limit_paddle_movement();
+		void check_blocks_collision();
+		void respawn_ball();
 		engine::utilities::input_manager mInputManager;
 
 	private:
@@ -50,6 +51,8 @@ namespace game
 		int mInputCounter;
 		int mWidth;
 		int mHeight;
+		int mPlayerScore;
+		int mPlayerLives;
 	};
 }
 

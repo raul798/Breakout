@@ -41,7 +41,7 @@ namespace engine
 			(std::string::basic_string("mVertex"), blockVertex, blockIndices);
 
 			engine::component::square_component *blockDimension = new engine::component::square_component
-			(std::string::basic_string("mDimension"), 0.05f, 0.05f);
+			(std::string::basic_string("mDimension"), pSize.mX * 0.05, pSize.mY * 0.05);
 
 			attach_component(blockModel);
 			attach_component(blockVertices);
@@ -56,6 +56,11 @@ namespace engine
 		bool block::get_is_solid()
 		{
 			return mIsSolid;
+		}
+
+		int block::get_score_value()
+		{
+			return mScoreValue;
 		}
 	}
 }
