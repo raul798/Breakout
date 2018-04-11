@@ -8,7 +8,7 @@ namespace engine
 {
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
-	
+
 	core::renderer renderManager;
 
 	App::App(const std::string& title, const int width, const int height)
@@ -21,11 +21,13 @@ namespace engine
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
+
+		mGame = game::game(width, height);
 	}
 
 	App::~App()
 	{
-		mGame.~game();
+		//mGame.~game();
 
 		CleanupSDL();
 	}
@@ -41,7 +43,7 @@ namespace engine
 		m_state = GameState::RUNNING;
 
 		mGame.execute();
-
+		mGame.update_screen_paremeter(m_width, m_height);
 		SDL_Event event;
 		while (m_state == GameState::RUNNING)
 		{
@@ -62,6 +64,7 @@ namespace engine
 	{
 		// Init the external dependencies
 		//
+
 		bool success = SDLInit() && GlewInit();
 		if (!success)
 		{
@@ -72,6 +75,11 @@ namespace engine
 		// Setup the viewport
 		//
 		SetupViewport();
+<<<<<<< HEAD
+=======
+		mGame.init();
+		
+>>>>>>> feature/lvl_generator
 
 		// Change game state
 		//
@@ -81,14 +89,23 @@ namespace engine
 	}
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
-	{		
+	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_F:
 			mGame.mInputManager.set_f(true);
 			break;
+		case SDL_SCANCODE_A:
+			mGame.mInputManager.set_a(true);
+			break;
+		case SDL_SCANCODE_D:
+			mGame.mInputManager.set_d(true);
+			break;
+		case SDL_SCANCODE_SPACE:
+			mGame.mInputManager.set_space(true);
+			break;
 
-		default:			
+		default:
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
 			break;
 		}
@@ -103,6 +120,15 @@ namespace engine
 			break;
 		case SDL_SCANCODE_F:
 			mGame.mInputManager.set_f(false);
+			break;
+		case SDL_SCANCODE_A:
+			mGame.mInputManager.set_a(false);
+			break;
+		case SDL_SCANCODE_D:
+			mGame.mInputManager.set_d(false);
+			break;
+		case SDL_SCANCODE_SPACE:
+			mGame.mInputManager.set_space(false);
 			break;
 
 		default:
@@ -161,9 +187,9 @@ namespace engine
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-		Uint32 flags =  SDL_WINDOW_OPENGL     | 
-						SDL_WINDOW_SHOWN      | 
-						SDL_WINDOW_RESIZABLE;
+		Uint32 flags = SDL_WINDOW_OPENGL |
+			SDL_WINDOW_SHOWN |
+			SDL_WINDOW_RESIZABLE;
 
 		m_mainWindow = SDL_CreateWindow(
 			m_title.c_str(),
@@ -190,7 +216,7 @@ namespace engine
 		return true;
 	}
 
-	void App::SetupViewport() 
+	void App::SetupViewport()
 	{
 		// Defining ortho values
 		//
@@ -244,7 +270,7 @@ namespace engine
 		//
 		m_width = width;
 		m_height = height;
-
+		mGame.update_screen_paremeter(m_width, m_height);
 		SetupViewport();
 	}
 

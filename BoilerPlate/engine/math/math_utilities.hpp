@@ -90,18 +90,7 @@ namespace engine
 				return result;
 			}
 
-			template <class type> type clamp(type pNumber, type pMin, type pMax)
-			{
-
-				if (pNumber < pMin) {
-					pNumber = pMin;
-				}
-				else if (pNumber > pMax) {
-					pNumber = pMax;
-				}
-
-				return pNumber;
-			}
+			float clamp(float pNumber, float pMin, float pMax);
 		};
 	}
 }

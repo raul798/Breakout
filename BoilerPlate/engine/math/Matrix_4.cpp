@@ -85,25 +85,7 @@ namespace engine
 
 		float *matrix_4::get_matrix()
 		{
-			float matrix[16];
-
-			matrix[0] = mMatrix[0];
-			matrix[2] = mMatrix[2];
-			matrix[3] = mMatrix[3];
-			matrix[4] = mMatrix[4];
-			matrix[5] = mMatrix[5];
-			matrix[6] = mMatrix[6];
-			matrix[7] = mMatrix[7];
-			matrix[8] = mMatrix[8];
-			matrix[9] = mMatrix[9];
-			matrix[10] = mMatrix[10];
-			matrix[11] = mMatrix[11];
-			matrix[12] = mMatrix[12];
-			matrix[13] = mMatrix[13];
-			matrix[14] = mMatrix[14];
-			matrix[15] = mMatrix[15];
-
-			return matrix;
+			return mMatrix;
 		}
 
 		float *matrix_4::get_matrix_pointer()
@@ -133,6 +115,26 @@ namespace engine
 			matrixColumn[3] = mMatrix[pColumnIndex + 3];
 
 			return matrixColumn;
+		}
+
+		void matrix_4::assign_matrix(float pMatrix[])
+		{
+			pMatrix[0] = mMatrix[0];
+			pMatrix[1] = mMatrix[1];
+			pMatrix[2] = mMatrix[2];
+			pMatrix[3] = mMatrix[3];
+			pMatrix[4] = mMatrix[4];
+			pMatrix[5] = mMatrix[5];
+			pMatrix[6] = mMatrix[6];
+			pMatrix[7] = mMatrix[7];
+			pMatrix[8] = mMatrix[8];
+			pMatrix[9] = mMatrix[9];
+			pMatrix[10] = mMatrix[10];
+			pMatrix[11] = mMatrix[11];
+			pMatrix[12] = mMatrix[12];
+			pMatrix[13] = mMatrix[13];
+			pMatrix[14] = mMatrix[14];
+			pMatrix[15] = mMatrix[15];
 		}
 
 		void matrix_4::set_identity()
@@ -471,7 +473,7 @@ namespace engine
 			rotationMatrix[8] = -sin(-pRadians);
 			rotationMatrix[10] = cos(-pRadians);
 
-			*this = *this * rotationMatrix;
+			*this = rotationMatrix * *this;
 		}
 
 		void matrix_4::rotate_z(float pRadians)
@@ -661,6 +663,7 @@ namespace engine
 		{
 			vector_4 result;
 
+<<<<<<< HEAD
 			result.mX = pLeftSide[0]  * pRightSide.mX + 
 						pLeftSide[4]  * pRightSide.mY + 
 						pLeftSide[8]  * pRightSide.mZ +
@@ -680,6 +683,27 @@ namespace engine
 						pLeftSide[7]  * pRightSide.mY + 
 						pLeftSide[11] * pRightSide.mZ +
 						pLeftSide[15] * pRightSide.mW;
+=======
+			result.mX = pLeftSide[0] * pRightSide.mX +
+				pLeftSide[4] * pRightSide.mY +
+				pLeftSide[8] * pRightSide.mZ +
+				pLeftSide[12] * pRightSide.mW;
+
+			result.mY = pLeftSide[1] * pRightSide.mX +
+				pLeftSide[5] * pRightSide.mY +
+				pLeftSide[9] * pRightSide.mZ +
+				pLeftSide[13] * pRightSide.mW;
+
+			result.mZ = pLeftSide[2] * pRightSide.mX +
+				pLeftSide[6] * pRightSide.mY +
+				pLeftSide[10] * pRightSide.mZ +
+				pLeftSide[14] * pRightSide.mW;
+
+			result.mX = pLeftSide[3] * pRightSide.mX +
+				pLeftSide[7] * pRightSide.mY +
+				pLeftSide[11] * pRightSide.mZ +
+				pLeftSide[15] * pRightSide.mW;
+>>>>>>> feature/lvl_generator
 
 			return result;
 		}
@@ -687,6 +711,7 @@ namespace engine
 		void matrix_4::make_ortho(const float &pMinimumXAxis, const float &pMaximumXAxis, const float &pMinimumYAxis,
 								  const float &pMaximumYAxis, const float &pMinimumZAxis, const float &pMaximumZAxis)
 		{
+<<<<<<< HEAD
 			//setting identity matrix, saves 10 lines of codes...
 			set_identity();
 			//setting inverse of the difference, save 3 divisions...
@@ -694,6 +719,12 @@ namespace engine
 			float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
 			float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
 	
+=======
+			float inverseXAxesDifference = 1 / (pMaximumXAxis - pMinimumXAxis);
+			float inverseYAxesDifference = 1 / (pMaximumYAxis - pMinimumYAxis);
+			float inverseZAxesDifference = 1 / (pMaximumZAxis - pMinimumZAxis);
+
+>>>>>>> feature/lvl_generator
 			mMatrix[0] = 2.0f * inverseXAxesDifference;
 			mMatrix[5] = 2.0f * inverseYAxesDifference;
 			mMatrix[10] = -2.0f * inverseZAxesDifference;
@@ -702,16 +733,25 @@ namespace engine
 			mMatrix[14] = -(pMaximumZAxis + pMinimumZAxis) * inverseZAxesDifference;
 		}
 
-		void matrix_4::make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane)
+		void matrix_4::make_perspective(const float &pFieldOfView, const float &pNearClippingPlane, const float &pFarClippingPlane
+			, const float& pScreenAspect)
 		{
 			math_utilities mathMaster;
 			//scale based on field of view, used mathmaster for angles managing
 			//operation pi/180 can be used with degrees_to_radians with 1 as angle
+<<<<<<< HEAD
 			float scale = 1 / (tan(pFieldOfView * 0.5) * mathMaster.degrees_to_radians(1));
 	
 			float inverseClippingPlaneDifference = 1 / (pFarClippingPlane - pNearClippingPlane);
 
 			mMatrix[0] = scale;
+=======
+			float scale = (float) (1.0f / (tan(mathMaster.degrees_to_radians(pFieldOfView * 0.5f))));
+
+			float inverseClippingPlaneDifference = 1.0f / (pFarClippingPlane - pNearClippingPlane);
+
+			mMatrix[0] = scale * pScreenAspect;
+>>>>>>> feature/lvl_generator
 			mMatrix[5] = scale;
 			mMatrix[10] = -pFarClippingPlane * inverseClippingPlaneDifference;
 			mMatrix[11] = -1;
@@ -742,6 +782,46 @@ namespace engine
 			mMatrix[9] = up.mZ;
 			mMatrix[10] = forward.mZ;
 			mMatrix[11] = pLookingPosition.mZ;
+		}
+
+		void matrix_4::rotate_quaternions(float pAngle, float pRotateX, float pRotateY, float pRotateZ)
+		{
+			vector_4 quaternion;
+			matrix_4 rotationMatrix;
+			math_utilities mathMaster;
+			float halfAngle = mathMaster.degrees_to_radians(pAngle / 2.0f);
+			float sinHalfAngle = sin(halfAngle);
+			quaternion.mX = sinHalfAngle * pRotateX;
+			quaternion.mY = sinHalfAngle * pRotateY;
+			quaternion.mZ = sinHalfAngle * pRotateZ;
+			quaternion.mW = cos(halfAngle);
+			rotationMatrix[0] = quaternion.mW;
+			rotationMatrix[1] = quaternion.mX;
+			rotationMatrix[2] = quaternion.mY;
+			rotationMatrix[3] = quaternion.mZ;
+			rotationMatrix[4] = -quaternion.mX;
+			rotationMatrix[5] = quaternion.mW;
+			rotationMatrix[6] = quaternion.mZ;
+			rotationMatrix[7] = -quaternion.mY;
+			rotationMatrix[8] = -quaternion.mY;
+			rotationMatrix[9] = -quaternion.mZ;
+			rotationMatrix[10] = quaternion.mW;
+			rotationMatrix[11] = quaternion.mX;
+			rotationMatrix[12] = -quaternion.mZ;
+			rotationMatrix[13] = quaternion.mY;
+			rotationMatrix[14] = -quaternion.mX;
+			rotationMatrix[15] = quaternion.mW;
+			*this = *this * rotationMatrix;
+		}
+
+		void matrix_4::scale(float pX, float pY, float pZ)
+		{
+			matrix_4 scaleMatrix;
+			scaleMatrix.set_identity();
+			scaleMatrix[0] = pX;
+			scaleMatrix[5] = pY;
+			scaleMatrix[10] = pZ;
+			*this = *this * scaleMatrix;
 		}
 	}
 }

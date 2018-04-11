@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-#include "component.hpp"
-
 namespace engine
 {
 	namespace core
@@ -11,15 +9,17 @@ namespace engine
 		game_object::game_object()
 		{
 			mParent = nullptr;
+			mModel = math::matrix_4();
 		}
 
 		game_object::~game_object()
 		{
 			//delete all attached components
-			while (!mComponents.empty())
-			{
-				delete mComponents.back(), mComponents.pop_back();
-			}
+			//while (!mComponents.empty())
+			//{
+			//	delete mComponents[mComponents.size() - 1];
+			//	mComponents.pop_back();
+			//}
 
 			//delete all attached children
 			while (!mChildren.empty())
@@ -77,7 +77,10 @@ namespace engine
 			//base class function call
 			IUpdate::update(pDeltaTime);
 		}
-
+		math::matrix_4 game_object::get_model_matrix()
+		{
+			return mModel;
+		}
 		void game_object::render()
 		{
 			//if ((m_nUpdates % 60) == 0)
@@ -91,5 +94,19 @@ namespace engine
 				}
 			}
 		}
+
+		component *game_object::get_component(std::string pComponentName)
+		{
+			for (int i = 0; i < mComponents.size(); i++)
+			{
+				if (mComponents[i]->get_name() == pComponentName)
+				{
+					return mComponents[i];
+				}
+			}
+
+			return NULL;
+		}
+
 	}
 }

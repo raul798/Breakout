@@ -42,7 +42,6 @@ namespace engine
 
 
 			// Compile Vertex Shader
-			printf("Compiling shader : %s\n", pVertexFilePath);
 			char const * VertexSourcePointer = VertexShaderCode.c_str();
 			glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
 			glCompileShader(VertexShaderID);
@@ -59,7 +58,6 @@ namespace engine
 
 
 			// Compile Fragment Shader
-			printf("Compiling shader : %s\n", pFragmentFilePath);
 			char const * FragmentSourcePointer = FragmentShaderCode.c_str();
 			glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
 			glCompileShader(FragmentShaderID);
@@ -76,7 +74,6 @@ namespace engine
 
 
 			// Link the program
-			printf("Linking program\n");
 			GLuint ProgramID = glCreateProgram();
 			glAttachShader(ProgramID, VertexShaderID);
 			glAttachShader(ProgramID, FragmentShaderID);
