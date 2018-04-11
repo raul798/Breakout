@@ -27,7 +27,6 @@ namespace game
 		mRenderManager.assign_textures("game/assets/ball.png");
 		mRenderManager.assign_textures("game/assets/block_solid.png");
 		mRenderManager.assign_textures("game/assets/paddle.png");
-		//mRenderManager.assign_textures("game/assets/background.png");
 		mRenderManager.generate_buffers();
 
 		level_generator::scene firstLevel(mWidth, mHeight);
@@ -62,6 +61,7 @@ namespace game
 				blockRenderer[i].get_component("mTextureIndex")->get_texture_index(),
 				*blockRenderer[i].get_component("mModel")->get_model_matrix());
 		}
+
 		mRenderManager.render
 		(
 			mBall.get_component("mVertex")->get_vertex(),
@@ -213,26 +213,26 @@ namespace game
 
 	void game::detect_screen_collision()
 	{
-		if (mBall.get_component("mOrigin")->get_position()->mX >= 1.6f)
+		if (mBall.get_component("mOrigin")->get_position()->mX >= 1.65f)
 		{
 			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.5f)
 			{
-				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+				*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 			}
 			else
 			{
-				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+				*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 			}
 		}
-		else if (mBall.get_component("mOrigin")->get_position()->mX <= -1.6f)
+		else if (mBall.get_component("mOrigin")->get_position()->mX <= -1.65f)
 		{
 			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.5f)
 			{
-				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+				*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 			}
 			else
 			{
-				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+				*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 			}
 		}
 
@@ -240,11 +240,11 @@ namespace game
 		{
 			if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) > 0.25f)
 			{
-				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+				*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 			}
 			else
 			{
-				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+				*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 			}
 		}
 		else if (mBall.get_component("mOrigin")->get_position()->mY <= -0.95f)
@@ -266,14 +266,11 @@ namespace game
 	{
 		if (check_ball_collision(mPaddle))
 		{
-			if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
-			{
-				*mBall.get_component("mPhysics")->get_angle() += 90.0f;
-			}
-			else
-			{
-				*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
-			}
+			engine::math::math_utilities RadiansToDegree;
+			float angle_radians = atan2f(
+				mPaddle.get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+				mPaddle.get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+			*mBall.get_component("mPhysics")->get_angle() = 180.0 + RadiansToDegree.radians_to_degrees(angle_radians);
 		}
 	}
 
@@ -318,31 +315,143 @@ namespace game
 		{
 			if (check_ball_collision(blockCollision[i]))
 			{
+				engine::math::math_utilities pi;
 				if(blockCollision[i].get_is_solid() == true)
 				{
-					if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+					if (*mBall.get_component("mPhysics")->get_angle() >= 89.0 && *mBall.get_component("mPhysics")->get_angle() <= 91.0f)
 					{
-						*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+						*mBall.get_component("mPhysics")->get_angle() = 270.0f;
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() >= 269.0 && *mBall.get_component("mPhysics")->get_angle() <= 271.0f)
+					{
+						*mBall.get_component("mPhysics")->get_angle() = 90.0f;
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.25f)
+					{
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.50f)
+					{
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.75f)
+					{
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
 					}
 					else
 					{
-						*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
 					}
+
 				}
 				else if(blockCollision[i].get_is_solid() == false)
 				{
 					mPlayerScore += blockCollision[i].get_score_value();
-
-					mGameLevels[0].mBlocks.erase(mGameLevels[0].mBlocks.begin() + i);
-
-					if (*mBall.get_component("mPhysics")->get_angle() > 180.0f)
+					if (*mBall.get_component("mPhysics")->get_angle() >= 89.0 && *mBall.get_component("mPhysics")->get_angle() <= 91.0f)
 					{
-						*mBall.get_component("mPhysics")->get_angle() += 90.0f;
+						*mBall.get_component("mPhysics")->get_angle() = 270.0f;
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() >= 269.0 && *mBall.get_component("mPhysics")->get_angle() <= 271.0f)
+					{
+						*mBall.get_component("mPhysics")->get_angle() = 90.0f;
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.25f)
+					{
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.50f)
+					{
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+					}
+					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.75f)
+					{
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
 					}
 					else
 					{
-						*mBall.get_component("mPhysics")->get_angle() -= 90.0f;
+						float angle_radians = atan2f(
+							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
+						{
+							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
+						else
+						{
+							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
+						}
 					}
+					mGameLevels[0].mBlocks.erase(mGameLevels[0].mBlocks.begin() + i);
 				}
 				break;
 			}
