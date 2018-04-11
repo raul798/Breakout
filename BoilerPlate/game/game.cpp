@@ -1,14 +1,16 @@
 #include "game.hpp"
+#include <irrKlang.h>
 
 namespace game
 {
+	irrklang::ISoundEngine *SoundEngine = irrklang::createIrrKlangDevice();
 	game::game(){}
 
 	game::game(int width, int height)
 	{
 		mInputCounter = 0;
 		mBlockCounter = 0;
-
+		mLvl = 0;
 		mWidth = width;
 		mHeight = height;
 
@@ -88,6 +90,11 @@ namespace game
 		this->mGameLevels.push_back(firstLevel);
 		this->mGameLevels.push_back(secondLevel);
 		this->mGameLevels.push_back(thirdLevel);
+
+		mBlocks = mGameLevels[mLvl].get_blocks();
+		SoundEngine->addSoundSourceFromFile("game/assets/solid.wav");
+		SoundEngine->addSoundSourceFromFile("game/assets/bleep.wav");
+		SoundEngine->addSoundSourceFromFile("game/assets/bleep.mp3");
 	}
 
 	void game::render()
@@ -100,14 +107,13 @@ namespace game
 			*mPaddle.get_component("mModel")->get_model_matrix()
 		);
 
-		std::vector<engine::core::block> blockRenderer = mGameLevels[0].get_blocks();
-
-		for (int i = 0; i < blockRenderer.size() ; i++)
+		
+		for (int i = 0; i < mBlocks.size() ; i++)
 		{
-				mRenderManager.render(blockRenderer[i].get_component("mVertex")->get_vertex(),
-				blockRenderer[i].get_component("mVertex")->get_indices(),
-				blockRenderer[i].get_component("mTextureIndex")->get_texture_index(),
-				*blockRenderer[i].get_component("mModel")->get_model_matrix());
+				mRenderManager.render(mBlocks[i].get_component("mVertex")->get_vertex(),
+				mBlocks[i].get_component("mVertex")->get_indices(),
+				mBlocks[i].get_component("mTextureIndex")->get_texture_index(),
+				*mBlocks[i].get_component("mModel")->get_model_matrix());
 		}
 
 		mRenderManager.render
@@ -134,7 +140,7 @@ namespace game
 	{
 		update_input_controller();
 		mRenderManager.determine_polygon_mode();
-		mGameLevels[0].update_screen_dimensions(mWidth, mHeight);
+		mGameLevels[mLvl].update_screen_dimensions(mWidth, mHeight);
 		detect_screen_collision();
 		paddle_collision();
 		check_blocks_collision();
@@ -331,6 +337,7 @@ namespace game
 	{
 		if (check_ball_collision(mPaddle))
 		{
+			SoundEngine->play2D("game/assets/bleep.mp3");
 			engine::math::math_utilities RadiansToDegree;
 			float angle_radians = atan2f(
 				mPaddle.get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
@@ -374,15 +381,14 @@ namespace game
 
 	void game::check_blocks_collision()
 	{
-		std::vector<engine::core::block> blockCollision = mGameLevels[0].get_blocks();
-
-		for (int i = 0; i < blockCollision.size(); i++)
+		for (int i = 0; i < mBlocks.size(); i++)
 		{
-			if (check_ball_collision(blockCollision[i]))
+			if (check_ball_collision(mBlocks[i]))
 			{
 				engine::math::math_utilities pi;
-				if(blockCollision[i].get_is_solid() == true)
+				if(mBlocks[i].get_is_solid() == true)
 				{
+					SoundEngine->play2D("game/assets/solid.wav");
 					if (*mBall.get_component("mPhysics")->get_angle() >= 85.0 && *mBall.get_component("mPhysics")->get_angle() <= 95.0f)
 					{
 						*mBall.get_component("mPhysics")->get_angle() = 270.0f;
@@ -394,8 +400,8 @@ namespace game
 				 if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.25f)
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -408,8 +414,8 @@ namespace game
 					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.50f)
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -422,8 +428,8 @@ namespace game
 					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.75f)
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -436,8 +442,8 @@ namespace game
 					else
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -449,9 +455,10 @@ namespace game
 					}
 
 				}
-				else if(blockCollision[i].get_is_solid() == false)
+				else if(mBlocks[i].get_is_solid() == false)
 				{
-					mPlayerScore += blockCollision[i].get_score_value();
+					SoundEngine->play2D("game/assets/bleep.wav");
+					mPlayerScore += mBlocks[i].get_score_value();
 					if (*mBall.get_component("mPhysics")->get_angle() >= 85.0 && *mBall.get_component("mPhysics")->get_angle() <= 95.0f)
 					{
 						*mBall.get_component("mPhysics")->get_angle() = 270.0f;
@@ -463,8 +470,8 @@ namespace game
 					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.25f)
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -477,8 +484,8 @@ namespace game
 					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.50f)
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -491,8 +498,8 @@ namespace game
 					else if (*mBall.get_component("mPhysics")->get_angle() / 360.0f - (int)(*mBall.get_component("mPhysics")->get_angle() / 360) <= 0.75f)
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -505,8 +512,8 @@ namespace game
 					else
 					{
 						float angle_radians = atan2f(
-							blockCollision[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
-							blockCollision[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
+							mBlocks[i].get_component("mOrigin")->get_position()->mY - mBall.get_component("mOrigin")->get_position()->mY,
+							mBlocks[i].get_component("mOrigin")->get_position()->mX - mBall.get_component("mOrigin")->get_position()->mX);
 						if (angle_radians < pi.PI / 4 && angle_radians > -pi.PI / 4)
 						{
 							*mBall.get_component("mPhysics")->get_angle() -= 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
@@ -516,8 +523,26 @@ namespace game
 							*mBall.get_component("mPhysics")->get_angle() += 180.0f - 2 * *mBall.get_component("mPhysics")->get_angle();
 						}
 					}
-					mGameLevels[0].mBlocks.erase(mGameLevels[0].mBlocks.begin() + i);
+					mBlocks.erase(mBlocks.begin() + i);
 				}
+				bool emptyLvl = true;
+				for (int i = 0; i < mBlocks.size(); i++)
+				{
+					if (mBlocks[i].get_is_solid() == false)
+					{
+						emptyLvl = false;
+						break;
+					}
+				}
+
+				if (emptyLvl)
+				{
+					mLvl++;
+					mLvl = mLvl % 3;
+					respawn_ball();
+					mBlocks = mGameLevels[mLvl].get_blocks();
+				}
+
 				break;
 			}
 		}

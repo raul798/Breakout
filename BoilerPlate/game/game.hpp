@@ -53,7 +53,9 @@ namespace game
 		int mHeight;
 		int mPlayerScore;
 		int mPlayerLives;
+		int mLvl;
 		engine::core::game_object mPlayerlife;
+		std::vector<engine::core::block> mBlocks;
 		std::vector<engine::core::game_object> mPlayerRemainingLives;
 	};
 }
