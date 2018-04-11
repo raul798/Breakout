@@ -100,8 +100,11 @@ namespace game
 
 		if (mInputManager.get_a()) 
 		{
-			mPaddle.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhysics")->get_movement_value();
-		
+			if (mPaddle.get_component("mOrigin")->get_position()->mX >= -1.6f)
+			{
+				mPaddle.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhysics")->get_movement_value();
+			}
+	
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
 			mPaddle.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
@@ -109,8 +112,11 @@ namespace game
 
 			if (mBall.get_AttchToPaddle() == true)
 			{
-				mBall.get_component("mOrigin")->get_position()->mX -= *mPaddle.get_component("mPhysics")->get_movement_value();
-
+				if (mPaddle.get_component("mOrigin")->get_position()->mX >= -1.6f)
+				{
+					mBall.get_component("mOrigin")->get_position()->mX = mPaddle.get_component("mOrigin")->get_position()->mX;
+				}
+				
 				mBall.get_component("mModel")->get_model_matrix()->set_identity();
 				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
 				mBall.get_component("mModel")->get_model_matrix()->rotate_z(0.0f);
@@ -120,7 +126,10 @@ namespace game
 
 		if (mInputManager.get_d())
 		{
-			mPaddle.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhysics")->get_movement_value();
+			if (mPaddle.get_component("mOrigin")->get_position()->mX <= 1.6f)
+			{
+				mPaddle.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhysics")->get_movement_value();
+			}
 
 			mPaddle.get_component("mModel")->get_model_matrix()->set_identity();		
 			mPaddle.get_component("mModel")->get_model_matrix()->translate_vector(*mPaddle.get_component("mOrigin")->get_position());
@@ -129,7 +138,10 @@ namespace game
 
 			if (mBall.get_AttchToPaddle() == true)
 			{
-				mBall.get_component("mOrigin")->get_position()->mX += *mPaddle.get_component("mPhysics")->get_movement_value();
+				if (mPaddle.get_component("mOrigin")->get_position()->mX <= 1.6f)
+				{
+					mBall.get_component("mOrigin")->get_position()->mX = mPaddle.get_component("mOrigin")->get_position()->mX;
+				}
 
 				mBall.get_component("mModel")->get_model_matrix()->set_identity();
 				mBall.get_component("mModel")->get_model_matrix()->translate_vector(*mBall.get_component("mOrigin")->get_position());
@@ -306,6 +318,14 @@ namespace game
 
 			return engine::math::vector_2(difference).length() < engine::math::vector_2(mBall.get_component("mRadius")->get_radius()).length();
 		}
-		
+	}
+
+	void game::limit_paddle_movement()
+	{
+		if (mPaddle.get_component("mOrigin")->get_position()->mX >= 1.6f  ||
+			mPaddle.get_component("mOrigin")->get_position()->mX <= -1.6f)
+		{
+			
+		}
 	}
 }
